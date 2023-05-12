@@ -41,13 +41,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotNull()]
     private array $roles = [];
 
-    private ?string $plainPassword = null;
+    #[Assert\NotBlank()]
+    private ?string $plainPassword = 'password';
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\NotBlank()]
-    private ?string $password = 'password';
+    private ?string $password;
 
     #[ORM\Column(length: 14)]
     #[Assert\NotBlank()]
@@ -64,13 +64,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $reservations;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\DateTime(format: 'd/m/Y h:i:s')]
+    //#[Assert\DateTime(format: 'd/m/Y h:i:s')]
     private ?\DateTimeInterface $updatedAt = null;
 
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
         $this->updatedAt = new \DateTime();
+        $this->roles[] = 'ROLE_USER';
     }
 
     public function getId(): ?int

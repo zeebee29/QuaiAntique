@@ -18,7 +18,7 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotNull()]
     #[Assert\NotBlank()]
-    #[Assert\datetime(format: 'd/m/Y h:i:s')]
+    #[Assert\DateTime(format: 'd/m/Y h:i:s')]
     private ?\DateTime $createdAt = null;
 
     #[ORM\Column(nullable: true, type: Types::DATETIME_MUTABLE)]
@@ -29,8 +29,8 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotNull()]
     #[Assert\NotBlank()]
-    //   #[Assert\datetime(format: 'd/m/Y h:i:s')]
-    #[Assert\datetime()]
+    //   #[Assert\DateTime(format: 'd/m/Y h:i:s')]
+    #[Assert\DateTime()]
     private ?\DateTime $dateReservation = null;
 
     #[ORM\Column]
