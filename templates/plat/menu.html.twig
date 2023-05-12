@@ -18,4 +18,23 @@
 </style>
 
 
+<div class="menu">
+    <h1>Menus du restaurant</h1>
+    <div class="menu-items text-center">
+        {% for menu in menus %}
+        <h2>{{ menu.nom }} - {{ menu.prix }}€</h2>
+        {% for plat in menu.plats %}
+        <h3>
+            {{ menu.description }}
+        </h3>
+        <div>
+            {{ plat }}
+        </div>
+
+        {% endfor %}
+
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

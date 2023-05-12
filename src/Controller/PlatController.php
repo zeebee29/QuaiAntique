@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\MenuRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlatController extends AbstractController
 {
     #[Route('/menu', name: 'app_menu')]
-    public function menus(): Response
+    public function menus(MenuRepository $menuRepository): Response
     {
+        $menus = $menuRepository->findAll();
         return $this->render('plat/menu.html.twig', [
-            'controller_name' => 'PlatController',
+            'menus' => $menus,
         ]);
     }
 
