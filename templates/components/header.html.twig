@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('accueil.home') }}/">Accueil<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Le Restaurant</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Carte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Menus</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Réserver</a>
+            </li>
+        </ul>
+    </div>
+    <div class="d-flex">
+        <ul class="navbar-nav ml-auto">
+            {% if app.user %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
+                    Bonjour {{ app.user.nom }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Historique de mes réservations</a>
+                    <a class="dropdown-item" href="{{ path('user.edit', {id:app.user.id}) }}">Modifier mes
+                        informations</a>
+                    <a class="dropdown-item" href="{{ path('user-edit-passsword', {id:app.user.id}) }}">Modifier mon
+                        mot de passe</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('security.logout') }}">Déconnexion</a>
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
+                    Bonjour, Identifiez-vous
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('security.login') }}">Connexion</a>
+                    <a class="dropdown-item" href="{{ path('security.registration') }}">Inscription</a>
+                </div>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

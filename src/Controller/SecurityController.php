@@ -47,7 +47,7 @@ class SecurityController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    #[Route('/inscription', 'security.inscription', methods: ['GET', 'POST'])]
+    #[Route('/inscription', name: 'security.registration', methods: ['GET', 'POST'])]
     public function inscription(Request $request, EntityManagerInterface $manager): Response
     {
         $user = new User();
