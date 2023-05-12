@@ -42,6 +42,12 @@ class Reservation
     #[Assert\Length(255)]
     private ?string $allergie = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull()]
+    private ?User $user = null;
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -110,6 +116,18 @@ class Reservation
     public function setAllergie(?string $allergie): self
     {
         $this->allergie = $allergie;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
