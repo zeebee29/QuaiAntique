@@ -22,15 +22,19 @@ class OuvertureHebdo
     #[Assert\Choice(choices: ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"])]
     private ?string $jourSemaine = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    #[Assert\NotNull()]
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     #[Assert\NotBlank()]
     private ?\DateTime $hOuverture = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    #[Assert\NotNull()]
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     #[Assert\NotBlank()]
     private ?\DateTime $hFermeture = null;
+
+    #[ORM\Column(length: 10)]
+    private ?string $plage = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $plageTxt = null;
 
     public function getId(): ?int
     {
@@ -54,7 +58,7 @@ class OuvertureHebdo
         return $this->hOuverture;
     }
 
-    public function setHOuverture(\DateTime $hOuverture): self
+    public function setHOuverture(?\DateTime $hOuverture): self
     {
         $this->hOuverture = $hOuverture;
 
@@ -66,9 +70,33 @@ class OuvertureHebdo
         return $this->hFermeture;
     }
 
-    public function setHFermeture(\DateTime $hFermeture): self
+    public function setHFermeture(?\DateTime $hFermeture): self
     {
         $this->hFermeture = $hFermeture;
+
+        return $this;
+    }
+
+    public function getPlage(): ?string
+    {
+        return $this->plage;
+    }
+
+    public function setPlage(string $plage): self
+    {
+        $this->plage = $plage;
+
+        return $this;
+    }
+
+    public function getPlageTxt(): ?string
+    {
+        return $this->plageTxt;
+    }
+
+    public function setPlageTxt(string $plageTxt): self
+    {
+        $this->plageTxt = $plageTxt;
 
         return $this;
     }
