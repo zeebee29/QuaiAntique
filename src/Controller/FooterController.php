@@ -12,7 +12,6 @@ class FooterController extends AbstractController
     public function plageOuverture(OuvertureHebdoRepository $ouvertureHebdoRepository): Response
     {
         $heures = $ouvertureHebdoRepository->findAll();
-        dd($heures);
 
         return $this->render('partial/_horaires.html.twig', [
             'heures' => $heures,

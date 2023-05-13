@@ -1,4 +1,14 @@
 {% for heure in heures %}
-<li> {{ heure.jourSemaine }} : {{heure.hOuverture|format_datetime('none', 'short', locale='fr') }} - {{
-    heure.hFermeture|format_datetime('none', 'short', locale='fr') }} </li>
+{% if heure.plage == 'midi' %}
+<li> {{ heure.jourSemaine }} : {{heure.plageTxt }}
+    {% set heureMidi = heure %}
+    {% else %}
+    {% if heure.hFermeture %} / {{heure.plageTxt}}
+    {% else %}
+    {% if heureMidi.hOuverture %}
+    {{heure.plageTxt}}
+    {% endif %}
+    {% endif %}
+</li>
+{% endif %}
 {% endfor %}

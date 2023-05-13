@@ -12,20 +12,20 @@ class OuvertureHebdoFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $ouvertureExamples = [
-            ['Lundi',    'midi', null, null, 'Fermé', 'resaLundiMidi',],
-            ['Lundi',    'soir', null, null, 'Fermé', 'resaLundiSoir',],
-            ['Mardi',    'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30:00', 'resaMardiMidi',],
-            ['Mardi',    'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00:00', 'resaMardiSoir',],
-            ['Mercredi', 'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30:00', 'resaMardiMidi',],
-            ['Mercredi', 'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00:00', 'resaMardiSoir',],
-            ['Jeudi',    'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30:00', 'resaJeudiMidi',],
-            ['Jeudi',    'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00:00', 'resaJeudiSoir',],
-            ['Vendredi', 'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30:00', 'resaVendrediMidi',],
-            ['Vendredi', 'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00:00', 'resaVendrediSoir',],
-            ['Samedi',   'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30:00', 'resaSamediMidi',],
-            ['Samedi',   'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00:00', 'resaSamediSoir',],
-            ['Dimanche', 'midi', null, null, 'Fermé', 'resaDimancheMidi',],
-            ['Dimanche', 'soir', null, null, 'Fermé', 'resaDimancheMidi',],
+            ['Lun', 'midi', null, null, 'Fermé', 'resaLundiMidi',],
+            ['Lun', 'soir', null, null, 'Fermé', 'resaLundiSoir',],
+            ['Mar', 'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30', 'resaMardiMidi',],
+            ['Mar', 'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00', 'resaMardiSoir',],
+            ['Mer', 'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30', 'resaMardiMidi',],
+            ['Mer', 'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00', 'resaMardiSoir',],
+            ['Jeu', 'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30', 'resaJeudiMidi',],
+            ['Jeu', 'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00', 'resaJeudiSoir',],
+            ['Ven', 'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30', 'resaVendrediMidi',],
+            ['Ven', 'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00', 'resaVendrediSoir',],
+            ['Sam', 'midi', new DateTime('2020-01-01 12:00:00'), new DateTime('2020-01-01 14:30:00'), '12:00 - 14:30', 'resaSamediMidi',],
+            ['Sam', 'soir', new DateTime('2020-01-01 19:00:00'), new DateTime('2020-01-01 22:00:00'), '19:00 - 22:00', 'resaSamediSoir',],
+            ['Dim', 'midi', null, null, 'Fermé', 'resaDimancheMidi',],
+            ['Dim', 'soir', null, null, 'Fermé', 'resaDimancheMidi',],
         ];
 
         foreach ($ouvertureExamples as [$jSem, $plage, $openH, $closeH, $plageTxt, $resa]) {
