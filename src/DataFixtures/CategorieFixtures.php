@@ -13,12 +13,12 @@ class CategorieFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $cat = [
-            ['apéritif', 'Apéritifs', 'Nos apéritifs', 'category_aperitif'],
+            ['apéritif', 'Apéritifs', 'Nos grignotages', 'category_aperitif'],
             ['entrées', 'Entrée', 'Nos entrées', 'category_entree'],
             ['plats', 'Plat', 'Nos plats', 'category_plat'],
             ['dessert', 'Dessert', 'Nos desserts', 'category_dessert'],
-            ['alcool', 'Boissons', 'Nos boissons alcoolisées', 'category_alcool'],
-            ['sans alcool', 'Boissons sans alcool', 'Nos boissons sans alcool', 'category_ss_alcool'],
+            ['alcool', 'Boissons', 'Nos apéritifs', 'category_alcool'],
+            ['sans alcool', 'Boissons sans alcool', 'Nos sans alcool', 'category_ss_alcool'],
             ['vins', 'Vins', 'Nos vins', 'category_vin']
         ];
 

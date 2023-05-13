@@ -3,7 +3,23 @@
 {% block title %}Carte{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-    <h1>CARTE</h1>
+<div class="container">
+    <h1>Carte</h1>
+    {% for categorie in categories %}
+    <h2 class="text-center">{{ categorie.titreCarte }}</h2>
+    {% for plat in plats %}
+    {% if plat.categorie == categorie.titreCarte %}
+    <div class="flex items-start justify-between">
+        <div class="w-2/3">
+            <strong>{{ plat.nom }}</strong>
+        </div>
+        <div class="w-1/3 text-right">
+            <strong>{{ plat.prix }}</strong>
+        </div>
+    </div>
+    <div class="text-left">{{ plat.description }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
 </div>
 {% endblock %}

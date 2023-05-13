@@ -39,6 +39,17 @@ class PlatRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllInCarte(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('c.titreCarte AS categorie', 'p.nom', 'p.description', 'p.prix')
+            ->join('p.categorie', 'c')
+            ->where('p.inCarte = true')
+            ->orderBy('c.nom', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     //    /**
     //     * @return Plat[] Returns an array of Plat objects
     //     */

@@ -12,9 +12,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('app_restau') }}">Le Restaurant</a>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_plat') }}">Carte</a>
+                <a class="nav-link" href="{{ path('app_plats') }}">Plats</a>
             </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_carte') }}">Carte</a>
+            </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('app_menu') }}">Menus</a>
             </li>
