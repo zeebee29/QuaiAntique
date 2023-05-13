@@ -3,5 +3,8 @@
     <div class="social-links">
         <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
         <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+        <ul>horaires
+            {{ render(controller('App\\Controller\\FooterController::plageOuverture')) }}
+        </ul>
     </div>
 </footer>
