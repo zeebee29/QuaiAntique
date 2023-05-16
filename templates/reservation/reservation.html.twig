@@ -4,7 +4,29 @@
 
 
 {% block body %}
-<div class="example-wrapper">
+<!--div class="example-wrapper">
     <h1>Réservation</h1>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Nombre de convives</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disable" href="#">Date</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disable" href="#">Heure</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Confirmation</a>
+        </li>
+    </ul-->
+
+
+{% include "/components/calendar.html.twig" %}
+
+
+
+
+
 </div>
 {% endblock %}
