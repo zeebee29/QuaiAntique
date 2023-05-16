@@ -47,6 +47,11 @@ class Reservation
     #[Assert\NotNull()]
     private ?User $user = null;
 
+    #[ORM\Column(length: 10)]
+    #[Assert\NotNull()]
+    #[Assert\NotBlank()]
+    private ?string $midiSoir = null;
+
 
     public function __construct()
     {
@@ -128,6 +133,18 @@ class Reservation
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMidiSoir(): ?string
+    {
+        return $this->midiSoir;
+    }
+
+    public function setMidiSoir(string $midiSoir): self
+    {
+        $this->midiSoir = $midiSoir;
 
         return $this;
     }
