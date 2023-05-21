@@ -1,0 +1,12 @@
+vich_uploader:
+    db_driver: orm
+    
+    metadata:
+        type: attribute
+
+    mappings:
+        restaurant_images:
+            uri_prefix: /images/restaurant
+            upload_destination: '%kernel.project_dir%/public/images/restaurant'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            inject_on_load: true

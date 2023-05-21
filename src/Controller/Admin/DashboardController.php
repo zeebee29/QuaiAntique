@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Categorie;
 use App\Entity\Fermeture;
+use App\Entity\Image;
 use App\Entity\Menu;
 use App\Entity\PlageReservation;
 use App\Entity\OuvertureHebdo;
@@ -93,6 +94,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Paramètres', 'fas fa_bars')->setSubItems([
             //MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Reservation::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Modifier', 'fas fa-eye', Restaurant::class)
+        ]);
+        yield MenuItem::subMenu('Photos', 'fas fa_bars')->setSubItems([
+            //MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Reservation::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Modifier', 'fa-solid fa-camera', Image::class)
         ]);
     }
 }
