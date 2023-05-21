@@ -53,4 +53,8 @@ class PlageReservation
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->heurePlage->format('H:i');
+    }
 }

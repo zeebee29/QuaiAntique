@@ -17,6 +17,7 @@ class RestaurantFixtures extends Fixture
         $restau->setGapResa(15);
         $restau->setDelayBeforeEnd(60);
         $manager->persist($restau);
+        $this->setReference('restaurant', $restau);
 
         $manager->flush();
     }

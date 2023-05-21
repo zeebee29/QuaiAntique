@@ -1,9 +1,15 @@
 <body>
+<form id="dataResa" data1={{plagesCompletes}} data2={{hebdo}} data3={{plagesH}}></form>
     <section class="ftco-section">
         <div class="container-resa">
             <div class="row content-center">
                 <div class="col-md-6 mb-2">
-                    <h2 class="titre-page">Réservation</h2>
+                    {% if nbPers > 1 %}
+                    <h2 class="titre-page">Réservation pour {{nbPers}} personnes</h2>
+                    {% else %}
+                    <h2 class="titre-page">Réservation pour {{nbPers}} personne</h2>
+                    {% endif %}
+
                 </div>
             </div>
             <div class="row">
@@ -12,11 +18,11 @@
                         <div class="calendar-container">
                             <div class="calendar">
                                 <div class="year-line">
-                                    <span class="left-button fa fa-chevron-left" id="prev"> </span>
-                                    <span class="year" id="label"></span>
-                                    <span class="right-button fa fa-chevron-right" id="next"> </span>
+                                    <span id="prev-year" class="left-button fa fa-chevron-left"> </span>
+                                    <span id="year" class="year"></span>
+                                    <span id="next-year" class="right-button fa fa-chevron-right"> </span>
                                 </div>
-                                <table class="months-table w-100">
+                                <table id="month-list" class="months-table w-100">
                                     <tbody>
                                         <tr class="months-row">
                                             <td class="month">Jan</td>
@@ -46,43 +52,39 @@
                                 </table>
                                 <div class="frame">
                                     <table class="dates-table w-100">
-                                        <tbody class="tbody">
+                                        <tbody id="tbody" class="tbody">
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="slots-container">
-                            <div class="slots" id="slots">
-                                <div class="titre-plage1">
-                                    <h3>MIDI</h3>
-                                </div>
-                                <table class="tb-plages">
-                                    <tr>
-                                        <td class="td-plage">12h00</td>
-                                        <td class="td-plage">12h15</td>
-                                        <td class="td-plage">12h30</td>
-                                        <td class="td-plage">12h45</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="td-plage active-slot">13h00</td>
-                                        <td class="td-plage">13h15</td>
-                                        <td class="td-plage">13h30</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-6 text-center mb-5">
-                                <button class="button" id="confirm-button">Confirmer ces date et heure</button>
-                            </div>
-                        </div>
+						<div id="slots-cont" class="slots-container">
+                            <div id="slot-card" class="slot-card"></div>
+                            <div id="date-slot" class="date-slot"></div>
+							<div id="slots-part1" class="slots">
+								<div id="sstitre1" class="titre-plage">
+									<h3></h3>
+								</div>
+                                <div id="msg-slot1" class="msg-slot"></div>
+								<table id="tb1-plages" class="tb-plages">
+								</table>
+							</div>
+							<div id="slots-part2" class="slots">
+								<div id="sstitre2" class="titre-plage">
+									<h3></h3>
+								</div>
+                                <div id="msg-slot2" class="msg-slot"></div>
+								<table id="tb2-plages" class="tb-plages">
+								</table>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-            </div>
         </div>
     </section>
-    <script src="js/jquery.min.js"></script>
+</form>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <!--script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script-->

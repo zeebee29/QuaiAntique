@@ -16,6 +16,9 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        dql:
+            datetime_functions:
+                DATE: App\DQL\DateSql
 
 when@test:
     doctrine:

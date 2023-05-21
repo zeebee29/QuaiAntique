@@ -39,28 +39,40 @@ class OuvertureHebdoRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return OuvertureHebdo[] Returns an array of OuvertureHebdo objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?OuvertureHebdo
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findFermeture(): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT jour_semaine AS jour, plage"
+            . " FROM ouverture_hebdo"
+            . " WHERE plage_txt = 'Fermé'";
+
+        $result = $connection->executeQuery($sql)->fetchAllAssociative();
+        return $result;
+    }
+    //    /**
+    //     * @return OuvertureHebdo[] Returns an array of OuvertureHebdo objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('o.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?OuvertureHebdo
+    //    {
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

@@ -100,6 +100,7 @@
 .titre-page {
     font-size: 28px;
     color: #CDA45E;
+    margin-top: 20px;
 }
 
 .row {
@@ -251,41 +252,40 @@
 }
 
 
-
+.msg-slot {
+    text-align: center;
+    color: #8f0c0c;
+    font-weight: bold;
+}
 
 .slots-container:after {
     clear: both;
 }
   
 .slot-card {
-    padding: 20px 0;
-    max-width: 100%;
-    display: block;
-    /*background: #fff;*/
-    border: none !important;
-    margin: 20px;
-    margin-left: 12px;
+    padding: 10px 0 5px 0;
+    /* max-width: 100%; */
+    /* display: block; */
+    /* margin: 20px; */
+    /* margin-left: 12px; */
     text-align: center;
 }
   
 .date-slot {
-    display: inline;
+    display: block;
+    max-width: 100%;
+
     padding: 0 10px;
     font-size: 1.5rem;
     padding-right: 0;
+    text-align: center;
 }
-
 
 /* input slots */
 .slots {
-    z-index: 5;
-    background: #000;
-    position: absolute;
-    width: 50%;
-    height: 500px;
-    top: 0;
-    right: 0;
-    display: none; }
+    height: 50%;
+    width: auto;
+     }
     @media (max-width: 767.98px) {
       .slots {
         width: 100%; } }
@@ -333,14 +333,39 @@
     border-collapse: separate;
   }
   
-    .td-plage{
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-      border-radius: 10%;
-      background-color: #ffda9b;
-      border-spacing: 0.5cm;
-      }
+.slot-h{
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    border-radius: 10%;
+    background-color: #ffda9b;
+    border-spacing: 0.5cm;
+    padding: 5px;
+    margin: 5px;
+}
   
-      .active-slot{
-        font-weight:bold;
-        border:#624C30 3px solid;
-      }
+.active-slot{
+    font-weight:bold;
+    /*border:#624C30 3px solid;*/
+    background-color: #624C30;
+    color: beige;
+}
+
+table {
+    width : 100%;
+}
+tr {
+    width: auto;
+}
+
+.line-h {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.titre-plage {
+    background-color: #624C30;
+    text-align: center;
+    font-size: 1.5rem;
+    color: beige;
+    margin-top: 8%;
+    margin-bottom: 5%;
+}

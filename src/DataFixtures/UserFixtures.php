@@ -51,7 +51,7 @@ class UserFixtures extends Fixture
                 ->setAllergie($allergene[mt_rand(0, count($allergene) - 1)])
                 ->setUpdatedAt(new \DateTime());
 
-            if ($i < 3) {
+            if ($i < 5) {
                 $this->setReference("user$i", $user);
             }
 

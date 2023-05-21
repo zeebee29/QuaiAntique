@@ -52,6 +52,10 @@ class Reservation
     #[Assert\NotBlank()]
     private ?string $midiSoir = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Restaurant $restaurant = null;
+
 
     public function __construct()
     {
@@ -145,6 +149,22 @@ class Reservation
     public function setMidiSoir(string $midiSoir): self
     {
         $this->midiSoir = $midiSoir;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->dateReservation->format('d/m/Y');
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
 
         return $this;
     }
