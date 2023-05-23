@@ -1,0 +1,14 @@
+{% extends 'base_reservation.html.twig' %}
+{% block title %}Réservation{% endblock %}
+
+{% block body %}
+
+<body>
+    <div class="container">
+        <form action="{{ path('app_resa_complement', {'nb':nb,'dateResa': dateResa}) }}" method="POST">
+        {{ form(form) }}
+
+    </form>
+</div>
+</body>
+{% endblock %}

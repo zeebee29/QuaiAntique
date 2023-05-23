@@ -2,11 +2,32 @@
 {% block title %}Réservation{% endblock %}
 
 {% block body %}
-{% for message in app.flashes('warning') %}
-<div class="alert alert-warning mt-4">
-    {{ message }}
-</div>
-{% endfor %}
-{% include "/components/calendar.html.twig" %}
 
+<body>
+    <div class="container">
+        {% include "/components/calendar.html.twig" %}
+
+        <form action="{{ path('app_resa_dispo',{ 'nb': nbPers}) }}" method="POST">
+        {{ form_start(form) }}
+
+            <div class="container-resa">
+            <div class="row content-center">
+            </div>
+            <div id="cont-confirm" class="row mb-5 content-center resa-grid">
+                <div id="date-confirm-xx" >
+                    <input type="hidden" id = "date-confirm-in" name="date-confirm-in" value=""> 
+                    
+                    <div id="date-confirm" data-valeur = "{{ dateReservation }}" ></div>
+
+                    <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary">Annuler</a>
+                    
+                    
+                </div>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </form>
+</div>
+</body>
 {% endblock %}

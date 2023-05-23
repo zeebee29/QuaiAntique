@@ -26,6 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const msgSlot2 = document.getElementById('msg-slot2');
     const tb2Plages = document.getElementById('tb2-plages');
 
+    const areaConfirm = document.getElementById('cont-confirm');
+    const dateConfirm = document.getElementById('date-confirm-in');
+
+    console.log("ID DATE CONFIRM", dateConfirm);
 
     let date = new Date();
     for (let i = 0; i < btnMonth.length; i++) {
@@ -78,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
         date.setDate(1);
 
         //Trouve le 1er lundi à afficher
-        console.log("1ERE DATE : ", date)
+        //console.log("1ERE DATE : ", date)
         var first_day = getFirstDay(date);
         dateTable = first_day;
         //boucle au max pour afficher 42 cases
@@ -153,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             dateTable.setDate(day + 1);
         }
-        // Append the last row and set the current year
+
         var rown = document.createElement("tr");
         rown.classList.add("table-row");
         calendar_days.appendChild(rown);
@@ -177,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tabSlots
     ) {
         return function (event) {
-            console.log("TARGET", event.target)
+            //console.log("TARGET", event.target)
             //Activation du conteneur pour affichage des plages horaires
             slotsCont.style.display = window.getComputedStyle(slotsCont).getPropertyValue("display");
             console.log("NOS DISPO2 : ", year + '-' + monthNum + '-' + dayNum)
@@ -185,11 +189,11 @@ document.addEventListener("DOMContentLoaded", function () {
             clickedElement = event.currentTarget;
             //efface toutes les ligne d'horaires déjà affichées (si existe)
             var elements = document.querySelectorAll('.line-h');
-            console.log("Ligne existante", elements);
+            //console.log("Ligne existante", elements);
             for (var i = 0; i < elements.length; i++) {
                 elements[i].remove();
             };
-            console.log("Ligne supprimée ?", elements);
+            //console.log("Ligne supprimée ?", elements);
 
             //slotsPart1.style.display = window.getComputedStyle(slotsPart1).getPropertyValue("display");
             //$(".slots-container").show(250);
@@ -223,23 +227,34 @@ document.addEventListener("DOMContentLoaded", function () {
         2 : si soir fermé
         3 : si midi + soir fermé
     */
-    function testFermeture(jSem, tabFermeture) {
+    function testFermeture(jSem, tabFermeture, aujourdhui, annee, mois, jour) {
         var fermeture = 0;
-        console.log("Fermeture : ", tabFermeture);
-        console.log("Jour demandé :", jSem)
-        for (var i = 0; i < tabFermeture.length; i++) {
-            if (tabFermeture[i].jour.toLowerCase() === jSem) {
+        console.log("demande : ", annee, mois, jour);
+        AnneeAujourdhui = aujourdhui.getFullYear();
+        MoisAujourdhui = aujourdhui.getMonth() + 1;
+        JourAujourdhui = aujourdhui.getDate();
+        console.log("aujourdhui :", JourAujourdhui, MoisAujourdhui, AnneeAujourdhui)
 
-                if (tabFermeture[i].plage == "midi") {
-                    fermeture += 1;
+        if ((annee < AnneeAujourdhui) ||
+            ((annee == AnneeAujourdhui) && (mois < MoisAujourdhui)) ||
+            ((annee == AnneeAujourdhui) && (mois == MoisAujourdhui) && (jour < JourAujourdhui))) {
+            fermeture = 3;
+        } else {
+
+            for (var i = 0; i < tabFermeture.length; i++) {
+                if (tabFermeture[i].jour.toLowerCase() === jSem) {
+
+                    if (tabFermeture[i].plage == "midi") {
+                        fermeture += 1;
+                    }
+                    if (tabFermeture[i].plage == "soir") {
+                        fermeture += 2;
+                    }
                 }
-                if (tabFermeture[i].plage == "soir") {
-                    fermeture += 2;
+                if (fermeture === 3) {
+                    //pas la peine de continuer
+                    break;
                 }
-            }
-            if (fermeture === 3) {
-                //pas la peine de continuer
-                break;
             }
         }
         return fermeture;
@@ -276,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* Affichage des plages de réservations suivant ouverture et dispo
      
     */
-    function affPlages(fermeture, completude, tabPlages) {
+    function affPlages(fermeture, completude, tabPlages, date) {
         if (fermeture === 3) {
             //Affiche 1x "Fermé" pour tout le jour
             console.log("Jour Fermé");
@@ -294,8 +309,8 @@ document.addEventListener("DOMContentLoaded", function () {
             //Affiche les horaires pour les 2 plages
             sstitre1.textContent = 'Midi';
             sstitre2.textContent = 'Soir';
-            affPlage("midi", fermeture, completude, tabPlages, msgSlot1, tb1Plages);
-            affPlage("soir", fermeture, completude, tabPlages, msgSlot2, tb2Plages);
+            affPlage("midi", fermeture, completude, tabPlages, msgSlot1, tb1Plages, date);
+            affPlage("soir", fermeture, completude, tabPlages, msgSlot2, tb2Plages, date);
         }
     }
 
@@ -304,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
     - "Complet" si 1/2j complète
     - Heure des plages de réservation de la 1/2j dans tous les autres cas.
     */
-    function affPlage(plage, fermeture, completude, tabPlages, msgSlotx, tbxPlages) {
+    function affPlage(plage, fermeture, completude, tabPlages, msgSlotx, tbxPlages, date) {
         if (((plage == "midi") && (fermeture === 1))
             || ((plage == "soir") && (fermeture === 2))) {
             // affiche "Fermé" pour la 1/2 journée
@@ -331,6 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     var plageN = document.createElement('td');
                     plageN.textContent = tabPlages[i].heure;
                     plageN.setAttribute('id', plage + "-" + i)
+                    plageN.setAttribute('value', date)
                     plageN.classList.add('slot-h');
                     plageN.addEventListener('click', handleClickHeure);
                     ligneTable.appendChild(plageN)
@@ -338,7 +354,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-
+    //year, month, day
     function creationTable(idLigne, tbPlages) {
         //normalement c'est déjà fait, mais au cas où, effecement
         const test = document.getElementById(idLigne);
@@ -356,11 +372,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function handleClickHeure(event) {
         const clickedElement = event.currentTarget;
+        date = clickedElement.getAttribute('value');
         const clickedId = clickedElement.id;
         console.log("Clic sur : ", clickedElement.textContent, clickedId);
+        console.log("Le : ", date)
         supprClass("active-slot");
         clickedElement.classList.add("active-slot");
+        prepareConfirm(date + " " + clickedElement.textContent);
     }
+
 
     function supprClass(classe) {
         const elements = document.getElementsByClassName(classe);
@@ -434,31 +454,40 @@ document.addEventListener("DOMContentLoaded", function () {
         var date = year + '-' + monthNum + '-' + dayNum;
         dateSlot.textContent = day + " " + month + " " + year;
 
+        dateJour = new Date();
         /*Données d'entrée 
         console.log('Plages completes:', tabFull.length, tabFull);
         console.log('H hebdo:', tabClosed.length, tabClosed);
         console.log('Plages H:', tabSlots.length, tabSlots);        
         /* Test si les plages "midi" ou "soir" sont des plages d'ouverture du restau */
-        const statusClosed = testFermeture(nomJsem, tabClosed);
+        const statusClosed = testFermeture(nomJsem, tabClosed, dateJour, year, monthNum, dayNum);
 
         /* Test si une des plages "midi ou soir" du jour sélectionné fait 
         partie de la liste des plages déclarées complètes. */
         const statusFull = testDispoJour(date, tabFull);
+
         /* Affichage des plages de réservations suivant ouverture et dispo */
-        affPlages(statusClosed, statusFull, tabSlots)
+        affPlages(statusClosed, statusFull, tabSlots, date)
 
     }
 
-    // Vérifie si la date a des dispos à afficher
-    function check_slots(day, month, year) {
-        //parcours de tabClosed pour griser le calendrier
-        /*
-        for (var i = 0; i < tabclosed.length; i++) {
+    function prepareConfirm(dateHeure) {
+        const x = dateConfirm.getAttribute('value');
+        console.log(x, dateHeure);
+        dateConfirm.value = dateHeure;
+        console.log(dateConfirm);
+
+
+        if (!document.getElementById('btn-submit')) {
+
+            var BtnSubmit = document.createElement('button');
+            BtnSubmit.type = 'submit';
+            BtnSubmit.className = 'btn btn-primary';
+            BtnSubmit.textContent = 'Confirmer ?';
+            BtnSubmit.setAttribute('id', 'btn-submit');
+            areaConfirm.appendChild(BtnSubmit);
         }
-         
-        return events;*/
     }
-
 
 
 });

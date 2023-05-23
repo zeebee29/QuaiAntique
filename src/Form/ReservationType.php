@@ -19,16 +19,11 @@ class ReservationType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'required' => true,
-                'label' => 'Nombre de convive',
+                'label' => ' ',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'class' => 'mx-auto resa-field content-center',
+                    'placeholder' => 'Nombre de personnes',
                 ],
-            ])
-            ->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary mt-4',
-                ],
-                'label' => 'suite',
             ]);
     }
 

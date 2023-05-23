@@ -7,28 +7,28 @@
 </div>
 {% endfor %}
 <body>
-    <section class="ftco-section">
+    <form action="{{ path('app_reservation') }}" method="POST">
+        {{ form_start(form) }}
+        <div class="container">
         <div class="container-resa">
             <div class="row content-center">
                 <div class="col-md-6 mb-2">
-                    <h2 class="titre-page">Nombre de convives</h2>
+                    <h2 class="titre-page">Combien serez-vous ?</h2>
+                    <p>(à partir de 10 personnes, nous ne prenons les réservations que par téléphone)</p>
                 </div>
             </div>
-            <div class="row">
-                <form action="{{ path('app_reservation') }}" method="POST">
-                    <div class="col-md-3">
-                        <button class="btn fa-solid fa-angle-left disable"></button>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        {{form(form)}}
-                                </div>
-                    <div class="col-md-3">
-                        <button  class="btn fa-solid fa-angle-right"></button>
-                    </div>
-                </form>
+            <div class="row mt-4 mb-5  content-center">
+                        {{ form_widget(form) }}
+            </div>
+            <div class="row mb-5 content-center resa-grid">
+                    <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary">Annuler</a>
+                    <button type="submit" class="btn btn-primary">Date >></button>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+    {{ form_end(form) }}
+</form>
 </body>
 
 {% endblock %}

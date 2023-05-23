@@ -563,3 +563,12 @@ tr {
 .photo1 > img{
     max-height: 200px;
 }
+
+.container-resa{
+    display: flex;
+    flex-direction: column;
+}
+
+.resa-field{
+    width: 150px;
+}
