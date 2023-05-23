@@ -1,23 +1,59 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
-    .example-wrapper {
-        margin: 1em auto;
-        max-width: 800px;
-        width: 95%;
-        font: 18px/1.5 sans-serif;
-    }
+<div class="container">
+    <div class="banniere-home">
+        <div class="cont-carousel">
+            <div id="demo" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                            <div class="img-container">
+                                <img src="{{ vich_uploader_asset(imagesCarousel[0], 'imageFile') }}" alt="Mon image"-->
+                            </div>
+                    </div>
+                    {% for imageCarousel in imagesCarousel|slice(1, images|length) %}
+                    <div class="carousel-item">
+                        <div class="img-container">
+                            <img src="{{ vich_uploader_asset(imageCarousel, 'imageFile') }}" alt="Mon image"-->
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
 
-    .example-wrapper code {
-        background: #F5F5F5;
-        padding: 2px 6px;
-    }
-</style>
+                <a class="carousel-control-prev" href="#demo" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#demo" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="msg1">
+        <div class="photo">
+            <img src="{{ vich_uploader_asset(accueil[0], 'imageFile') }}">
+        </div>
+        <div class="legend right">{{accueil[0].description}}</div>
 
-<div class="example-wrapper">
-    <h1>Hello </h1>
-    ✅ Page d'accueil
-
+    </div>
+    <div class="banniere-photo">
+        <div class="photo">
+            <img src="{{ vich_uploader_asset(images[0], 'imageFile') }}" alt="{{images[0].description}}">
+        </div>
+        <div class="photo">
+            <img src="{{ vich_uploader_asset(images[1], 'imageFile') }}" alt="{images[1].description}}">
+        </div>
+        <div class="photo">
+            <img src="{{ vich_uploader_asset(images[2], 'imageFile') }}" alt="{images[2].description}}">
+        </div>
+        <div class="photo">
+            <img src="{{ vich_uploader_asset(images[3], 'imageFile') }}" alt="{images[3].description}}">
+        </div>
+    </div>
+    <div class="msg2">
+        <div class="legend center">TEST</div>
+    </div>
 </div>
 {% endblock %}

@@ -25,7 +25,6 @@ class PlatController extends AbstractController
     {
         $plats = $platRepository->findAllinCarte();
         $categories = $categorieRepository->findAll();
-        //dd($categories, $plats);
         return $this->render('plat/plat.html.twig', [
             'categories' => $categories,
             'plats' => $plats,
@@ -34,11 +33,12 @@ class PlatController extends AbstractController
 
     #[Route('/plats', name: 'app_plats')]
     #[IsGranted('ROLE_ADMIN')]
-    public function plats(PlatRepository $platRepository): Response
+    public function plats(PlatRepository $platRepository, CategorieRepository $categorieRepository): Response
     {
         $plats = $platRepository->findAll();
-        dd($plats);
+        $categories = $categorieRepository->findAll();
         return $this->render('plat/plat.html.twig', [
+            'categories' => $categories,
             'plats' => $plats,
         ]);
     }

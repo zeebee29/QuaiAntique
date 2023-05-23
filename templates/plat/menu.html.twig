@@ -3,26 +3,13 @@
 {% block title %}Menus du restaurant{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper {
-        margin: 1em auto;
-        max-width: 800px;
-        width: 95%;
-        font: 18px/1.5 sans-serif;
-    }
-
-    .example-wrapper code {
-        background: #F5F5F5;
-        padding: 2px 6px;
-    }
-</style>
-
-
+<div class="container">
 <div class="menu">
     <h1>Menus du restaurant</h1>
     <div class="menu-items text-center">
         {% for menu in menus %}
         <h2>{{ menu.nom }} - {{ menu.prix }}€</h2>
+        <div class="menu-item">
         {% for plat in menu.plats %}
         <h3>
             {{ menu.description }}
@@ -32,9 +19,9 @@
         </div>
 
         {% endfor %}
-
+    </div>
         {% endfor %}
     </div>
 </div>
-
+</div>
 {% endblock %}

@@ -1,5 +1,19 @@
+.banniere-home {
+    background-image: linear-gradient(135deg,#221e1a,#9e7c41,black);
+    width:100%;
+    height: auto;
+    background-attachment: fixed;
+}
 
-    
+body{
+    background-image: url("../images/fondBois-2000x1333.jpg");
+    height:100%;
+}
+
+h1,h2,h3,a,p{
+    color: antiquewhite;
+}
+
 .container-resa {
     width: 100%;
     padding-right: 15px;
@@ -10,8 +24,6 @@
     display: flex;
     flex-direction:column;
 }
-
-
 
 .calendar-container {
     position: relative;
@@ -368,4 +380,186 @@ tr {
     color: beige;
     margin-top: 8%;
     margin-bottom: 5%;
+}
+.img-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display:flex;
+    justify-content: center;
+}
+.carousel-inner > .carousel-item > .img-container > img {
+    width: auto;
+    height: 300px;
+}
+
+.msg1,.msg2,.banniere-photo, .cont-photo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: antiquewhite;
+    box-shadow: 4px 4px 10px rgb(253, 236, 85);
+    border-radius: 10px 10px;
+    margin-top: 20px;
+    padding : 10px;
+    margin-bottom: 20px;
+}
+
+.msg1 > .photo {
+    background-color: #8f0c0c;
+    max-width: 40%;
+    max-height: 300px;
+    text-align: center;
+}
+
+.legend{
+    padding: 10px;
+    width:60%;
+
+}
+.legend.right {
+    text-align: left;
+
+}
+/*
+.banniere-photo > .photo {
+    max-width: 25%;
+    height: 300px;
+}
+*/
+.legend.center {
+    text-align: center;
+    width: 100%;
+}
+/*
+.photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 100%;
+}
+
+.photo img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.container-photo {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+    border-radius: 10%;
+    background-color: #ffda9b;
+    border-spacing: 0.5cm;
+    padding: 5px;
+    margin: 5px;
+}
+
+.container-photo > .photo {
+    height:300px;
+    width : max-content;
+}
+*/
+.banniere-photo {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .photo {
+    flex-basis:25%;
+    height: auto;
+  }
+  
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+  
+  @media (max-width: 990px) {
+    .photo {
+      flex-basis: 50%; 
+    }
+  }
+  
+  @media (max-width: 760px) {
+    .photo {
+      flex-basis: 100%; 
+    }
+  }
+
+  .footer {
+    background-color: #33281e;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+  }
+  
+
+  
+  .title-footer h2 {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .address-details {
+    text-align: right;
+  }
+  .address-details p {
+    margin: 0;
+    font-size: 14px;
+    text-align: center;
+  }
+  .hours > li{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.plat, .menu{
+/*    background-color: antiquewhite;*/
+    color:antiquewhite;
+
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
+    border-radius: 10px 10px;
+    margin-top: 10px;
+    padding : 10px;
+    margin-bottom: 10px;
+}
+
+.menu-items {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+.menu-item {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.nav-item >.active {
+    color: #33281e;
+}
+
+.cont-photo.reverse{
+    flex-direction: row-reverse;
+}
+
+.cont-photo.photo1{
+    max-height: 300px;
+}
+
+.cont-restau {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+.photo1 > img{
+    max-height: 200px;
 }
