@@ -1,10 +1,20 @@
 <footer class="footer">
-    <p>Tous droits réservés &copy; 2023 Mon site Web</p>
-    <div class="social-links">
-        <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
-        <ul>horaires
-            {{ render(controller('App\\Controller\\FooterController::plageOuverture')) }}
-        </ul>
+    <div class="title-footer">
+      <h2>LE QUAI ANTIQUE</h2>
     </div>
-</footer>
+    <div class="ouvertures">
+      <h3>Horaires d'ouverture :</h3>
+      <ul class="hours">
+        {{ render(controller('App\\Controller\\FooterController::plageOuverture')) }}
+    </ul>
+    </div>
+    <div class="address">
+      <div class="logo-container">
+        <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+      </div>
+      <div class="address-details">
+        {{ render(controller('App\\Controller\\FooterController::toutesCoordonnees')) }}
+      </div>
+    </div>
+  </footer>
+  

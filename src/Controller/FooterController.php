@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\OuvertureHebdo;
 use App\Repository\OuvertureHebdoRepository;
+use App\Repository\RestaurantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,6 +16,14 @@ class FooterController extends AbstractController
 
         return $this->render('partial/_horaires.html.twig', [
             'heures' => $heures,
+        ]);
+    }
+    public function toutesCoordonnees(RestaurantRepository $restauRepo): Response
+    {
+        $coord = $restauRepo->findCoordonnees();
+        //dd($coord);
+        return $this->render('partial/_coordonnees.html.twig', [
+            'coord' => $coord[0],
         ]);
     }
 }
