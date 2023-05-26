@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Categorie;
-use App\Entity\Fermeture;
 use App\Entity\Image;
 use App\Entity\Menu;
 use App\Entity\PlageReservation;
