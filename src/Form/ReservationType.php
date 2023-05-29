@@ -8,6 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints as Recapt;
 
 class ReservationType extends AbstractType
 {
@@ -24,6 +26,10 @@ class ReservationType extends AbstractType
                     'class' => 'mx-auto resa-field content-center',
                     'placeholder' => 'Nombre de personnes',
                 ],
+            ])
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recapt\Recaptcha3(),
+                'action_name' => 'inscription',
             ]);
     }
 

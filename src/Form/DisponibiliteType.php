@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints as Recapt;
 
 class DisponibiliteType extends AbstractType
 {
@@ -14,6 +16,10 @@ class DisponibiliteType extends AbstractType
         $builder
             ->add('dateReservation', DateTimeType::class, [
                 'required' => true,
+            ])
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recapt\Recaptcha3(),
+                'action_name' => 'inscription',
             ]);
     }
 
