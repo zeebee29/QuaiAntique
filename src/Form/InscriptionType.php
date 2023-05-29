@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints as Recapt;
 
 class InscriptionType extends AbstractType
 {
@@ -131,6 +133,10 @@ class InscriptionType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4',
                 ]
+            ])
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recapt\Recaptcha3(),
+                'action_name' => 'inscription',
             ]);
     }
 
