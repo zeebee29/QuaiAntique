@@ -7,7 +7,11 @@
 </div>
 {% endfor %}
 <body>
-    <form action="{{ path('app_reservation') }}" method="POST">
+    {% if app.user %}
+        <form action="{{ path('reservation1',{id:app.user.id}) }}" method="POST">
+    {% else %}
+        <form action="{{ path('reservation1') }}" method="POST">
+    {% endif %}                        
         {{ form_start(form) }}
         <div class="container">
         <div class="container-resa">
@@ -17,8 +21,10 @@
                     <p>(à partir de 10 personnes, nous ne prenons les réservations que par téléphone)</p>
                 </div>
             </div>
-            <div class="row mt-4 mb-5  content-center">
-                        {{ form_widget(form) }}
+            <div class="row mt-4 mb-5 content-center">
+            <div>
+                        {{ form_widget(form.nbConvive, {'value': nbConvive}) }}
+            </div>
             </div>
             <div class="row mb-5 content-center resa-grid">
                     <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary">Annuler</a>

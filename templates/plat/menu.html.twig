@@ -4,24 +4,21 @@
 
 {% block body %}
 <div class="container">
-<div class="menu">
-    <h1>Menus du restaurant</h1>
-    <div class="menu-items text-center">
+    <div class="menu">
+        <h1>Menus du restaurant</h1>
+        <div class="menu-items text-center">
         {% for menu in menus %}
-        <h2>{{ menu.nom }} - {{ menu.prix }}€</h2>
-        <div class="menu-item">
-        {% for plat in menu.plats %}
-        <h3>
-            {{ menu.description }}
-        </h3>
-        <div>
-            {{ plat }}
+            <h2>{{ menu.nom }} - {{ menu.prix }}€</h2>
+            <div class="menu-item">
+            {% for plat in menu.plats %}
+                <h3>{{ menu.description }}</h3>
+                <div>
+                    {{ plat }}
+                </div>
+            {% endfor %}
+            </div>
+        {% endfor %}
         </div>
-
-        {% endfor %}
     </div>
-        {% endfor %}
-    </div>
-</div>
 </div>
 {% endblock %}

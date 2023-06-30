@@ -28,7 +28,7 @@ class DashboardController extends AbstractDashboardController
 
     #[Route('/admin', name: 'admin')]
     #[IsGranted('ROLE_ADMIN')]
-    public function index(): Response
+    public function dashBoardAdmin(): Response
     {
         $url = $this->adminUrlGenerator->setController(CategorieCrudController::class)->generateUrl();
 

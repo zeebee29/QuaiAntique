@@ -21,8 +21,8 @@ class UserType extends AbstractType
             ->add('nom', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '50'
+                    'minlength' => '2',
+                    'maxlength' => '50'
                 ],
                 'label' => 'Nom',
                 'label_attr' => [
@@ -36,8 +36,8 @@ class UserType extends AbstractType
             ->add('prenom', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '50'
+                    'minlength' => '2',
+                    'maxlength' => '50'
                 ],
                 'required' => false,
                 'label' => 'Prénom (facultatif)',
@@ -51,8 +51,8 @@ class UserType extends AbstractType
             ->add('tel', TelType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '10',
-                    'maxlenght' => '14'
+                    'minlength' => '10',
+                    'maxlength' => '14'
                 ],
                 'label' => 'Téléphone',
                 'label_attr' => [
@@ -76,7 +76,7 @@ class UserType extends AbstractType
             ->add('allergie', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'maxlenght' => '500'
+                    'maxlength' => '500'
                 ],
                 'required' => false,
                 'label' => 'Allergie',

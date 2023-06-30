@@ -9,12 +9,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
 use Karser\Recaptcha3Bundle\Validator\Constraints as Recapt;
 
-class DisponibiliteType extends AbstractType
+class Reservation2Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('dateReservation', DateTimeType::class, [
+                'attr' => ['hidden' => 'hidden'],
                 'required' => true,
             ])
             ->add('captcha', Recaptcha3Type::class, [

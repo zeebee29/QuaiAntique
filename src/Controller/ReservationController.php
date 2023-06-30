@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Entity\User;
-use App\Form\DisponibiliteType;
+use App\Form\Reservation2Type;
+use App\Form\Reservation3Type;
 use App\Form\ReservationType;
 use App\Repository\OuvertureHebdoRepository;
 use App\Repository\PlageReservationRepository;
@@ -19,34 +20,39 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
 {
-    #[Route('/reservation', name: 'app_reservation', methods: ['GET', 'POST'])]
-    public function startResa(Request $request): Response
+    #[Route('/reservation/{id?}', name: 'reservation1', methods: ['GET', 'POST'])]
+    public function startResa(Request $request, ?User $user): Response
     {
         $resa = new Reservation();
-
         $form = $this->createForm(ReservationType::class);
         $form->handleRequest($request);
+        $idUser= null;
+        if (($this->getUser()) && ($this->getUser() === $user)) {//user connected AND user connected <> #id transmitted ?
+            $resa->setNbConvive($user->getNbConvive());
+            $idUser = $user->getId(); // pour le transmettre au 2nd volet de la réservation
+        }
 
         if ($form->isSubmitted()) {
             $resa = $form->getData();
             $nbConvive = $resa->getNbConvive();
 
             if ($nbConvive > 10) {
-                $this->addflash('warning', 'Pour un nombre de convives suéprieur à 10, nous contacter.');
+                $this->addflash('warning', 'Pour un nombre de convives supérieur à 10, nous contacter.');
             } elseif ($nbConvive < 1) {
                 $this->addflash('warning', 'Erreur sur le nombre de convives.');
             } else {
                 //Nb saisi OK, on peut passer au calendrier
                 $this->addflash('success', 'nos dispos pour ' . $nbConvive . ' personne(s).');
-
                 return $this->redirectToRoute(
-                    'app_resa_dispo',
+                    'reservation2_dispo',
                     [
                         'nb' => $nbConvive,
+                        'id' => $idUser,
                     ]
                 );
             }
         }
+
         return $this->render('reservation/reservation.html.twig', [
             'form' => $form->createView(),
             'nbConvive' => $resa->getNbConvive()
@@ -56,9 +62,11 @@ class ReservationController extends AbstractController
     /*
      * renvoie les jours complets et la table des ouvertures/fermetures Hebdo  
      */
-    #[Route('/reservation/{nb}', name: 'app_resa_dispo')]
-    public function consultDispo(Request $request, $nb, PlageReservationRepository $plageReservationRepository, ReservationRepository $reservationRepository, OuvertureHebdoRepository $ouvertureHebdoRepository): Response
+    #[Route('/reservation2/{nb}/{id?}', name: 'reservation2_dispo')]
+    public function consultDispo(Request $request,int $nb, PlageReservationRepository $plageReservationRepository, ReservationRepository $reservationRepository, OuvertureHebdoRepository $ouvertureHebdoRepository, ?User $user): Response
     {
+        var_dump($user->getId());
+
         $resa = new Reservation();
         $jClos = $ouvertureHebdoRepository->findFermeture();
         $plages = $plageReservationRepository->findAllPlages();
@@ -66,29 +74,31 @@ class ReservationController extends AbstractController
         //récupère les réservations non passées par dates/plages avec somme des convives
         $plagesCompletes = $reservationRepository->findNotDispoAfter(new DateTime(), $nb);
 
-        $form = $this->createForm(DisponibiliteType::class, $resa);
+        $form = $this->createForm(Reservation2Type::class, $resa);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $resa = $form->getData();
             $dateResa = $request->request->get('date-confirm-in');
-
+            
             //vérif que date/heure OK et place toujours dispo
             //test si dans la liste des fermetures
+            var_dump($user->getId());
 
             $nbConvive = $resa->getNbConvive();
             //test si nbConvives toujours OK sur la plage horaire
             //si c'est OK, pas de msg et on passe à la suite
             return $this->redirectToRoute(
-                'app_resa_complement',
+                'reservation3_confirm',
                 [
                     'nb' => $nb,
                     'dateResa' => $dateResa,
+                    'id'=> $user->getId(),
                 ]
             );
         }
 
-        return $this->render('reservation/disponibilite.html.twig', [
+        return $this->render('reservation/reservation2.html.twig', [
             'form' => $form->createView(),
             'plagesCompletes' => json_encode($plagesCompletes),
             'hebdo' => json_encode($jClos),
@@ -100,22 +110,17 @@ class ReservationController extends AbstractController
     }
 
 
-    #[Route('/reservation3/{nb}{dateResa}', name: 'app_resa_complement')]
-    public function requestCompl(Request $request, $nb, $dateResa, User $user, UserRepository $userRepo): Response
+    #[Route('/reservation3/{nb}/{dateResa}/{id?}', name: 'reservation3_confirm')]
+    public function requestCompl(Request $request, int $nb, $dateResa, ?User $user, UserRepository $userRepo): Response
     {
+        var_dump($user->getId());
 
-
-        if (!$this->getUser()) {
-            //l'utilisateur n'est pas connecté
-            //alors pas de requête pour récupérer ses infos
-
-        } else { //utilisateur connecté, on récupère ses infos
-
-
+        if (($this->getUser()) && ($this->getUser() === $user)) {//user connected AND user connected <> #id transmitted ?
         }
+
         $resa = new Reservation();
 
-        $form = $this->createForm(Reservation3Type::class, $resa);
+        $form = $this->createForm(Reservation3Type::class, [$resa,['user' => $user]);
         $form->handleRequest($request);
 
         return $this->render('reservation/reservation3.html.twig', [

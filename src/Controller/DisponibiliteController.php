@@ -14,7 +14,7 @@ class DisponibiliteController extends AbstractController
     public function dispoMonth(PlageReservationRepository $plageReservationRepository): Response
     {
         $plagesResa = $plageReservationRepository->findAll();
-        return $this->render('reservation/disponibilite.html.twig', [
+        return $this->render('reservation/reservation2.html.twig', [
             'plages' => $plagesResa,
         ]);
     }

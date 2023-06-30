@@ -315,7 +315,9 @@ h1,h2,h3,a,p{
     text-transform: uppercase;
     font-size: 13px;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.9); }
+    /*color: rgba(255, 255, 255, 0.9);*/
+ }
+
   
   .input {
     border: none;
@@ -570,5 +572,13 @@ tr {
 }
 
 .resa-field{
-    width: 150px;
+    width: 50%;
+}
+
+.register-form
+{
+    width: 50%;
+}
+.input-nb {
+    text-align: center;
 }

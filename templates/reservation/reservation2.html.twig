@@ -6,8 +6,12 @@
 <body>
     <div class="container">
         {% include "/components/calendar.html.twig" %}
-
-        <form action="{{ path('app_resa_dispo',{ 'nb': nbPers}) }}" method="POST">
+        {{dump(app.user.id)}}
+    {% if app.user %}
+        <form action="{{ path('reservation2_dispo',{'nb': nbPers, id:app.user.id}) }}" method="POST">
+    {% else %}
+        <form action="{{ path('reservation2_dispo',{ 'nb': nbPers}) }}" method="POST">
+    {% endif %}      
         {{ form_start(form) }}
 
             <div class="container-resa">
@@ -20,8 +24,7 @@
                     <div id="date-confirm" data-valeur = "{{ dateReservation }}" ></div>
 
                     <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary">Annuler</a>
-                    
-                    
+                   
                 </div>
                 </div>
             </div>

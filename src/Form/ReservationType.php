@@ -18,12 +18,12 @@ class ReservationType extends AbstractType
         $builder
             ->add('nbConvive', IntegerType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control input-nb',
                 ],
                 'required' => true,
                 'label' => ' ',
                 'label_attr' => [
-                    'class' => 'mx-auto resa-field content-center',
+                    'class' => 'mx-auto resa-field content-center ',
                     'placeholder' => 'Nombre de personnes',
                 ],
             ])
