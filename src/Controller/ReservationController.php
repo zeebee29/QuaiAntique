@@ -42,7 +42,7 @@ class ReservationController extends AbstractController
                 $this->addflash('warning', 'Erreur sur le nombre de convives.');
             } else {
                 //Nb saisi OK, on peut passer au calendrier
-                $this->addflash('success', 'nos dispos pour ' . $nbConvive . ' personne(s).');
+                //$this->addflash('success', 'nos dispos pour ' . $nbConvive . ' personne(s).');
                 return $this->redirectToRoute(
                     'reservation2_dispo',
                     [
@@ -65,7 +65,6 @@ class ReservationController extends AbstractController
     #[Route('/reservation2/{nb}/{id?}', name: 'reservation2_dispo')]
     public function consultDispo(Request $request,int $nb, PlageReservationRepository $plageReservationRepository, ReservationRepository $reservationRepository, OuvertureHebdoRepository $ouvertureHebdoRepository, ?User $user): Response
     {
-        var_dump($user->getId());
 
         $resa = new Reservation();
         $jClos = $ouvertureHebdoRepository->findFermeture();
@@ -79,11 +78,9 @@ class ReservationController extends AbstractController
 
         if ($form->isSubmitted()) {
             $resa = $form->getData();
-            $dateResa = $request->request->get('date-confirm-in');
             
             //vérif que date/heure OK et place toujours dispo
             //test si dans la liste des fermetures
-            var_dump($user->getId());
 
             $nbConvive = $resa->getNbConvive();
             //test si nbConvives toujours OK sur la plage horaire
@@ -92,7 +89,7 @@ class ReservationController extends AbstractController
                 'reservation3_confirm',
                 [
                     'nb' => $nb,
-                    'dateResa' => $dateResa,
+                    'dateResa' => $resa->getDateReservation()->format('Y-m-d H:i:s'),
                     'id'=> $user->getId(),
                 ]
             );
@@ -111,22 +108,22 @@ class ReservationController extends AbstractController
 
 
     #[Route('/reservation3/{nb}/{dateResa}/{id?}', name: 'reservation3_confirm')]
-    public function requestCompl(Request $request, int $nb, $dateResa, ?User $user, UserRepository $userRepo): Response
+    public function requestCompl(Request $request, int $nb, $dateResa, UserRepository $userRepo, ?User $user): Response
     {
-        var_dump($user->getId());
+        var_dump($user->getId(), $nb, $dateResa);
 
         if (($this->getUser()) && ($this->getUser() === $user)) {//user connected AND user connected <> #id transmitted ?
         }
 
         $resa = new Reservation();
 
-        $form = $this->createForm(Reservation3Type::class, [$resa,['user' => $user]);
+        $form = $this->createForm(Reservation3Type::class, $resa);
         $form->handleRequest($request);
 
         return $this->render('reservation/reservation3.html.twig', [
             'form' => $form->createView(),
             'nb' => $nb,
-            'dateReservation' => $dateResa
+            'dateResa' => $dateResa
 
         ]);
     }

@@ -51,7 +51,7 @@ class ReservationRepository extends ServiceEntityRepository
     {
         $connection = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT jour, plage, total "
+        $sql = "SELECT jour, plage "
             . "FROM ("
             . "SELECT DATE(resa.date_reservation) AS jour, SUM(resa.nb_convive) AS total, resa.midi_soir AS plage, resa.restaurant_id AS id "
             . "FROM reservation AS resa "

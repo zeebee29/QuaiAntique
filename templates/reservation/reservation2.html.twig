@@ -5,8 +5,7 @@
 
 <body>
     <div class="container">
-        {% include "/components/calendar.html.twig" %}
-        {{dump(app.user.id)}}
+    {% include "/components/calendar.html.twig" %}
     {% if app.user %}
         <form action="{{ path('reservation2_dispo',{'nb': nbPers, id:app.user.id}) }}" method="POST">
     {% else %}
@@ -18,19 +17,18 @@
             <div class="row content-center">
             </div>
             <div id="cont-confirm" class="row mb-5 content-center resa-grid">
-                <div id="date-confirm-xx" >
-                    <input type="hidden" id = "date-confirm-in" name="date-confirm-in" value=""> 
-                    
-                    <div id="date-confirm" data-valeur = "{{ dateReservation }}" ></div>
+
+                    {{ form_row(form.dateReservation)}}
 
                     <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary">Annuler</a>
                    
-                </div>
                 </div>
             </div>
         </div>
         {{ form_end(form) }}
     </form>
 </div>
+    <script src="{{ asset('js/calendar.js') }}"></script>
+
 </body>
 {% endblock %}

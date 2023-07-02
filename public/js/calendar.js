@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tb2Plages = document.getElementById('tb2-plages');
 
     const areaConfirm = document.getElementById('cont-confirm');
-    const dateConfirm = document.getElementById('date-confirm-in');
+    const dateConfirm = document.getElementById('reservation2_dateReservation');
 
     console.log("ID DATE CONFIRM", dateConfirm);
 
@@ -181,30 +181,21 @@ document.addEventListener("DOMContentLoaded", function () {
         tabSlots
     ) {
         return function (event) {
-            //console.log("TARGET", event.target)
             //Activation du conteneur pour affichage des plages horaires
             slotsCont.style.display = window.getComputedStyle(slotsCont).getPropertyValue("display");
-            console.log("NOS DISPO2 : ", year + '-' + monthNum + '-' + dayNum)
-            //console.log("TabDate : ", dateTable)
+            //console.log("NOS DISPO2 : ", year + '-' + monthNum + '-' + dayNum)
             clickedElement = event.currentTarget;
             //efface toutes les ligne d'horaires déjà affichées (si existe)
             var elements = document.querySelectorAll('.line-h');
-            //console.log("Ligne existante", elements);
             for (var i = 0; i < elements.length; i++) {
                 elements[i].remove();
             };
-            //console.log("Ligne supprimée ?", elements);
-
-            //slotsPart1.style.display = window.getComputedStyle(slotsPart1).getPropertyValue("display");
-            //$(".slots-container").show(250);
-            //$("#slots").show(250);
 
             //bascule de la sélection
             supprClass("active-date");
             clickedElement.classList.add("active-date");
 
             //appel de l'affichage des plages
-            //        show_slots(event.data.events, event.data.year, event.data.month, event.data.day);
             show_slots(
                 year,
                 month,
@@ -342,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
             for (var i = 0; i < tabPlages.length; i++) {
                 if (tabPlages[i].plage === plage) {
                     // affiche toutes les plages horaires de la 1/2 journée demandée
-                    console.log(plage, " XX:XX");
+                    //console.log(plage, " XX:XX");
                     var plageN = document.createElement('td');
                     plageN.textContent = tabPlages[i].heure;
                     plageN.setAttribute('id', plage + "-" + i)
@@ -450,7 +441,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tabSlots,
     ) {
         slotCard.textContent = "Nos diponibilités pour le";
-        console.log("NOS DISPO3 : ", year + '-' + monthNum + '-' + dayNum)
+        console.log("NOS DISPO33 : ", year + '-' + monthNum + '-' + dayNum)
         var date = year + '-' + monthNum + '-' + dayNum;
         dateSlot.textContent = day + " " + month + " " + year;
 
@@ -473,7 +464,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function prepareConfirm(dateHeure) {
         const x = dateConfirm.getAttribute('value');
-        console.log(x, dateHeure);
+        //console.log(x, dateHeure);
         dateConfirm.value = dateHeure;
         console.log(dateConfirm);
 
@@ -483,7 +474,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var BtnSubmit = document.createElement('button');
             BtnSubmit.type = 'submit';
             BtnSubmit.className = 'btn btn-primary';
-            BtnSubmit.textContent = 'Confirmer ?';
+            BtnSubmit.textContent = 'Confirmer date et heure';
             BtnSubmit.setAttribute('id', 'btn-submit');
             areaConfirm.appendChild(BtnSubmit);
         }
