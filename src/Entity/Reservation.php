@@ -18,19 +18,22 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotNull()]
     #[Assert\NotBlank()]
-    #[Assert\DateTime(format: 'd/m/Y h:i:s')]
+//    #[Assert\DateTime(format: 'Y-m-d h:i:s')]
+    #[Assert\Type("\DateTimeInterface")]
     private ?\DateTime $createdAt = null;
 
     #[ORM\Column(nullable: true, type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank()]
-    #[Assert\DateTime(format: 'd/m/Y h:i:s')]
+//    #[Assert\DateTime(format: 'Y-m-d h:i:s')]
+    #[Assert\Type("\DateTimeInterface")]
     private ?\DateTime $modifiedAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotNull()]
     #[Assert\NotBlank()]
-    //   #[Assert\DateTime(format: 'd/m/Y h:i:s')]
-    #[Assert\DateTime()]
+    //   #[Assert\DateTime(format: 'Y-m-d h:i:s')]
+    //#[Assert\DateTime()]
+    #[Assert\Type("\DateTimeInterface")]
     private ?\DateTime $dateReservation = null;
 
     #[ORM\Column]
@@ -39,12 +42,10 @@ class Reservation
     private ?int $nbConvive = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Length(255)]
+    #[Assert\Length(min: 2, max: 255)]
     private ?string $allergie = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotNull()]
     private ?User $user = null;
 
     #[ORM\Column(length: 10)]
@@ -56,6 +57,18 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private ?Restaurant $restaurant = null;
 
+    #[ORM\Column(length: 180)]
+    #[Assert\Email()]
+    #[Assert\Length(min: 2, max: 180)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 14)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 10, max: 14)]
+    private ?string $telReserv = null;
+
+    #[ORM\Column(length: 20)]
+    private ?string $status = null;
 
     public function __construct()
     {
@@ -165,6 +178,42 @@ class Reservation
     public function setRestaurant(?Restaurant $restaurant): self
     {
         $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getTelReserv(): ?string
+    {
+        return $this->telReserv;
+    }
+
+    public function setTelReserv(string $telReserv): static
+    {
+        $this->telReserv = $telReserv;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

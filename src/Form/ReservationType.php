@@ -21,7 +21,7 @@ class ReservationType extends AbstractType
                 'required' => true,
                 'label' => ' ',
                 'label_attr' => [
-                    'class' => 'mx-auto resa-field content-center ',
+                    'class' => 'mx-auto content-center ',
                     'placeholder' => 'Nombre de personnes',
                 ],
             ]);

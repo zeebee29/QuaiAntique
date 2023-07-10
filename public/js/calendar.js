@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const areaConfirm = document.getElementById('cont-confirm');
     const dateConfirm = document.getElementById('reservation2_dateReservation');
 
-    console.log("ID DATE CONFIRM", dateConfirm);
+    //console.log("ID DATE CONFIRM", dateConfirm);
 
     let date = new Date();
     for (let i = 0; i < btnMonth.length; i++) {
@@ -47,8 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     initCalendar(date);
 
-    function initCalendar(date) {
-
+    function initCalendar(dateCal) {
         var dataResa = document.getElementById('dataResa');
         var tab = dataResa.getAttribute('data1');
         var tabFull = JSON.parse(tab);
@@ -56,12 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
         var tabClosed = JSON.parse(tab);
         var tab = dataResa.getAttribute('data3');
         var tabSlots = JSON.parse(tab);
-        console.log('Plages HS:', tabFull.length, tabFull);
-        console.log('H hebdo:', tabClosed.length, tabClosed);
-        console.log('Plages H:', tabSlots.length, tabSlots);
+        //console.log('Plages HS:', tabFull.length, tabFull);
+        //console.log('H hebdo:', tabClosed.length, tabClosed);
+        //console.log('Plages H:', tabSlots.length, tabSlots);
 
         //vide le contenu calendrier et les dispo 
-        //$(".tbody").empty();
         if (tabDate) {
             supprChildren(tabDate);
         }
@@ -69,8 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         //var calendar_days = tabDate;
         var calendar_days = document.getElementById("tbody");
-        var month = date.getMonth();
-        var year = date.getFullYear();
+        var month = dateCal.getMonth();
+        var year = dateCal.getFullYear();
         //var day_count = days_in_month(month, year);
 
         /*var row = document.createElement("tr");
@@ -79,11 +77,11 @@ document.addEventListener("DOMContentLoaded", function () {
         var dateTable = new Date();
 
         // pas de décalage
-        date.setDate(1);
+        dateCal.setDate(1);
 
         //Trouve le 1er lundi à afficher
         //console.log("1ERE DATE : ", date)
-        var first_day = getFirstDay(date);
+        var first_day = getFirstDay(dateCal);
         dateTable = first_day;
         //boucle au max pour afficher 42 cases
         //mais si un dimanche de mois+1 est affiché alors fin de la boucle => pas de ligne supplémentaire dans le calendrier
@@ -134,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 var dayFormated = String(dateTable.getDate()).padStart(2, '0');
 
                 var eventHandler = date_click(
-                    date.getFullYear(),
+                    dateCal.getFullYear(),
                     months[month],
                     monthFormated,
                     day,
@@ -144,14 +142,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     tabClosed,
                     tabSlots
                 );
-
+console.log('dateJ : ',date)
                 curr_date.addEventListener("click", eventHandler);
             }
 
 
-            var date2 = new Date(dateTable.getFullYear(), dateTable.getMonth(), dateTable.getDate() + 1);
+            var dateAff = new Date(dateTable.getFullYear(), dateTable.getMonth(), dateTable.getDate() + 1);
             //Si un dimanche de mois+1 est affiché alors fin de la boucle => pas de ligne supplémentaire dans le calendrier
-            if ((date2.getDay() === 1) && (date2.getMonth() > month)) {
+            if ((dateAff.getDay() === 1) && (dateAff.getMonth() > month)) {
                 //fin de la table
                 break;
             }
@@ -186,11 +184,9 @@ document.addEventListener("DOMContentLoaded", function () {
             //console.log("NOS DISPO2 : ", year + '-' + monthNum + '-' + dayNum)
             clickedElement = event.currentTarget;
             //efface toutes les ligne d'horaires déjà affichées (si existe)
-            var elements = document.querySelectorAll('.line-h');
-            for (var i = 0; i < elements.length; i++) {
-                elements[i].remove();
-            };
+            effaceHeures();
 
+            annuleConfirm();
             //bascule de la sélection
             supprClass("active-date");
             clickedElement.classList.add("active-date");
@@ -210,7 +206,19 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
-
+function effaceHeures()
+{
+    var elements = document.querySelectorAll('.line-h');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].remove();
+    };
+    sstitre1.textContent = '';
+    sstitre2.textContent = '';
+    slotCard.textContent = '';
+    dateSlot.textContent = '';
+    msgSlot1.textContent = '';
+    msgSlot2.textContent = '';
+}
     /* Test si les plages "midi" ou "soir" sont des plages d'ouverture du restau
     retour : 
         0 : si aucune fermeture
@@ -363,13 +371,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function handleClickHeure(event) {
         const clickedElement = event.currentTarget;
-        date = clickedElement.getAttribute('value');
+        var dateClick = clickedElement.getAttribute('value');
         const clickedId = clickedElement.id;
         console.log("Clic sur : ", clickedElement.textContent, clickedId);
-        console.log("Le : ", date)
+        console.log("Le : ", dateClick)
         supprClass("active-slot");
         clickedElement.classList.add("active-slot");
-        prepareConfirm(date + " " + clickedElement.textContent);
+        prepareConfirm(dateClick + " " + clickedElement.textContent);
     }
 
 
@@ -381,42 +389,51 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function handleClickNextYear(date) {
+    function handleClickNextYear(dateY) {
         //année + 1
-        var new_year = date.getFullYear() + 1;
+        console.log('Date récupérée : ',dateY);
+        var new_year = dateY.getFullYear() + 1;
 
         //mise à jour affichage barre supérieure
         labelYear.textContent = new_year;
         //mise à jour contenu de table dates
-        date.setFullYear(new_year);
+        dateY.setFullYear(new_year);
+        console.log('Date initialisée : ',dateY);
+        var event = new Event('click');
+        btnMonth[dateY.getMonth()].dispatchEvent(event);
+        initCalendar(dateY);
+        effaceHeures();
 
-        initCalendar(date);
     }
 
-    function handleClickPrevYear(date) {
+    function handleClickPrevYear(dateY) {
         //année -1
-        var new_year = date.getFullYear() - 1;
+        var new_year = dateY.getFullYear() - 1;
 
         //mise à jour affichage barre supérieure
         labelYear.textContent = new_year;
         //mise à jour contenu de table dates
-        date.setFullYear(new_year);
-
-        initCalendar(date);
+        dateY.setFullYear(new_year);
+        var event = new Event('click');
+        btnMonth[dateY.getMonth()].dispatchEvent(event);
+        initCalendar(dateY);
+        effaceHeures();
     }
 
-    function handleClickMonth(event, date, index) {
+    function handleClickMonth(event, dateM, index) {
+
         currentElement = event.currentTarget;
         //retire le style "active" au mois en cours
         supprClass("active-month");
         //l'affecte au mois sélectionné
         currentElement = event.currentTarget;
         currentElement.classList.add("active-month");
-
         //mise à jour contenu de table dates
-        date.setMonth(index);
+        dateM.setMonth(index);
 
-        initCalendar(date);
+        initCalendar(dateM);
+        effaceHeures();
+
     }
 
 
@@ -442,7 +459,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
         slotCard.textContent = "Nos diponibilités pour le";
         console.log("NOS DISPO33 : ", year + '-' + monthNum + '-' + dayNum)
-        var date = year + '-' + monthNum + '-' + dayNum;
+        var dateTxt = year + '-' + monthNum + '-' + dayNum;
         dateSlot.textContent = day + " " + month + " " + year;
 
         dateJour = new Date();
@@ -455,10 +472,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* Test si une des plages "midi ou soir" du jour sélectionné fait 
         partie de la liste des plages déclarées complètes. */
-        const statusFull = testDispoJour(date, tabFull);
+        const statusFull = testDispoJour(dateTxt, tabFull);
 
         /* Affichage des plages de réservations suivant ouverture et dispo */
-        affPlages(statusClosed, statusFull, tabSlots, date)
+        affPlages(statusClosed, statusFull, tabSlots, dateTxt)
 
     }
 
@@ -471,14 +488,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!document.getElementById('btn-submit')) {
 
-            var BtnSubmit = document.createElement('button');
-            BtnSubmit.type = 'submit';
-            BtnSubmit.className = 'btn btn-primary';
-            BtnSubmit.textContent = 'Confirmer date et heure';
-            BtnSubmit.setAttribute('id', 'btn-submit');
-            areaConfirm.appendChild(BtnSubmit);
+            var btnSubmit = document.createElement('button');
+            btnSubmit.type = 'submit';
+            btnSubmit.className = 'btn btn-primary m-3';
+            btnSubmit.textContent = 'Confirmer >>';
+            btnSubmit.setAttribute('id', 'btn-submit');
+            areaConfirm.appendChild(btnSubmit);
         }
     }
 
+    function annuleConfirm()
+    {
+        console.log('annulation');
+        var btnSubmit = document.getElementById('btn-submit');
+        if (btnSubmit) {
+            btnSubmit.remove();
+            console.log('annulation2');
+        }
+    }
 
 });

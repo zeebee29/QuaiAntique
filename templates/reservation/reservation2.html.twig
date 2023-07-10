@@ -12,22 +12,18 @@
         <form action="{{ path('reservation2_dispo',{ 'nb': nbPers}) }}" method="POST">
     {% endif %}      
         {{ form_start(form) }}
-
-            <div class="container-resa">
+        <div class="container-resa2">
             <div class="row content-center">
-            </div>
-            <div id="cont-confirm" class="row mb-5 content-center resa-grid">
-
+                <div id="cont-confirm" class="row mb-5 content-center resa-grid">
                     {{ form_row(form.dateReservation)}}
-
-                    <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary">Annuler</a>
-                   
+                    <a href="javascript:history.back()" type="button" class="btn btn-secondary m-3"> Retour</a>
+                    <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary m-3">Annuler</a>
                 </div>
             </div>
         </div>
         {{ form_end(form) }}
-    </form>
-</div>
+        </form>
+    </div>
     <script src="{{ asset('js/calendar.js') }}"></script>
 
 </body>

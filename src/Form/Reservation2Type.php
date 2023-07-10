@@ -19,6 +19,7 @@ class Reservation2Type extends AbstractType
                 'html5' => false,
                 'format' => 'yyyy-MM-dd HH:mm',
                 'required' => true,
+                'label' => false,
             ]);
     }
 
