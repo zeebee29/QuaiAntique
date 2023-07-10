@@ -49,4 +49,15 @@ class RestaurantRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    
+    public function getId(): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT id FROM `restaurant` WHERE id IS NOT NULL";
+
+        $result = $connection->executeQuery($sql)->fetchAllAssociative();
+        return $result;
+    }
+
 }

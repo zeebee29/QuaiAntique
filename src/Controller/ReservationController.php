@@ -10,8 +10,10 @@ use App\Form\ReservationType;
 use App\Repository\OuvertureHebdoRepository;
 use App\Repository\PlageReservationRepository;
 use App\Repository\ReservationRepository;
+use App\Repository\RestaurantRepository;
 use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,8 +26,7 @@ class ReservationController extends AbstractController
     public function startResa(Request $request, ?User $user): Response
     {
         $resa = new Reservation();
-        $form = $this->createForm(ReservationType::class,$resa);
-        $form->handleRequest($request);
+
         $idUser= null;
         if (($this->getUser()) && ($this->getUser() === $user)) {
             //user connected AND user connected <> #id transmitted
@@ -35,9 +36,12 @@ class ReservationController extends AbstractController
         else {
             $resa->setNbConvive(1);
         }
+        $form = $this->createForm(ReservationType::class,$resa);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $resa = $form->getData();
+
             $nbConvive = $resa->getNbConvive();
 
             if ($nbConvive > 10) {
@@ -72,7 +76,6 @@ class ReservationController extends AbstractController
         $resa = new Reservation();
         $jClos = $ouvertureHebdoRepository->findFermeture();
         $plages = $plageReservationRepository->findAllPlages();
-
         //récupère les réservations non passées par dates/plages avec somme des convives
         $plagesCompletes = $reservationRepository->findNotDispoAfter(new DateTime(), $nb);
 
@@ -92,7 +95,7 @@ class ReservationController extends AbstractController
                     'reservation3_confirm',
                     [
                         'nb' => $nb,
-                        'dateResaTxt' => $resa->getDateReservation()->format('Ymd His'),
+                        'dateResaTxt' => $resa->getDateReservation()->format('Y-m-d H:i:s'),
                         ]
                 );
             } else {
@@ -101,13 +104,13 @@ class ReservationController extends AbstractController
                     'reservation3_confirm',
                     [
                         'nb' => $nb,
-                        'dateResaTxt' => $resa->getDateReservation()->format('Ymd His'),
+                        'dateResaTxt' => $resa->getDateReservation()->format('Y-m-d H:i:s'),
                         'id'=> $user->getId(),
                     ]
                 );
             }
         }
-        var_dump($resa->getDateReservation());
+        var_dump($nb);
         return $this->render('reservation/reservation2.html.twig', [
             'form' => $form->createView(),
             'plagesCompletes' => json_encode($plagesCompletes),
@@ -118,7 +121,12 @@ class ReservationController extends AbstractController
         ]);
     }
     #[Route('/reservation3/{nb}/{dateResaTxt}/{id?}', name: 'reservation3_confirm', methods: ['GET', 'POST'])]
-    public function requestUserCompl(Request $request, int $nb, $dateResaTxt, ?User $user): Response
+    public function requestUserCompl(Request $request, int $nb, $dateResaTxt,
+         ReservationRepository $reservationRepository,
+         OuvertureHebdoRepository $ouvertureHebdoRepository,
+         RestaurantRepository $restaurantRepository,
+         EntityManagerInterface $entityManager,
+         ?User $user): Response
     {
         $anonymous = true;
         if (($this->getUser()) && ($this->getUser() === $user)) {
@@ -130,7 +138,7 @@ class ReservationController extends AbstractController
         $resa = new Reservation();
         $resa->setNbConvive($nb);
 
-        $dateResa = DateTime::createFromFormat('Ymd His', $dateResaTxt);
+        $dateResa = DateTime::createFromFormat('Y-m-d H:i:s', $dateResaTxt);
         $resa->setDateReservation($dateResa);
         if (!$anonymous) {
             $resa->setUser($user);
@@ -152,11 +160,54 @@ class ReservationController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+        if (($form->isSubmitted()) && ($form->isValid())) {
+            //dd('OK pour réservation : '. $nb.', '.$dateResaTxt);
 
-                dd('VALID');
-            } 
+            //-1- vérifier que les dispos sont tjrs dispos
+            //vérifie que la date demandée est future
+            $today = new DateTime();
+            if ($today > $dateResa) {
+                dd('PB DATE');
+            }
+            //vérifie que restaurant est ouvert
+            $resultat = $ouvertureHebdoRepository->litEtatJourPlage($dateResa->format('N'), $plageTxt);
+            if ($resultat[0]['h_ouverture'] === null) {            
+                dd("FERME");
+
+            } else {
+                //vérifie dispo pour x personnes pour le jour et la plage choisie
+                //au cas où, recherche que dans le futur.
+                //si retour = vide c'est dispo
+                //dd($today, $nb, $dateResaTxt, $plageTxt);
+                $resultat = $reservationRepository->testDispoAfter($today, $nb, $dateResaTxt, $plageTxt);
+                if(!empty($resultat)) {
+                    //Si plus dispo => message et retour sur réservation
+                    $nonDispoDate = $dateResa->format('d/m/Y');
+                    if(1 === $nb) {
+                        $this->addflash('warning', 'Après vérification, il n\'y a plus de place disponible le '.$nonDispoDate.' '.$plageTxt);
+                    }
+                    else {
+                        $this->addflash('warning', 'Après vérification, il n\'y a plus de place disponible pour '.$nb.' personnes le '.$nonDispoDate.' '.$plageTxt);
+                    }                    
+                }
+
+            }
+            $resa->setStatus('Attente');
+            $idRestau = $restaurantRepository->getId();
+            $resa->setRestaurant($restaurantRepository->find($idRestau[0]['id']));
+
+            //-2- création réservation avec
+            $entityManager->persist($resa);
+            $entityManager->flush();
+            $this->addflash('success', 'Votre réservation a été enregistrée. Confirmez-la grâce au lien envoyé dans votre boite mail.');
+            
+
+
+
+            // status = attente
+            // si user connecté, lien vers user
+            // envoi msg+ lien confirmation + lien annulation
+
         }
         if (!$anonymous) {
             return $this->render('reservation/reservation3.html.twig', [

@@ -13,6 +13,11 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
+
 class Reservation3Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -26,7 +31,7 @@ class Reservation3Type extends AbstractType
             ],
             'widget' => 'single_text',
             'html5' => false,
-            'format' => 'yyyyMMdd HHmmss',
+            'format' => 'yyyy-MM-dd HH:mm:ss',
             'required' => true,
             'label_attr' => [
                 'class' => 'label-visible',
@@ -66,6 +71,13 @@ class Reservation3Type extends AbstractType
             'label_attr' => [
                 'class' => 'label-visible',
             ],            
+            'constraints'=> [
+                new NotBlank(),
+                new Regex([
+                    'pattern' => '/^(\+33|0)[0-9]{9}$/',
+                    'message' => "Veuillez saisir un N° de téléphone valide ('+33' ou '0' suivi de 9 chiffres)",
+                ])
+            ]
         ])
         ->add('email', EmailType::class, [
             'label' => 'email : ',
@@ -83,7 +95,10 @@ class Reservation3Type extends AbstractType
             $data = $event->getData();
             if (isset($data['dateReservation'])) {
                 $dateReservation = \DateTime::createFromFormat('d/m/Y - H:i', $data['dateReservation']);
-                $data['dateReservation'] = $dateReservation->format('Ymd His');
+                $data['dateReservation'] = $dateReservation->format('Y-m-d H:i:s');
+            }
+            if (isset($data['telReserv'])) {
+                $data['telReserv'] = str_replace(' ', '', $data['telReserv']);
             }
             $event->setData($data);
         });

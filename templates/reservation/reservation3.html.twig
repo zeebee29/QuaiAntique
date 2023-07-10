@@ -5,13 +5,13 @@
 
 <body>
     <div class="container">
+
     {% if app.user %}
         <form method="POST">
     {% else %}
         <form method="POST">
     {% endif %}          
         {{ form_start(form) }}
-        <div class="container">
         <div class="container-resa">
             <div class="row content-center">
                 <div class="col-md-6 mb-2">
@@ -35,10 +35,8 @@
                     {{ form_widget(form.dateReservation, {'value': form.dateReservation.vars.value|date('d/m/Y') ~ " - " ~ form.dateReservation.vars.value|date('H:i')}) }}
                     {{ form_label(form.telReserv) }}
                     {{ form_widget(form.telReserv) }}
-
                     {{ form_label(form.email) }}
                     {{ form_widget(form.email) }}
-                    
                     {{ form_label(form.allergie) }}
                     {{ form_widget(form.allergie) }}
 
@@ -46,7 +44,20 @@
                 </div>
             </div>
             <div class="msg-reservation">
+                        {{ form_errors(form.telReserv) }}
+                        {{ form_errors(form.email) }}
+                        {{ form_errors(form.allergie) }}
                 Un lien de confirmation valable<strong> 30 minutes </strong>vous sera envoyé par mail et par SMS.
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success mt-4">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+    <div class="alert alert-warning mt-4">
+        {{ message }}
+    </div>
+    {% endfor %}
             </div>
             <div class="row mb-5 content-center resa-grid">
                     <a href="javascript:history.back()" type="button" class="btn btn-secondary m-3">Retour</a>

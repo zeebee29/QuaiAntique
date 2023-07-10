@@ -42,7 +42,11 @@ class Reservation
     private ?int $nbConvive = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Length(min: 2, max: 255)]
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: 'Allergie : libellé trop court',
+        maxMessage: 'Allergie : libellé trop long')]
     private ?string $allergie = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
@@ -59,12 +63,16 @@ class Reservation
 
     #[ORM\Column(length: 180)]
     #[Assert\Email()]
-    #[Assert\Length(min: 2, max: 180)]
+    #[Assert\Length(min: 6, max: 180)]
     private ?string $email = null;
 
     #[ORM\Column(length: 14)]
     #[Assert\NotBlank()]
-    #[Assert\Length(min: 10, max: 14)]
+    #[Assert\Length(
+        min: 10,
+        max: 14,
+        minMessage: 'N° trop court',
+        maxMessage: 'N° trop long')]
     private ?string $telReserv = null;
 
     #[ORM\Column(length: 20)]

@@ -51,6 +51,21 @@ class OuvertureHebdoRepository extends ServiceEntityRepository
         $result = $connection->executeQuery($sql)->fetchAllAssociative();
         return $result;
     }
+
+    public function litEtatJourPlage($numJ,$plage)
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT h_ouverture"
+        . " FROM ouverture_hebdo"
+        . " WHERE :numJ = num_jsem AND :plage = plage";
+        
+        $params = ['plage' => $plage, 'numJ' => $numJ];
+
+        $result = $connection->executeQuery($sql, $params)->fetchAllAssociative();
+        return $result;
+    }
+
     //    /**
     //     * @return OuvertureHebdo[] Returns an array of OuvertureHebdo objects
     //     */

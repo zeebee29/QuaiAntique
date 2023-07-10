@@ -19,8 +19,12 @@ class OuvertureHebdo
     #[Assert\NotNull()]
     #[Assert\NotBlank()]
     #[Assert\Length(10)]
-    #[Assert\Choice(choices: ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"])]
+    #[Assert\Choice(choices: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"])]
     private ?string $jourSemaine = null;
+    
+    #[ORM\Column]
+    private ?int $numJsem = null;
+
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     #[Assert\NotBlank()]
@@ -39,6 +43,13 @@ class OuvertureHebdo
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setNumJsem(int $numJsem): static
+    {
+        $this->numJsem = $numJsem;
+
+        return $this;
     }
 
     public function getJourSemaine(): ?string
@@ -99,5 +110,10 @@ class OuvertureHebdo
         $this->plageTxt = $plageTxt;
 
         return $this;
+    }
+
+    public function getNumJsem(): ?int
+    {
+        return $this->numJsem;
     }
 }

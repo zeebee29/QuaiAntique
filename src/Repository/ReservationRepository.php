@@ -65,70 +65,37 @@ class ReservationRepository extends ServiceEntityRepository
 
         $result = $connection->executeQuery($sql, $params)->fetchAllAssociative();
         return $result;
+    }
 
-        /*
-        $subQuery = $this->createQueryBuilder('r_sub')
-            ->select('r_sub.dateReservation, r_sub.midiSoir')
-            ->join('r_sub.restaurant', 'restaurant_sub')
-            ->groupBy('r_sub.dateReservation', 'r_sub.midiSoir')
-            ->having('SUM(r_sub.nbConvive) >= restaurant_sub.capacite')
-            ->getDQL();
+    public function testDispoAfter($jourJ, $nbP, $dateReservation, $plage): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
 
-        $query = $this->createQueryBuilder()
-            ->select('r')
-            ->from(Reservation::class, 'r')
-            ->where($this->createQueryBuilder('r')->expr()->in('r.dateReservation', $subQuery))
-            ->getQuery();
-
-        $result = $query->getResult();
-        return $result;
-*/
-        /*
-            $requete->select('jour, plage, total')
-            ->andWhere('r.dateReservation >= :jourJ')
-            ->andWhere('totalConvive < :maxRestau')
-            ->setParameter('jourJ', $date)
-            ->setParameter('maxRestau', $capa)
-            ->groupBy('r.midiSoir', 'jour')
-            ->getQuery()
-*//*
-        return $this->createQueryBuilder('resa')
-            ->select('DATE(resa.dateReservation) AS jour, UM(resa.nbConvive) AS total, resa.midiSoir, restaurant.capacite')
-            ->andWhere('resa.dateReservation >= :jourJ')
-            ->join('resa.restaurant', 'restaurant')
-            ->groupBy('resa.midiSoir', 'resa.dateReservation')
-            ->having('SUM(resa.nbConvive) > restaurant.capacite - :nbResa')
-            ->orderBy('resa.dateReservation', 'ASC')
-            ->setParameter('nbResa', $nbP)
-            ->setParameter('jourJ', $date)
-            ->getQuery()
-            ->getResult();
-    */
-        /*
-        $query = $this->getEntityManager()->createQuery("SELECT jour, plage "
+        $sql = "SELECT jour, plage "
             . "FROM ("
             . "SELECT DATE(resa.date_reservation) AS jour, SUM(resa.nb_convive) AS total, resa.midi_soir AS plage, resa.restaurant_id AS id "
             . "FROM reservation AS resa "
+            . "WHERE resa.date_reservation > :jourJ "
+            . "AND DATE(resa.date_reservation) = DATE(:dateR) "
+            . "AND resa.midi_soir = :plage "
+            . "AND resa.status = 'confirmé' "
             . "GROUP BY plage, jour "
             . ") AS temp "
             . "LEFT JOIN restaurant AS restau "
             . "ON restau.id = temp.id "
-            . "WHERE total >= restau.capacite ");
-        return $query->getResult();
-        */
-        /*
-        $query = $this->getEntityManager()->createQuery("SELECT jour, plage "
-        . "FROM ("
-        . "SELECT DATE(resa.date_reservation) AS jour, SUM(resa.nb_convive) AS total, resa.midi_soir AS plage, resa.restaurant_id AS id "
-        . "FROM reservation AS resa "
-        . "GROUP BY plage, jour "
-        . ") AS temp "
-        . "LEFT JOIN restaurant AS restau "
-        . "ON restau.id = temp.id "
-        . "WHERE total >= restau.capacite ");
-        return $query->getResult();
-*/
+            . "WHERE total > restau.capacite - :nbP ";
+        $params = [
+            'nbP' => $nbP,
+            'jourJ' => $jourJ->format('Y-m-d'),
+            'dateR' => $dateReservation,
+            'plage' => $plage,
+        ];
+
+        $result = $connection->executeQuery($sql, $params)->fetchAllAssociative();
+        return $result;
     }
+
+
     //    /**
     //     * @return Reservation[] Returns an array of Reservation objects
     //     */
