@@ -142,7 +142,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     tabClosed,
                     tabSlots
                 );
-console.log('dateJ : ',date)
                 curr_date.addEventListener("click", eventHandler);
             }
 
@@ -228,11 +227,11 @@ function effaceHeures()
     */
     function testFermeture(jSem, tabFermeture, aujourdhui, annee, mois, jour) {
         var fermeture = 0;
-        console.log("demande : ", annee, mois, jour);
+        //console.log("demande : ", annee, mois, jour);
         AnneeAujourdhui = aujourdhui.getFullYear();
         MoisAujourdhui = aujourdhui.getMonth() + 1;
         JourAujourdhui = aujourdhui.getDate();
-        console.log("aujourdhui :", JourAujourdhui, MoisAujourdhui, AnneeAujourdhui)
+        //console.log("aujourdhui :", JourAujourdhui, MoisAujourdhui, AnneeAujourdhui)
 
         if ((annee < AnneeAujourdhui) ||
             ((annee == AnneeAujourdhui) && (mois < MoisAujourdhui)) ||
@@ -323,13 +322,13 @@ function effaceHeures()
             || ((plage == "soir") && (fermeture === 2))) {
             // affiche "Fermé" pour la 1/2 journée
             msgSlotx.textContent = 'Fermé';
-            console.log(plage, " : Fermé");
+            //console.log(plage, " : Fermé");
         }
-        else if (((plage == "midi") && (completude === 1))
-            || ((plage == "soir") && (completude === 2))) {
+        else if (((plage == "midi") && ((completude&1) === 1))
+            || ((plage == "soir") && ((completude&2) === 2))) {
             // affiche "Complet" pour la 1/2 journée
             msgSlotx.textContent = 'Complet';
-            console.log(plage, " : Complet");
+            //console.log(plage, " : Complet");
         }
         else {
             if (plage === "midi") {
@@ -373,8 +372,8 @@ function effaceHeures()
         const clickedElement = event.currentTarget;
         var dateClick = clickedElement.getAttribute('value');
         const clickedId = clickedElement.id;
-        console.log("Clic sur : ", clickedElement.textContent, clickedId);
-        console.log("Le : ", dateClick)
+        //console.log("Clic sur : ", clickedElement.textContent, clickedId);
+        //console.log("Le : ", dateClick)
         supprClass("active-slot");
         clickedElement.classList.add("active-slot");
         prepareConfirm(dateClick + " " + clickedElement.textContent);
@@ -391,14 +390,14 @@ function effaceHeures()
 
     function handleClickNextYear(dateY) {
         //année + 1
-        console.log('Date récupérée : ',dateY);
+        //console.log('Date récupérée : ',dateY);
         var new_year = dateY.getFullYear() + 1;
 
         //mise à jour affichage barre supérieure
         labelYear.textContent = new_year;
         //mise à jour contenu de table dates
         dateY.setFullYear(new_year);
-        console.log('Date initialisée : ',dateY);
+        //console.log('Date initialisée : ',dateY);
         var event = new Event('click');
         btnMonth[dateY.getMonth()].dispatchEvent(event);
         initCalendar(dateY);
@@ -458,7 +457,7 @@ function effaceHeures()
         tabSlots,
     ) {
         slotCard.textContent = "Nos diponibilités pour le";
-        console.log("NOS DISPO33 : ", year + '-' + monthNum + '-' + dayNum)
+        //console.log("NOS DISPO33 : ", year + '-' + monthNum + '-' + dayNum)
         var dateTxt = year + '-' + monthNum + '-' + dayNum;
         dateSlot.textContent = day + " " + month + " " + year;
 
@@ -480,10 +479,10 @@ function effaceHeures()
     }
 
     function prepareConfirm(dateHeure) {
-        const x = dateConfirm.getAttribute('value');
+        //const x = dateConfirm.getAttribute('value');
         //console.log(x, dateHeure);
         dateConfirm.value = dateHeure;
-        console.log(dateConfirm);
+        //console.log(dateConfirm);
 
 
         if (!document.getElementById('btn-submit')) {
@@ -499,11 +498,10 @@ function effaceHeures()
 
     function annuleConfirm()
     {
-        console.log('annulation');
         var btnSubmit = document.getElementById('btn-submit');
         if (btnSubmit) {
             btnSubmit.remove();
-            console.log('annulation2');
+            //console.log('annulation2');
         }
     }
 

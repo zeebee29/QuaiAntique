@@ -42,6 +42,16 @@
 
 <body>
     {% include "/components/header.html.twig" %}
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success mt-3">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+    <div class="alert alert-warning mt-3">
+        {{ message }}
+    </div>
+    {% endfor %}    
     {% block body %}{% endblock %}
     {% include "/components/footer.html.twig" %}
 </body>

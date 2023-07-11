@@ -76,9 +76,10 @@ class ReservationController extends AbstractController
         $resa = new Reservation();
         $jClos = $ouvertureHebdoRepository->findFermeture();
         $plages = $plageReservationRepository->findAllPlages();
+
         //récupère les réservations non passées par dates/plages avec somme des convives
         $plagesCompletes = $reservationRepository->findNotDispoAfter(new DateTime(), $nb);
-
+//dd($plagesCompletes);
         $form = $this->createForm(Reservation2Type::class, $resa);
         $form->handleRequest($request);
 
@@ -110,7 +111,6 @@ class ReservationController extends AbstractController
                 );
             }
         }
-        var_dump($nb);
         return $this->render('reservation/reservation2.html.twig', [
             'form' => $form->createView(),
             'plagesCompletes' => json_encode($plagesCompletes),
@@ -166,20 +166,35 @@ class ReservationController extends AbstractController
             //-1- vérifier que les dispos sont tjrs dispos
             //vérifie que la date demandée est future
             $today = new DateTime();
+
             if ($today > $dateResa) {
-                dd('PB DATE');
+                $this->addflash('warning', 'La date choisie est indisponible.');
+                return $this->redirectToRoute(
+                    'reservation2_dispo',
+                    [
+                        'nb' => $nb,
+                        'id'=> $user->getId(),
+                        ]
+                );
             }
             //vérifie que restaurant est ouvert
             $resultat = $ouvertureHebdoRepository->litEtatJourPlage($dateResa->format('N'), $plageTxt);
             if ($resultat[0]['h_ouverture'] === null) {            
-                dd("FERME");
-
+                $this->addflash('warning', 'La date choisie est indisponible.');
+                return $this->redirectToRoute(
+                    'reservation2_dispo',
+                    [
+                        'nb' => $nb,
+                        'id'=> $user->getId(),
+                        ]
+                );
             } else {
                 //vérifie dispo pour x personnes pour le jour et la plage choisie
                 //au cas où, recherche que dans le futur.
                 //si retour = vide c'est dispo
                 //dd($today, $nb, $dateResaTxt, $plageTxt);
                 $resultat = $reservationRepository->testDispoAfter($today, $nb, $dateResaTxt, $plageTxt);
+                //dd($today, $dateResaTxt);
                 if(!empty($resultat)) {
                     //Si plus dispo => message et retour sur réservation
                     $nonDispoDate = $dateResa->format('d/m/Y');
@@ -189,10 +204,16 @@ class ReservationController extends AbstractController
                     else {
                         $this->addflash('warning', 'Après vérification, il n\'y a plus de place disponible pour '.$nb.' personnes le '.$nonDispoDate.' '.$plageTxt);
                     }                    
-                }
-
+                    return $this->redirectToRoute(
+                        'reservation2_dispo',
+                        [
+                            'nb' => $nb,
+                            'id'=> $user->getId(),
+                            ]
+                    );
             }
-            $resa->setStatus('Attente');
+        }
+            $resa->setStatus('Confirmé');
             $idRestau = $restaurantRepository->getId();
             $resa->setRestaurant($restaurantRepository->find($idRestau[0]['id']));
 
@@ -201,6 +222,7 @@ class ReservationController extends AbstractController
             $entityManager->flush();
             $this->addflash('success', 'Votre réservation a été enregistrée. Confirmez-la grâce au lien envoyé dans votre boite mail.');
             
+            return $this->redirectToRoute("homepage");
 
 
 
