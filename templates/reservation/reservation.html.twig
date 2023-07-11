@@ -1,11 +1,6 @@
 {% extends 'base_reservation.html.twig' %}
 
 {% block body %}
-{% for message in app.flashes('warning') %}
-<div class="alert alert-warning mt-4">
-    {{ message }}
-</div>
-{% endfor %}
 <body>
     {% if app.user %}
         <form action="{{ path('reservation1',{id:app.user.id}) }}" method="POST">
