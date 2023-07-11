@@ -97,28 +97,23 @@ class ReservationRepository extends ServiceEntityRepository
     }
 
 
-    //    /**
-    //     * @return Reservation[] Returns an array of Reservation objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('r.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+        /**
+         * @return Reservation[] Returns an array of Reservation objects
+         */
+        public function findByUserField($user): array
+        {
+            $connection = $this->getEntityManager()->getConnection();
 
-    //    public function findOneBySomeField($value): ?Reservation
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+            $sql = 'SELECT date_reservation, nb_convive, status, email, tel_reserv
+                FROM reservation AS r
+                WHERE r.user_id = :user
+                ORDER BY date_reservation DESC'
+                ;
+            $params = [
+                'user' => $user->getId(),
+            ];
+
+            $result = $connection->executeQuery($sql, $params)->fetchAllAssociative();
+            return $result;
+    }
 }

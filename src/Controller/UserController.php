@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
 use App\Entity\User;
 use App\Form\UserPasswordType;
 use App\Form\UserType;
+use App\Repository\ReservationRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -97,4 +99,22 @@ class UserController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/user/history/{id}', 'user-booking', methods: ['GET', 'POST'])]
+    public function bookingHistory(Request $request, User $user, ReservationRepository $reservRepo): Response
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('security.login');
+        }
+
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute('security.logout');
+        }
+
+        return $this->render('user/book_history.html.twig', [
+            'bookings' => $reservRepo->findByUserField($user),
+        ]);
+    }
+
+
 }

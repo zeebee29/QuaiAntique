@@ -48,7 +48,7 @@
                     Bonjour {{ app.user.nom }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Historique de mes réservations</a>
+                    <a class="dropdown-item" href="{{ path('user-booking', {id:app.user.id}) }}">Historique de mes réservations</a>
                     <a class="dropdown-item" href="{{ path('user.edit', {id:app.user.id}) }}">Modifier mes
                         informations</a>
                     <a class="dropdown-item" href="{{ path('user-edit-passsword', {id:app.user.id}) }}">Modifier mon

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Le quai antique - Historique{% endblock %}
+
+{% block body %}
+  <div class="container">
+      <h1 class="mt-4">Historique de vos commandes</h1>
+
+    <div>
+      <table class="tb-booking">
+        <thead>
+          <th scope="col" class="col-header-booking">Date</th>
+          <th scope="col" class="col-header-booking">Heure</th>
+          <th scope="col" class="col-header-booking">Nb couverts</th>
+          <th scope="col" class="col-header-booking">Email</th>
+          <th scope="col" class="col-header-booking">Téléphone</th>
+          <th scope="col" class="col-header-booking">Statut</th>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+          <tr>
+            <td class="tb-cell-booking">{{ booking.date_reservation|date('d/m/Y') }}</td>
+            <td class="tb-cell-booking">{{ booking.date_reservation|date('H:i') }}</td>
+            <td class="tb-cell-booking">{{ booking.nb_convive }}</td>
+            <td class="tb-cell-booking">{{ booking.email }}</td>
+            <td class="tb-cell-booking">{{ booking.tel_reserv }}</td>
+            <td class="tb-cell-booking">{{ booking.status }}</td>
+          </tr> 
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
