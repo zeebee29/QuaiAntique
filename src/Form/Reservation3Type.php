@@ -38,7 +38,7 @@ class Reservation3Type extends AbstractType
             ],            
         ])
         ->add('nbConvive',NumberType::class,[
-            'label' => 'Réservation pour :',
+            'label' => 'Nbre de couvert(s) :',
             'attr'=> [
                 'readonly' => 'readonly',
                 'class' => 'disabled-field input-nb'

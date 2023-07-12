@@ -68,7 +68,7 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'required' => false,
-                'label' => 'Nombre de convive',
+                'label' => 'Nombre de couvert(s)',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],

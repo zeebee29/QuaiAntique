@@ -45,9 +45,9 @@ class ReservationController extends AbstractController
             $nbConvive = $resa->getNbConvive();
 
             if ($nbConvive > 10) {
-                $this->addflash('warning', 'Pour un nombre de convives supérieur à 10, nous contacter.');
+                $this->addflash('warning', 'Pour un nombre de couverts supérieur à 10, nous contacter.');
             } elseif ($nbConvive < 1) {
-                $this->addflash('warning', 'Erreur sur le nombre de convives.');
+                $this->addflash('warning', 'Erreur sur le nombre de couverts.');
             } else {
                 //Nb saisi OK, on peut passer au calendrier
                 return $this->redirectToRoute(

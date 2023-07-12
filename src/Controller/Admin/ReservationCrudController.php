@@ -25,7 +25,7 @@ class ReservationCrudController extends AbstractCrudController
             DateTimeField::new('dateReservation', 'Jour/heure réservé')->setFormat('yyyy-MM-dd HH:mm'),
             DateTimeField::new('createdAt', 'Date création')->setFormat('yyyy-MM-dd HH:mm')->setFormTypeOption('disabled', 'disabled'),
             DateTimeField::new('modifiedAt', 'Modifié le')->setFormat('yyyy-MM-dd HH:mm')->setFormTypeOption('disabled', 'disabled'),
-            IntegerField::new('nbConvive', 'Nbre de personnes'),
+            IntegerField::new('nbConvive', 'Nbre de couverts'),
             TextEditorField::new('allergie', 'Allergie signalée'),
         ];
     }

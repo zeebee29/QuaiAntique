@@ -110,7 +110,7 @@ class InscriptionType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'required' => false,
-                'label' => 'Nombre de convive',
+                'label' => 'Nombre de couvert',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
