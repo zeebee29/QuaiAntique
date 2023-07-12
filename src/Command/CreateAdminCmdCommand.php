@@ -95,24 +95,19 @@ class CreateAdminCmdCommand extends Command
                 $io->caution('Les mots de passe ne sont pas identiques.');
                 $is_pwdConfirmed = false;
             }
-    } while ($is_pwdConfirmed === false);
+        } while ($is_pwdConfirmed === false);
 
-    $user = new User();
-    $user->setNom($nom);
-    $user->setEmail($email);
-    $user->setTel($tel);
-    $user->setPassword($password1);
-    $user->setNbConvive(0);
-    $user->setRoles(["ROLE_ADMIN","ROLE_USER"]);
+        $user = new User();
+        $user->setNom($nom);
+        $user->setEmail($email);
+        $user->setTel($tel);
+        $user->setPassword($password1);
+        $user->setNbConvive(0);
+        $user->setRoles(["ROLE_ADMIN","ROLE_USER"]);
 
-    $this->entityManager->persist($user);
-    $this->entityManager->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     
-/*
-        ->setRoles(['ROLE_USER'])
-        ->setPlainPassword('password')
-        ->setNbConvive(mt_rand(1, 4))
-*/
         $io->success('L\'administrateur %s a été créé dans la base.');
         $io->listing([
             sprintf('Nom : %s',$nom),
