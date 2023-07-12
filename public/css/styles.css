@@ -642,7 +642,7 @@ tbody {
     font-size: 0.8rem;
 }
 
-td,
+.tb-cell-booking,
 th {
     border: 1px solid rgb(190, 190, 190);
     padding: 5px 10px;
@@ -660,7 +660,7 @@ th {
     .tb-booking {
         font-size: 0.9rem;
     }
-    td,
+    .tb-cell-booking,
     th {
         padding: 5px 5px;
     }

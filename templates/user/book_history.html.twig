@@ -14,7 +14,6 @@
           <th scope="col" class="col-header-booking">Nb couverts</th>
           <th scope="col" class="col-header-booking">Email</th>
           <th scope="col" class="col-header-booking">Téléphone</th>
-          <th scope="col" class="col-header-booking">Statut</th>
         </thead>
         <tbody>
         {% for booking in bookings %}
@@ -24,7 +23,6 @@
             <td class="tb-cell-booking">{{ booking.nb_convive }}</td>
             <td class="tb-cell-booking">{{ booking.email }}</td>
             <td class="tb-cell-booking">{{ booking.tel_reserv }}</td>
-            <td class="tb-cell-booking">{{ booking.status }}</td>
           </tr> 
         {% endfor %}
         </tbody>

@@ -47,7 +47,7 @@
                     aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
                     Bonjour {{ app.user.nom }}
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ path('user-booking', {id:app.user.id}) }}">Historique de mes réservations</a>
                     <a class="dropdown-item" href="{{ path('user.edit', {id:app.user.id}) }}">Modifier mes
                         informations</a>
@@ -63,7 +63,7 @@
                     aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
                     Bonjour, Identifiez-vous
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ path('security.login') }}">Connexion</a>
                     <a class="dropdown-item" href="{{ path('security.registration') }}">Inscription</a>
                 </div>
