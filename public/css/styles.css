@@ -665,3 +665,7 @@ th {
         padding: 5px 5px;
     }
 }
+
+.readonly-field {
+    background-color: #fdd39a; /* Couleur de fond pour les champs en lecture seule */
+}

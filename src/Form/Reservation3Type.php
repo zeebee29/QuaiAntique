@@ -27,7 +27,7 @@ class Reservation3Type extends AbstractType
             'label' => 'Le : ',
             'attr'=> [
                 'readonly' => 'readonly',
-                'class' => 'disabled-field input-nb'
+                'class' => 'readonly-field input-nb'
             ],
             'widget' => 'single_text',
             'html5' => false,
@@ -41,7 +41,7 @@ class Reservation3Type extends AbstractType
             'label' => 'Nbre de couvert(s) :',
             'attr'=> [
                 'readonly' => 'readonly',
-                'class' => 'disabled-field input-nb'
+                'class' => 'readonly-field input-nb'
             ],
             'label_attr' => [
                 'class' => 'label-visible',
