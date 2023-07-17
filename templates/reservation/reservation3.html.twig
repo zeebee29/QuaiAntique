@@ -5,12 +5,11 @@
 
 <body>
     <div class="container">
-
-    {% if app.user %}
+        {% if app.user %}
         <form method="POST">
-    {% else %}
+        {% else %}
         <form method="POST">
-    {% endif %}          
+        {% endif %}          
         {{ form_start(form) }}
         <div class="container-resa">
             <div class="row content-center">
@@ -44,31 +43,28 @@
                 </div>
             </div>
             <div class="msg-reservation">
-                        {{ form_errors(form.telReserv) }}
-                        {{ form_errors(form.email) }}
-                        {{ form_errors(form.allergie) }}
+                {{ form_errors(form.telReserv) }}
+                {{ form_errors(form.email) }}
+                {{ form_errors(form.allergie) }}
                 Un lien de confirmation valable<strong> 30 minutes </strong>vous sera envoyé par mail.
-    {% for message in app.flashes('success') %}
-    <div class="alert alert-success mt-4">
-        {{ message }}
-    </div>
-    {% endfor %}
-    {% for message in app.flashes('warning') %}
-    <div class="alert alert-warning mt-4">
-        {{ message }}
-    </div>
-    {% endfor %}
+                {% for message in app.flashes('success') %}
+                <div class="alert alert-success mt-4">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning mt-4">
+                    {{ message }}
+                </div>
+                {% endfor %}
             </div>
             <div class="row mb-5 content-center resa-grid">
-                    <a href="javascript:history.back()" type="button" class="btn btn-secondary m-3">Retour</a>
-                    <button type="submit" class="btn btn-primary m-3">Confirmer</button>
-                    <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary m-3">Annuler</a>
-                </div>
+                <a href="javascript:history.back()" type="button" class="btn btn-secondary m-3">Retour</a>
+                <button type="submit" class="btn btn-primary m-3">Confirmer</button>
+                <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary m-3">Annuler</a>
             </div>
         </div>
-    </div>
-        {{ form_end(form) }}
-
+    {{ form_end(form) }}
     </form>
 </div>
 </body>

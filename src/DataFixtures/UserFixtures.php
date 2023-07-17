@@ -15,7 +15,6 @@ class UserFixtures extends Fixture
      */
     private Generator $faker;
 
-
     public function __construct()
     {
         $this->faker = Factory::create('fr_FR');
@@ -50,10 +49,7 @@ class UserFixtures extends Fixture
                 ->setNbConvive(mt_rand(1, 4))
                 ->setAllergie($allergene[mt_rand(0, count($allergene) - 1)])
                 ->setUpdatedAt(new \DateTime());
-
-            if ($i < 5) {
-                $this->setReference("user$i", $user);
-            }
+            $this->setReference("user$i", $user);
 
             $manager->persist($user);
         }

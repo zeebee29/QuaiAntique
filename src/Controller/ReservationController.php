@@ -85,12 +85,7 @@ class ReservationController extends AbstractController
 
         if ($form->isSubmitted()) {
             $resa = $form->getData();
-            //vérif que date/heure OK et place toujours dispo
-            //test si dans la liste des fermetures
 
-            $nbConvive = $resa->getNbConvive();
-            //test si nbConvives toujours OK sur la plage horaire
-            //si c'est OK, pas de msg et on passe à la suite
             if(is_null($user)) {
                 return $this->redirectToRoute(
                     'reservation3_confirm',
@@ -121,7 +116,7 @@ class ReservationController extends AbstractController
         ]);
     }
     #[Route('/reservation3/{nb}/{dateResaTxt}/{id?}', name: 'reservation3_confirm', methods: ['GET', 'POST'])]
-    public function requestUserCompl(Request $request, int $nb, $dateResaTxt,
+    public function requestUserComplement(Request $request, int $nb, $dateResaTxt,
          ReservationRepository $reservationRepository,
          OuvertureHebdoRepository $ouvertureHebdoRepository,
          RestaurantRepository $restaurantRepository,
@@ -161,8 +156,6 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
 
         if (($form->isSubmitted()) && ($form->isValid())) {
-            //dd('OK pour réservation : '. $nb.', '.$dateResaTxt);
-
             //-1- vérifier que les dispos sont tjrs dispos
             //vérifie que la date demandée est future
             $today = new DateTime();
@@ -211,8 +204,8 @@ class ReservationController extends AbstractController
                             'id'=> $user->getId(),
                             ]
                     );
+                }
             }
-        }
             $resa->setStatus('Confirmé');
             $idRestau = $restaurantRepository->getId();
             $resa->setRestaurant($restaurantRepository->find($idRestau[0]['id']));
@@ -224,12 +217,9 @@ class ReservationController extends AbstractController
             
             return $this->redirectToRoute("homepage");
 
-
-
             // status = attente
             // si user connecté, lien vers user
             // envoi msg+ lien confirmation + lien annulation
-
         }
         if (!$anonymous) {
             return $this->render('reservation/reservation3.html.twig', [

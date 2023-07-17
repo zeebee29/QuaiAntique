@@ -49,7 +49,6 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
                 ->setTelReserv($this->faker->regexify('/^(\+33|0)[0-9]{9}$/'))
                 ->setEmail($this->faker->email())
                 ->setRestaurant($this->getReference('restaurant'));
-            //$resa->setModifiedAt($modifAt);
             $manager->persist($resa);
         }
         $manager->flush();
