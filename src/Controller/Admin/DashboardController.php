@@ -30,7 +30,7 @@ class DashboardController extends AbstractDashboardController
     #[IsGranted('ROLE_ADMIN')]
     public function dashBoardAdmin(): Response
     {
-        $url = $this->adminUrlGenerator->setController(CategorieCrudController::class)->generateUrl();
+        $url = $this->adminUrlGenerator->setController(ReservationCrudController::class)->generateUrl();
 
         return $this->redirect($url);
     }
