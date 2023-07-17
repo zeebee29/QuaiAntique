@@ -44,9 +44,9 @@ class OuvertureHebdoRepository extends ServiceEntityRepository
     {
         $connection = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT jour_semaine AS jour, plage"
-            . " FROM ouverture_hebdo"
-            . " WHERE plage_txt = 'Fermé'";
+        $sql = 'SELECT jour_semaine AS jour, plage
+            FROM ouverture_hebdo
+            WHERE plage_txt = "Fermé"';
 
         $result = $connection->executeQuery($sql)->fetchAllAssociative();
         return $result;
@@ -56,9 +56,9 @@ class OuvertureHebdoRepository extends ServiceEntityRepository
     {
         $connection = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT h_ouverture"
-        . " FROM ouverture_hebdo"
-        . " WHERE :numJ = num_jsem AND :plage = plage";
+        $sql = 'SELECT h_ouverture
+        FROM ouverture_hebdo
+        WHERE :numJ = num_jsem AND :plage = plage';
         
         $params = ['plage' => $plage, 'numJ' => $numJ];
 

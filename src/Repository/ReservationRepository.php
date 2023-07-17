@@ -72,19 +72,19 @@ class ReservationRepository extends ServiceEntityRepository
     {
         $connection = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT jour, plage "
-            . "FROM ("
-            . "SELECT DATE(resa.date_reservation) AS jour, SUM(resa.nb_convive) AS total, resa.midi_soir AS plage, resa.restaurant_id AS id "
-            . "FROM reservation AS resa "
-            . "WHERE resa.date_reservation > :jourJ "
-            . "AND DATE(resa.date_reservation) = DATE(:dateR) "
-            . "AND resa.midi_soir = :plage "
-//            . "AND resa.status = 'confirmé' "
-            . "GROUP BY plage, jour "
-            . ") AS temp "
-            . "LEFT JOIN restaurant AS restau "
-            . "ON restau.id = temp.id "
-            . "WHERE total > restau.capacite - :nbP ";
+        $sql = 'SELECT jour, plage
+            FROM (
+            SELECT DATE(resa.date_reservation) AS jour, SUM(resa.nb_convive) AS total, resa.midi_soir AS plage, resa.restaurant_id AS id
+            FROM reservation AS resa
+            WHERE resa.date_reservation > :jourJ
+            AND DATE(resa.date_reservation) = DATE(:dateR)
+            AND resa.midi_soir = :plage
+            GROUP BY plage, jour
+            ) AS temp
+            LEFT JOIN restaurant AS restau
+            ON restau.id = temp.id
+            WHERE total > restau.capacite - :nbP';
+        
         $params = [
             'nbP' => $nbP,
             'jourJ' => $jourJ->format('Y-m-d'),
