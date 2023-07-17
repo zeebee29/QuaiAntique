@@ -12,16 +12,20 @@
     </div>
     {% endif %}
     <form action="{{ path('security.login') }}" method="post">
-        <div class="mb-3">
+        <div class="mt-5 mb-3 input-group">
             <label for="username" class="form-label">Adresse email</label>
             <input type="email" class="form-control" id="username" name="_username"
-                placeholer="exemple@le-quai-antique.fr" value="{{ last_username }}">
-            <div id="emailHelp" class="form-text">Votre email ne sera jamais partagé avec des tiers.</div>
+                placeholer="exemple@le-quai-antique.fr" value="{{ last_username }}" required>
         </div>
-        <div class="mb-3">
+        <div class="mb-3 input-group">
             <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="_password" placeholder="********">
+            <input type="password" class="form-control" id="password" name="_password" placeholder="********" required>
+            <span role="button" class="input-group-text " onclick="togglePassword()">
+                <i id="eye-slash" class="bi bi-eye-slash"></i>
+                <i id="eye" class="bi bi-eye" style="display:none"></i>
+            </span>
         </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <button type="submit" class="btn btn-primary">Se connecter</button>
     </form>
 </div>
