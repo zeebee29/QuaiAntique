@@ -90,7 +90,7 @@ class CreateAdminCmdCommand extends Command
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     
-        $io->success('L\'administrateur %s a été créé dans la base.');
+        $io->success(sprintf('L\'administrateur "%s" a été créé dans la base.',$nom));
         $io->listing([
             sprintf('Nom : %s',$nom),
             sprintf('Email : %s',$email),

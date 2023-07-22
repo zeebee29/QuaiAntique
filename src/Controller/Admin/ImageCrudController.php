@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ImageCrudController extends AbstractCrudController
@@ -23,7 +24,7 @@ class ImageCrudController extends AbstractCrudController
         $fields = [
             IdField::new('id')->hideOnForm()->hideOnIndex(),
             TextField::new('nom', 'Titre')->setFormTypeOption('disabled', true),
-            TextField::new('description', 'Description'),
+            TextareaField::new('description', 'Description'),
             VichImageField::new('imageFile'),
             AssociationField::new('restaurant'),
         ];

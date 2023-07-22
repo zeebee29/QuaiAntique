@@ -9,15 +9,15 @@
     {% set img_reverse = false %}
     {% for image in images %}
     {% if img_reverse == false %}
-    <div class="cont-photo">
-      {% else %}
+      <div class="cont-photo">
+    {% else %}
       <div class="cont-photo reverse">
-      {% endif %}
-          <div class="photo1">
+    {% endif %}
+        <div class="photo1">
           <img src="{{ vich_uploader_asset(image, 'imageFile') }}">
-          </div>
-      <div class="legend right">{{image.description}}</div>
-    </div>
+        </div>
+        <div class="legend right">{{image.description}}</div>
+      </div>
     {% set img_reverse = not img_reverse %}
     {% endfor %}
   </div>

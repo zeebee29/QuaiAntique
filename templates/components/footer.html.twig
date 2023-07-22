@@ -1,14 +1,16 @@
 <footer class="footer bg-dark ">
-    <div class="footer h1">
-      LE QUAI ANTIQUE
+    <div class="footer h1 mt-2">
+    <a class="navbar-brand" href="{{ path('accueil.home') }}">
+    <img class="logo-navbar" src="{{ asset('images/LogoRestaurant.svg')}}" alt="Logo Restaurant" />
+    </a>
     </div>
-    <div class="ouvertures">
+    <div class="ouvertures mt-2">
       <div class="footer h2">Horaires d'ouverture :</div>
       <ul class="hours">
         {{ render(controller('App\\Controller\\FooterController::plageOuverture')) }}
     </ul>
     </div>
-    <div class="address">
+    <div class="address mt-2">
       <div class="logo-container">
         <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
       </div>

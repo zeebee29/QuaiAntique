@@ -1,6 +1,8 @@
 <header class="header">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ path('accueil.home') }}">Le Quai Antique</a>
+    <a class="navbar-brand text-light" href="{{ path('accueil.home') }}">
+    <img class="logo-navbar" src="{{ asset('images/LogoRestaurant.svg')}}" alt="Logo Restaurant" />
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -45,7 +47,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
-                    Bonjour {{ app.user.nom }}
+                    <span class="txt-welcome-navbar">Bonjour {{ app.user.nom }} </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ path('user-booking', {id:app.user.id}) }}">Historique de mes réservations</a>
@@ -61,7 +63,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
-                    Bonjour, Identifiez-vous
+                    <span class="txt-welcome-navbar">Bonjour, Identifiez-vous </span>
+                    
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ path('security.login') }}">Connexion</a>
