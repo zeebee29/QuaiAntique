@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Post;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,19 +20,25 @@ class LoginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("email", TextType::class, [
-                "label" => "Email de l'utilisateur",
-                "required" => true,
-                "constraints" => [
-                    new NotBlank(["message" => "Le nom d'utilisateur ne doit pas être vide !"])
-                ]
+            ->add("email", EmailType::class, [
+                'label' => 'Adresse email :',
+                'required' => true,
+                'attr'=> [
+                    'class' => "input-nb form-control input-nb",
+                ],
+                'label_attr' => [
+                    'class' => 'col-form-label',
+                ],            
             ])
             ->add("password", PasswordType::class, [
-                "label" => "Mot de passe",
+                "label" => "Mot de passe :",
                 "required" => true,
-                "constraints" => [
-                    new NotBlank(["message" => "Le mot de passe ne peut pas être vide !"])
-                ]
+                'attr' => [
+                    'data-role'=> "input-pw",
+                ],
+                'label_attr' => [
+                    'class' => 'col-form-label',
+                ],                 
             ]);
     }
 

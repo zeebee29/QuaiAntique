@@ -26,11 +26,7 @@ class UserType extends AbstractType
                 ],
                 'label' => 'Nom',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    'class' => 'col-form-label mt-4'
                 ],
             ])
             ->add('prenom', TextType::class, [
@@ -42,10 +38,7 @@ class UserType extends AbstractType
                 'required' => false,
                 'label' => 'Prénom (facultatif)',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    'class' => 'col-form-label mt-1'
                 ],
             ])
             ->add('tel', TelType::class, [
@@ -56,11 +49,7 @@ class UserType extends AbstractType
                 ],
                 'label' => 'Téléphone',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min' => 10, 'max' => 14]),
+                    'class' => 'col-form-label mt-1'
                 ],
             ])
             ->add('nbConvive', IntegerType::class, [
@@ -70,27 +59,19 @@ class UserType extends AbstractType
                 'required' => false,
                 'label' => 'Nombre de couvert(s)',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'class' => 'col-form-label mt-1'
                 ],
             ])
             ->add('allergie', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control  mb-3',
                     'maxlength' => '500'
                 ],
                 'required' => false,
                 'label' => 'Allergie',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'class' => 'col-form-label mt-1'
                 ],
-                'constraints' => [
-                    new Assert\Length(['max' => 500]),
-                ],
-            ])
-            ->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary mt-4',
-                ]
             ]);
     }
 

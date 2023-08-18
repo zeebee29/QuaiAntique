@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="mt-4">Formulaire de connexion</h1>
+    <h1 class="title-page-profil mt-4">S'identifier</h1>
 
     {% if error %}
     <div class="alert alert-danger mt-4">
@@ -12,21 +12,29 @@
     </div>
     {% endif %}
     <form action="{{ path('security.login') }}" method="post">
-        <div class="mt-5 mb-3 input-group">
-            <label for="username" class="form-label">Adresse email</label>
-            <input type="email" class="form-control" id="username" name="_username"
-                placeholer="exemple@le-quai-antique.fr" value="{{ last_username }}" required>
+        <div class="col-md-6 mt-5 mb-3 mx-auto">
+            <label for="username" class="col-form-label">Adresse email</label>
+            <div class="input-group">
+                <input type="email" class="form-control" id="username" name="_username"
+                    placeholer="exemple@le-quai-antique.fr" value="{{ last_username }}" required>
+            </div>
         </div>
-        <div class="mb-3 input-group">
-            <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="_password" placeholder="********" required>
-            <span role="button" class="input-group-text " onclick="togglePassword()">
-                <i id="eye-slash" class="bi bi-eye-slash"></i>
-                <i id="eye" class="bi bi-eye" style="display:none"></i>
-            </span>
+        <div class="col-md-6 mb-3 mx-auto">
+            <label for="password" class="col-form-label ">Mot de passe</label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="password" data-role="input-pw" name="_password" placeholder="********" required>
+                <span role="button" class="input-group-text " onclick="togglePassword()">
+                    <i id="eye-slash" class="bi bi-eye-slash"></i>
+                    <i id="eye" class="bi bi-eye" style="display:none"></i>
+                </span>                    
+            </div>
         </div>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <button type="submit" class="btn btn-primary">Se connecter</button>
+        <div class="d-flex my-5 justify-content-center resa-row-btn">
+            <a href="{{ path('homepage') }}" role="button" class="btn btn-secondary m-3">Annuler</a>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <button type="submit" class="btn btn-primary m-3">Se connecter</button>
+        </div>
     </form>
+    </div>
 </div>
 {% endblock %}

@@ -24,7 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(['message'=>"Le nom est requis."])]
     #[Assert\Length(min: 2, max: 50)]
     private ?string $nom = null;
 
@@ -33,7 +33,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $prenom = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    #[Assert\Email()]
+    #[Assert\Email(['message'=>"Cette adresse n'est pas valide."])]
+    #[Assert\NotBlank(['message'=>"L'email est obligatoire."])]
     #[Assert\Length(min: 2, max: 180)]
     private ?string $email = null;
 
@@ -41,7 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotNull()]
     private array $roles = [];
 
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(['message'=>"Le mot de passe est obligatoire."])]
     private ?string $plainPassword = 'password';
     /**
      * @var string The hashed password
@@ -50,8 +51,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password;
 
     #[ORM\Column(length: 14)]
-    #[Assert\NotBlank()]
-    #[Assert\Length(min: 10, max: 14)]
+    #[Assert\NotBlank(['message'=>"Le N° de téléphone est obligatoire."])]
+    #[Assert\Regex(['pattern' => '/^(\+33|0)[0-9]{9}$/',
+        'message' => "Veuillez saisir un N° de téléphone valide ('+33' ou '0' suivi de 9 chiffres).",
+    ])]
     private ?string $tel = null;
 
     #[ORM\Column(nullable: true)]

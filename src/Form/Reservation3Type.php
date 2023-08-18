@@ -34,7 +34,7 @@ class Reservation3Type extends AbstractType
             'format' => 'yyyy-MM-dd HH:mm:ss',
             'required' => true,
             'label_attr' => [
-                'class' => 'label-visible',
+                'class' => 'label-visible resa3-input-label',
             ],            
         ])
         ->add('nbConvive',NumberType::class,[
@@ -44,14 +44,14 @@ class Reservation3Type extends AbstractType
                 'class' => 'readonly-field input-nb'
             ],
             'label_attr' => [
-                'class' => 'label-visible',
+                'class' => 'label-visible resa3-input-label',
             ],            
         ])
         ->add('allergie', TextType::class,[
             'label' => 'Allergie à signaler :',
             'required' => false,
             'label_attr' => [
-                'class' => 'label-visible',
+                'class' => 'label-visible resa3-input-label',
             ],            
         ])
         ->add('midiSoir',TextType::class,[
@@ -69,7 +69,7 @@ class Reservation3Type extends AbstractType
             ],
             'required' => true,
             'label_attr' => [
-                'class' => 'label-visible',
+                'class' => 'label-visible resa3-input-label',
             ],            
             'constraints'=> [
                 new NotBlank(),
@@ -86,7 +86,7 @@ class Reservation3Type extends AbstractType
             ],
             'required' => true,
             'label_attr' => [
-                'class' => 'label-visible',
+                'class' => 'label-visible resa3-input-label',
             ],            
         ]);
 

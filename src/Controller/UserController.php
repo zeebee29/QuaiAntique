@@ -89,7 +89,7 @@ class UserController extends AbstractController
 
                 $this->addflash('success', 'Votre mot de passe a été modifié.');
 
-                return $this->redirectToRoute('accueil.home');
+                return $this->redirectToRoute('homepage');
             } else {
                 $this->addflash('warning', 'Erreur sur mot de passe actuel.');
             }

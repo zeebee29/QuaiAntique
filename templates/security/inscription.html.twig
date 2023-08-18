@@ -5,12 +5,38 @@ Le Quai antique - Inscription
 {% endblock %}
 
 {% block body %}
+
 <div class="container">
-    <div class="register-form">
+    <h1 class="title-page-profil mt-4">Modification du mot de passe</h1>
 
-        <h1 class="mt-4">Formulaire d'inscription</h1>
+    <div class="cont-edit my-2">
+        <form method="POST">
+            {{ form_start(form) }}
+            {{ form_row(form.nom) }}
+            {{ form_errors(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.email) }}
+            {{ form_label(form.plainPassword.first)}}
+            {{ form_errors(form.plainPassword.first) }}
+            <div class="input-group mb-3">
+                {{form_widget(form.plainPassword.first)}}
+                <span role="button" class="input-group-text " onclick="togglePassword()">
+                    <i id="eye-slash" class="bi bi-eye-slash"></i>
+                    <i id="eye" class="bi bi-eye" style="display:none"></i>
+                </span>
+            </div>
+            {{ form_row(form.plainPassword.second)}}
+            {{ form_row(form.tel) }}
+            {{ form_row(form.nbConvive) }}
+            {{ form_row(form.allergie) }}
 
-        {{ form(form) }}
+            <div class="d-flex mb-5 justify-content-center resa-row-btn">
+                <a href="{{ path('homepage') }}" role="button" class="btn btn-secondary m-3">Annuler</a>
+                <button type="submit" class="btn btn-primary m-3">Enregistrer</button>
+            </div>
+            {{ form_end(form)}}
+        </form>
     </div>
 </div>
+
 {% endblock %}

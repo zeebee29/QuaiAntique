@@ -1,17 +1,4 @@
-<body>
-<form id="dataResa" data1={{plagesCompletes}} data2={{hebdo}} data3={{plagesH}}></form>
-    <section class="ftco-section">
-        <div class="container-resa2">
-            <div class="row content-center">
-                <div class="col-md-6 mb-2">
-                    {% if nbPers > 1 %}
-                    <h2 class="titre-page-resa">Réservation pour {{nbPers}} personnes</h2>
-                    {% else %}
-                    <h2 class="titre-page-resa">Réservation pour {{nbPers}} personne</h2>
-                    {% endif %}
 
-                </div>
-            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="content w-100">
@@ -24,20 +11,24 @@
                                 </div>
                                 <table id="month-list" class="months-table w-100">
                                     <tbody>
-                                        <tr class="months-row">
-                                            <td class="month">Jan</td>
-                                            <td class="month">Fev</td>
-                                            <td class="month">Mar</td>
-                                            <td class="month">Avr</td>
-                                            <td class="month">Mai</td>
-                                            <td class="month">Juin</td>
-                                            <td class="month">Juil</td>
-                                            <td class="month">Aout</td>
-                                            <td class="month">Sept</td>
-                                            <td class="month">Oct</td>
-                                            <td class="month">Nov</td>
-                                            <td class="month">Dec</td>
-                                        </tr>
+                                        <div class="months-row">
+                                        <div class="sem">
+                                            <div class="month">Jan</div>
+                                            <div class="month">Fev</div>
+                                            <div class="month">Mar</div>
+                                            <div class="month">Avr</div>
+                                            <div class="month">Mai</div>
+                                            <div class="month">Juin</div>
+                                        </div>
+                                        <div class="sem">
+                                            <div class="month">Juil</div>
+                                            <div class="month">Aout</div>
+                                            <div class="month">Sept</div>
+                                            <div class="month">Oct</div>
+                                            <div class="month">Nov</div>
+                                            <div class="month">Dec</div>
+                                        </div>
+                                        </div>
                                     </tbody>
                                 </table>
 
@@ -81,8 +72,5 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</form>
 
-</body>
+

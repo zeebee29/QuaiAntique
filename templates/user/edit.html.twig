@@ -4,8 +4,22 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="mt-4">Modification de votre profil</h1>
+    <h1 class="title-page-profil mt-4">Modification de profil</h1>
+    <div class="cont-edit">
+        <form method="POST">
+            {{ form_start(form) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.tel) }}
+            {{ form_row(form.nbConvive) }}
+            {{ form_row(form.allergie) }}
 
-    {{ form(form) }}
+            <div class="d-flex mb-5 justify-content-center resa-row-btn">
+                <a href="{{ path('homepage') }}" role="button" class="btn btn-secondary m-3">Annuler</a>
+                <button type="submit" class="btn btn-primary m-3">Enregistrer</button>
+            </div>
+            {{ form_end(form)}}
+        </form>
+    </div>
 </div>
 {% endblock %}

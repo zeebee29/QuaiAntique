@@ -26,15 +26,11 @@ class InscriptionType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'minlength' => '2',
-                    'maxlength' => '50'
+                    'maxlength' => '50',
                 ],
                 'label' => 'Nom',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    'class' => ' col-form-label mt-4'
                 ],
             ])
             ->add('prenom', TextType::class, [
@@ -46,10 +42,7 @@ class InscriptionType extends AbstractType
                 'required' => false,
                 'label' => 'Prénom (facultatif)',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    'class' => 'col-form-label mt-1'
                 ],
             ])
             ->add('email', EmailType::class, [
@@ -60,35 +53,31 @@ class InscriptionType extends AbstractType
                 ],
                 'label' => 'Email',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Email(),
-                    new Assert\Length(['min' => 2, 'max' => 180]),
+                    'class' => 'col-form-label mt-1'
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'first_options' => [
                     'label' => 'Mot de passe',
                     'label_attr' => [
-                        'class' => 'form-label mt-4'
+                        'class' => 'col-form-label mt-1'
                     ],
                     'attr' => [
                         'class' => 'form-control',
+                        'data-role'=> "input-pw",
                     ]
                 ],
                 'second_options' => [
                     'label' => 'Confirmation du mot de passe',
                     'label_attr' => [
-                        'class' => 'form-label mt-4'
+                        'class' => 'col-form-label'
                     ],
                     'attr' => [
                         'class' => 'form-control',
                     ]
                 ],
-                'invalid_message' => 'Les mots de passe ne correspondent pas.',
             ])
             ->add('tel', TelType::class, [
                 'attr' => [
@@ -98,11 +87,7 @@ class InscriptionType extends AbstractType
                 ],
                 'label' => 'Téléphone',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min' => 10, 'max' => 14]),
+                    'class' => 'col-form-label mt-1'
                 ],
             ])
             ->add('nbConvive', IntegerType::class, [
@@ -110,9 +95,9 @@ class InscriptionType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'required' => false,
-                'label' => 'Nombre de couvert',
+                'label' => 'Nombre de couvert(s)',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'class' => 'col-form-label mt-1'
                 ],
             ])
             ->add('allergie', TextType::class, [
@@ -121,19 +106,12 @@ class InscriptionType extends AbstractType
                     'maxlength' => '500'
                 ],
                 'required' => false,
-                'label' => 'Allergie',
+                'label' => 'Allergie(s) (500 car.)',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\Length(['max' => 500]),
+                    'class' => 'col-form-label mt-1'
                 ],
             ])
-            ->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary mt-4',
-                ]
-            ])
+
             ->add('captcha', Recaptcha3Type::class, [
                 'constraints' => new Recapt\Recaptcha3(),
                 'action_name' => 'inscription',

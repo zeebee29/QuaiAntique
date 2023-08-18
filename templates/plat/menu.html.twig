@@ -8,11 +8,11 @@
         <h1>Menus du restaurant</h1>
         <div class="menu-items text-center">
         {% for menu in menus %}
-            <h2>{{ menu.nom }} - {{ menu.prix }}€</h2>
+            <div class="fs-3">{{ menu.nom }} - {{ menu.prix }}€</div>
             <div class="menu-item">
+                <div class="fs-4">{{ menu.description }}</div>
             {% for plat in menu.plats %}
-                <h3>{{ menu.description }}</h3>
-                <div>
+                <div class="fs-5 text-hilight">
                     {{ plat }}
                 </div>
             {% endfor %}
