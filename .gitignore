@@ -11,3 +11,4 @@
 
 public/images/*
 !public/images/.gitignore
+!public/images/LogoRestaurant.svg
