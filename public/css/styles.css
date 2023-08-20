@@ -1,13 +1,13 @@
 :root {
     --txt-color-light:#fef6eb;
     --txt-color-hilight:#ffd499;
-    --txt-color-dark: #343A40;
+    --txt-color-dark: #212529;
     --bk-color-light:rgb(254, 246, 235);;
-    --bk-color-dark:#343A40;
+    --bk-color-dark:#212529;
     --bk-btn-calendar: #aba799;
     --shadow-card:#645d49;
-    --selected-month:#343A40;
-    --selected-date:#343A40;
+    --selected-month:#212529;
+    --selected-date:#212529;
     --bk-calendar-slot:#aba799;
     --bk-calendar-date:#fff;
     --txt-disabled-month:#aaaaaa;
@@ -25,11 +25,41 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     /*font-size: 0.9rem;*/
 }
+.container{
+    margin-top: 100px;
+}
+.navbar {
+    transition: top 0.3s ease-in-out;
+    transition-delay: 0.2s;
+    /* Autres styles de votre navbar */
+}
+.nav-item{
+    white-space: nowrap;
+    font-size: 1rem;
+}
+.navbar-nav .nav-link:hover{
+    color:white;
+    font-weight: bold;
 
+}
+.fixed-footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--bk-color-light);
+    color: var(--txt-color-dark);
+    text-align: center;
+    padding: 10px 0;
+}
 .logo-navbar {
     height:2em;
 }
-h1,h2,h3,a,p{
+h1{
+    font-family: 'Stardos Stencil', cursive;
+
+}
+h1,h2,h3{
     color: var(--txt-color-light);
 }
 .text-hilight{
@@ -61,7 +91,7 @@ h1,h2,h3,a,p{
 .nav-user2{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     font-size: 0.8rem;
     justify-content: center;
@@ -115,6 +145,7 @@ h1,h2,h3,a,p{
 }
 
 
+
 .container-confirm {
     display: grid;
     grid-template-columns: 1fr;
@@ -149,18 +180,18 @@ h1,h2,h3,a,p{
     line-height: 30px;
     color: var(--txt-color-light);
 }
-/*.title-page-restau,*/
 .titre-page-resa {
     font-size: 1.3rem;
-    margin-top: 0;
+    margin-top: 20px;
     text-align: center;
+    color: var(--txt-color-light);
 }
 .title-page-profil,
 .title-page-restau{
     color: var(--txt-color-dark);
-}
-.titre-page-resa {
-    color: var(--txt-color-light);
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 .resa-row-btn
 {
@@ -431,12 +462,12 @@ tr {
     transform: translate(-50%);
     position: absolute;
     height:auto;
-    background-color: darkred;
+    background-color: var(--txt-color-hilight);
     border-radius: 8px;
-    outline: 5px solid darkred;
+    outline: 4px solid var(--txt-color-hilight);
     outline-offset: 5px;
     padding: 10px 20px;
-    color: var(--txt-color-light);
+    color: var(--txt-color-dark);
     text-decoration: none;
     font-weight: bold;
     transition: all 0.3s ease;
@@ -446,7 +477,7 @@ tr {
     z-index: 2;
 }
 .booking-btn:hover {
-    background-color: #ca1717;
+    background-color: #066f00;
     color: #fff;
   }
 .msg1,
@@ -650,15 +681,13 @@ th {
         color: var(--txt-color-dark);
         text-align:center;
     }    
-    .txt-welcome-navbar{
-        display:flex;
-    }
+
     
 }
 
 @media screen and (min-width: 768px) {
     .logo-navbar {
-        height:2.5em;
+        height:2.3em;
     }
     .booking-btn {
         bottom: 30px;
@@ -669,7 +698,8 @@ th {
         transform: translate(0);
     }
     .photo {
-        flex-basis: 50%; 
+        flex-basis: 50%;
+        border-radius: 5px;
     }   
     .txt-carousel {
         max-width: 50%;
@@ -707,6 +737,9 @@ th {
         order:2;
         align-items: center;
     }
+    .nav-item{
+        font-size: 1rem;
+    }
     .msg1,.msg2,.banniere-photo, .cont-photo{
         flex-direction: row;
         flex-wrap: wrap;
@@ -727,6 +760,13 @@ th {
     }
     .cont-photo.reverse{
         flex-direction: row-reverse;
+    }
+    .title-page-restau{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .fixed-footer{
+    display: none;
     }
 }
 
@@ -756,6 +796,10 @@ th {
     .nav-user2{
         font-size: 1rem;;
     }
+    .nav-item{
+        font-size: 1.25rem;
+    }
 }
+
 
 

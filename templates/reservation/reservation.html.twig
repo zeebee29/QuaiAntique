@@ -2,16 +2,19 @@
 
 {% block body %}
 <body>
+    <div class="container">
+        <h1 class="title-page-restau">RESERVATION</h1>
     {% if app.user %}
         <form action="{{ path('reservation1',{id:app.user.id}) }}" method="POST">
     {% else %}
         <form action="{{ path('reservation1') }}" method="POST">
     {% endif %}                        
-        {{ form_start(form) }}
-        <div class="container">
+
+            {{ form_start(form) }}
+
         <div class="container-resa">
             <div class="d-flex justify-content-center">
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6 mb-2 mt-2">
                     <h2 class="titre-page-resa">Combien serez-vous ?</h2>
                     <p>(à partir de 10 personnes, nous ne prenons les réservations que par téléphone)</p>
                 </div>

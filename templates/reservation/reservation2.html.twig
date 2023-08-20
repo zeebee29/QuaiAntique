@@ -5,14 +5,15 @@
 
 <body>
     <div class="container">
+            <h1 class="title-page-restau">RESERVATION</h1>
     <form id="dataResa" data1={{plagesCompletes}} data2={{hebdo}} data3={{plagesH}}></form>
         <div class="container-resa2">
             <div class="d-flex justify-content-center">
                 <div class="col-lg-6 mb-2">
                     {% if nbPers > 1 %}
-                    <h2 class="titre-page-resa">Réservation pour {{nbPers}} personnes</h2>
+                    <h2 class="titre-page-resa">pour {{nbPers}} personnes</h2>
                     {% else %}
-                    <h2 class="titre-page-resa">Réservation pour {{nbPers}} personne</h2>
+                    <h2 class="titre-page-resa">pour {{nbPers}} personne</h2>
                     {% endif %}
 
                 </div>

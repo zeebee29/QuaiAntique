@@ -1,6 +1,6 @@
 <header class="header">
 <div class="container-fluid px-0">
-<nav class="navbar navbar-expand-md navbar-dark bg-dark px-2">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark px-2 fixed-top">
     <div class="navbar2">
         <div class="navbar1">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -14,19 +14,19 @@
                         <a class="nav-link" href="{{ path('homepage') }}">Accueil<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link no-break" href="{{ path('app_restau') }}">Le Restaurant</a>
+                        <a class="nav-link no-break" href="{{ path('app_restau') }}">Le restaurant</a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_plats') }}">Plats</a>
+                        <a class="nav-link" href="{{ path('app_plats') }}">Les plats</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_carte') }}">Carte</a>
+                        <a class="nav-link" href="{{ path('app_carte') }}">La carte</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_menu') }}">Menus</a>
+                        <a class="nav-link" href="{{ path('app_menu') }}">Les menus</a>
                     </li>
                     <li class="nav-item">
                             <a class="nav-link {%if pageR is defined %} active {% endif %}"
@@ -35,7 +35,7 @@
                         {% else %}
                             href="{{ path('reservation1') }}"
                         {% endif %}                        
-                        >Réserver</a>
+                        >Réservation</a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item">
@@ -57,7 +57,6 @@
                         aria-expanded="true">
                         <i class="fa fa-user"></i>
                 {% if app.user %}
-                        <span class="txt-welcome-navbar">Bonjour </span>
                         <span class="txt-welcome-navbar">{{ app.user.nom }} </span>
                     </a>
                     <div class="position-absolute dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -71,11 +70,11 @@
                     </div>
                 </li>
                 {% else %}
-                        <span class="txt-welcome-navbar">Bonjour,</span>
-                    </a>
+                <span class="txt-welcome-navbar">Mon compte</span>
+            </a>
                     <div class="position-absolute dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{ path('security.login') }}">S'identifier</a>
-                        <a class="dropdown-item" href="{{ path('security.registration') }}">S'inscrire</a>
+                        <a class="dropdown-item" href="{{ path('security.login') }}">Me connecter</a>
+                        <a class="dropdown-item" href="{{ path('security.registration') }}">M'inscrire</a>
                     </div>
                 </li>
                 {% endif %}
@@ -85,3 +84,19 @@
 </nav>
 </div>
 </header>
+<script>
+    let prevScrollPos = window.pageYOffset;
+
+window.onscroll = function() {
+    let currentScrollPos = window.pageYOffset;
+    
+    if (prevScrollPos > currentScrollPos) {
+        document.querySelector(".navbar").style.top = "0";
+    } else {
+        document.querySelector(".navbar").style.top = "-100px";
+    }
+    
+    prevScrollPos = currentScrollPos;
+}
+
+</script>

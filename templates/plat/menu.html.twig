@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="container">
+    <h1 class="title-page-restau">MENUS</h1>
     <div class="menu">
-        <h1>Menus du restaurant</h1>
         <div class="menu-items text-center">
         {% for menu in menus %}
             <div class="fs-3">{{ menu.nom }} - {{ menu.prix }}€</div>

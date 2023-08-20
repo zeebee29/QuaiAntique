@@ -3,9 +3,11 @@
 {% block title %}Le restaurant{% endblock %}
 
 {% block body %}
+
 <div class="container">
+  <h1 class="title-page-restau">Le restaurant</h1>
+
   <div class="cont-restau">
-    <h1 class="title-page-restau">Le restaurant</h1>
     {% set img_reverse = false %}
     {% for image in images %}
     {% if img_reverse == false %}
