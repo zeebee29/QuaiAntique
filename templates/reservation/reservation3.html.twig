@@ -4,8 +4,10 @@
 {% block body %}
 
 <body>
-    <div class="container">
-        <h1 class="title-page-restau">RESERVATION</h1>
+<div class="bandeau-titre">
+  <h1 class="title-page">RESERVATION</h1>
+</div>
+<div class="container">
         {% if app.user %}
         <form method="POST">
         {% else %}
@@ -60,9 +62,9 @@
                 {% endfor %}
             </div>
             <div class="d-flex justify-content-center  mb-5 resa-row-btn">
-                <a href="javascript:history.back()" type="button" class="btn btn-secondary m-3">Retour</a>
-                <button type="submit" class="btn btn-primary m-3">Confirmer</button>
-                <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary m-3">Annuler</a>
+                <a href="javascript:history.back()" type="button" class="qa-btn m-3">Retour</a>
+                <button type="submit" class="qa-btn m-3">Confirmer</button>
+                <a href="{{ path('homepage') }}" type="button" class="qa-btn m-3">Annuler</a>
             </div>
         </div>
     {{ form_end(form) }}

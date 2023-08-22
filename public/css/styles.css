@@ -17,7 +17,6 @@
 }
 
 body{
-    /*background-image: url("../images/fondBois-2000x1333.jpg");*/
     background-color: var(--bk-color-light);
     min-height: 100vh;
     display: flex;
@@ -26,7 +25,8 @@ body{
     /*font-size: 0.9rem;*/
 }
 .container{
-    margin-top: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .navbar {
     transition: top 0.3s ease-in-out;
@@ -44,6 +44,10 @@ body{
 }
 .fixed-footer{
     position: fixed;
+    display:flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -51,6 +55,16 @@ body{
     color: var(--txt-color-dark);
     text-align: center;
     padding: 10px 0;
+    z-index:1;
+}
+.fixed-footer a{
+    color: var(--txt-color-dark);
+    text-align: center;
+}
+.fixed-footer-link{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
 }
 .logo-navbar {
     height:2em;
@@ -121,11 +135,67 @@ h1,h2,h3{
     justify-content: left;
 }
 
+.cont-contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.cont-contact-carte{
+    width:100%;
+}
+.cont-contact-carte iframe{
+    border: 5px solid white;
+}
+.cont-contact-logo {
+    background-color: var(--bk-color-dark);
+    border-radius: 10px;
+    padding: 10px 50px;
+    align-items: center;
+  }
+.cont-accueil-logo{
+    height:auto;
+    width: 100%;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.cont-accueil-logo>img{
+    width: 40%;
+    min-width: 220px;
+    max-width: 600px;
+}
 
+.cont-accueil .down-arrow {
+	background-image: url('../images/chevron-down.svg');
+	background-size: contain;
+	bottom: 85px;
+	height: 40px;
+	left: 50%;
+	margin-left: -20px;
+	position: absolute;
+	width: 40px;
+	z-index: 1;
+}
+.cont-accueil .bounce{
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px); 
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
 .hours > li {
     white-space: nowrap;
     overflow: hidden;
-    /*text-overflow: ellipsis;*/
     font-size: 0.8em;
     padding-left:0px;
 }
@@ -143,8 +213,6 @@ h1,h2,h3{
     margin-bottom: 0.5rem;
     justify-content: space-between;
 }
-
-
 
 .container-confirm {
     display: grid;
@@ -193,6 +261,12 @@ h1,h2,h3{
     margin-top: 10px;
     margin-bottom: 20px;
 }
+.title-page{
+    color: var(--txt-color-light);
+    text-align: center;
+    margin-top:50px;
+}
+
 .resa-row-btn
 {
     display: flex;
@@ -264,9 +338,6 @@ h1,h2,h3{
 .table-date {
     cursor: default;
     color: #2b2b2b;
-    /*height: 26px;
-    width: 26px;
-    padding: 10px;*/
     font-size: 15px;
     line-height: 26px;
     text-align: center;
@@ -316,10 +387,6 @@ h1,h2,h3{
 }
 .slot-card {
     padding: 10px 0 5px 0;
-    /* max-width: 100%; */
-    /* display: block; */
-    /* margin: 20px; */
-    /* margin-left: 12px; */
     text-align: center;
 }
 .date-slot {
@@ -357,13 +424,12 @@ h1,h2,h3{
 
 .active-slot {
     font-weight:bold;
-    /*border:#624C30 3px solid;*/
     background-color: var(--bk-color-dark);
     color: var(--txt-color-light);
 }
 .readonly-field {
-    background-color: var(--txt-readonly); /* Couleur de fond pour les champs en lecture seule */
-    color: var(--txt-color-dark); /* Couleur de fond pour les champs en lecture seule */
+    background-color: var(--txt-readonly); 
+    color: var(--txt-color-dark); 
 }
 table {
     width : 100%;
@@ -455,9 +521,39 @@ tr {
     color: var(--txt-color-light);
     text-align: justify;
 }
+.qa-btn {
+    background-color: #3382ff;
+    color: var(--txt-color-light);
+    text-align:center;
+    border-radius: 8px;
+	text-decoration: none;
+	padding: 10px 20px;
+    border:none;
+  }
+
 .booking-btn {
-    top: 30px; /* Position verticale */
-    left: 50%; /* Position horizontale */
+	/* top: 30px; */
+	/* left: 50%; */
+	/* bottom: auto; */
+	/* transform: translate(-50%); */
+	/* position: absolute; */
+	/* height: auto; */
+	/* background-color: var(--txt-color-hilight); */
+	border-radius: 8px;
+	outline: 4px solid #3382ff;
+	outline-offset: 5px;
+	color: var(--txt-color-dark);
+	font-weight: bold;
+	transition: all 0.3s ease;
+	/* text-align: center; */
+	/* width: 100px; */
+	font-size: 0.8em;
+	/* z-index: 2; */
+}
+/*
+.booking-btn {
+    top: 30px; 
+    left: 50%; 
     bottom: auto;
     transform: translate(-50%);
     position: absolute;
@@ -475,16 +571,17 @@ tr {
     width: 100px;
     font-size: 0.8em;
     z-index: 2;
-}
-.booking-btn:hover {
-    background-color: #066f00;
-    color: #fff;
+}*/
+.qa-btn:hover {
+    background-color: var(--txt-color-hilight);
+    color: var(--txt-color-dark)
   }
 .msg1,
 .msg2,
 .banniere-photo,
 .banniere-home,
-.cont-photo{
+.cont-photo,
+.cont-contact{
     display: flex;
     flex-direction: column;
     background-color: var(--bk-color-dark);
@@ -496,7 +593,32 @@ tr {
     color: var(--txt-color-light);
     align-items: center;
 }
-    
+.bandeau-titre{
+    background-image: url('../images/headerRestau.png');
+    background-size: cover; 
+    background-position: center;
+    padding: 120px 0;
+}
+.cont-accueil{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding-top: 100px;
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+.cont-accueil>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
 .container-resa, .container-resa2, .container-plat, .menu {
     color:var(--txt-color-light);
     background-color: var(--bk-color-dark);
@@ -538,7 +660,9 @@ tr {
     flex-wrap: wrap;
     -ms-flex-wrap: wrap; /*pour ancienne version IE*/
 }
-
+.banniere-photo .photo {
+    padding:5px;
+}
 .photo {
     flex-basis: 100%; 
     height: auto;
@@ -548,7 +672,8 @@ tr {
 .photo img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
+    border-radius:5px;
 }
 
 

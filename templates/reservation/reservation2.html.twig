@@ -4,8 +4,10 @@
 {% block body %}
 
 <body>
-    <div class="container">
-            <h1 class="title-page-restau">RESERVATION</h1>
+<div class="bandeau-titre">
+  <h1 class="title-page">RESERVATION</h1>
+</div>
+<div class="container">
     <form id="dataResa" data1={{plagesCompletes}} data2={{hebdo}} data3={{plagesH}}></form>
         <div class="container-resa2">
             <div class="d-flex justify-content-center">
@@ -27,8 +29,8 @@
         {{ form_start(form) }}
                 <div id="cont-confirm" class="d-flex justify-content-center mb-1 resa-row-btn">
                     {{ form_row(form.dateReservation)}}
-                    <a href="javascript:history.back()" type="button" class="btn btn-secondary m-1"> Retour</a>
-                    <a href="{{ path('homepage') }}" type="button" class="btn btn-secondary m-1">Annuler</a>
+                    <a href="javascript:history.back()" type="button" class="qa-btn m-1"> Retour</a>
+                    <a href="{{ path('homepage') }}" type="button" class="qa-btn m-1">Annuler</a>
                 </div>
             </div>
         {{ form_end(form) }}

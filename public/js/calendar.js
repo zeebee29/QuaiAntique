@@ -489,7 +489,7 @@ function effaceHeures()
 
             var btnSubmit = document.createElement('button');
             btnSubmit.type = 'submit';
-            btnSubmit.className = 'btn btn-primary m-1';
+            btnSubmit.className = 'qa-btn m-1';
             btnSubmit.textContent = 'Confirmer >>';
             btnSubmit.setAttribute('id', 'btn-submit');
             areaConfirm.appendChild(btnSubmit);

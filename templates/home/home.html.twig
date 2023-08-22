@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="cont-accueil">
+<img src="../images/fondRestau.png" alt="image restaurant">
+    <div class="cont-accueil-logo">
+      <img  src="{{ asset('images/LogoRestaurant.svg')}}" alt="Logo Restaurant" />
+    </div>
+    <a type="button"  href="{{ path('reservation1') }}" class="qa-btn booking-btn">Je réserve</a>
+    <div class="down-arrow bounce"></div>
+</div>
 <div class="container">
     <div class="banniere-home">
         <div class="cont-carousel">
@@ -40,7 +48,6 @@
                 </a>
             </div>
         </div>
-            <a type="button"  href="{{ path('reservation1') }}" class="booking-btn">Je réserve</a>
     </div>
     <div class="msg1">
         <div class="photo">

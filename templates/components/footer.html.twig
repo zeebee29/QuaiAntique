@@ -1,5 +1,29 @@
 <div class="fixed-footer">
-  kgfkf
+  <div class="fixed-footer-link">
+    <a 
+      {% if app.user %}
+          href="{{ path('reservation1', {id:app.user.id}) }}">
+      {% else %}
+          href="{{ path('reservation1') }}">
+      {% endif %}  
+    <i class="bi bi-calendar3"></i>
+    <p>Réservation</p></a>
+    </div>
+  <div class="fixed-footer-link">
+    <a 
+      {% if app.user %}
+        href="{{ path('user.edit', {id:app.user.id}) }}">
+      {% else %}
+        href="{{ path('security.login') }}">
+      {% endif %}  
+      <i class="fa fa-user"></i>
+      <p> Mon compte</p></a>
+    </div>
+    <div class="fixed-footer-link">
+      <a href="{{ path('app_contact') }}">
+      <i class="bi bi-geo-alt"></i>
+      <p>Nous contacter</p></a>
+    </div>    
 </div>
 <footer class="footer bg-dark ">
     <div class="footer h1 mt-2">

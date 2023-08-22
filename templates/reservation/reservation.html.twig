@@ -2,8 +2,10 @@
 
 {% block body %}
 <body>
-    <div class="container">
-        <h1 class="title-page-restau">RESERVATION</h1>
+<div class="bandeau-titre">
+  <h1 class="title-page">RESERVATION</h1>
+</div>
+<div class="container">
     {% if app.user %}
         <form action="{{ path('reservation1',{id:app.user.id}) }}" method="POST">
     {% else %}
@@ -25,8 +27,8 @@
                 </div>
             </div>
             <div class="d-flex mb-5 justify-content-center resa-row-btn">
-                <a href="{{ path('homepage') }}" role="button" class="btn btn-secondary m-3">Annuler</a>
-                <button type="submit" class="btn btn-primary m-3">Date >></button>
+                <a href="{{ path('homepage') }}" role="button" class="qa-btn m-3">Annuler</a>
+                <button type="submit" class="qa-btn m-3">Date >></button>
             </div>
         </div>
         </div>
