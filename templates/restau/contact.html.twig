@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<div class="bandeau-titre">
+  <h1 class="title-page">NOUS CONTACTER</h1>
+</div>
+<div class="container">
+  <div class="cont-contact">
+    <div class="cont-contact-logo">
+      <img class="logo-navbar" src="{{ asset('images/LogoRestaurant.svg')}}" alt="Logo Restaurant" />
+    </div>
+    <div class="cont-contact-coord">
+      <p>-- {{ coord.adresse }} --</p>
+
+  {% if coord.tel|length == 10 %}
+      <p>{{ coord.tel[:2] }} {{ coord.tel[2:2] }} {{ coord.tel[4:2] }} {{ coord.tel[6:2] }} {{ coord.tel[8:2] }}</p>
+  {% elseif coord.tel|length == 12 %}      
+      <p>{{ coord.tel[:3] }} {{ coord.tel[3:1] }} {{ coord.tel[4:2] }} {{ coord.tel[6:2] }} {{ coord.tel[8:2] }} {{ coord.tel[10:2] }}</p>
+  {% else %}      
+      <p>{{ coord.tel}}</p>
+{% endif %}
+    </div>
+      <div class="cont-contact-carte">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d508.23029227734025!2d5.926094766595114!3d45.567636078058676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478ba8fb01dc50b5%3A0x8a293571adf6a83c!2s238%20Quai%20Charles%20Ravet%2C%2073000%20Chamb%C3%A9ry!5e0!3m2!1sfr!2sfr!4v1692612488975!5m2!1sfr!2sfr" 
+        style="width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

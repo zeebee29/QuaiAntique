@@ -37,11 +37,9 @@
                         {% endif %}                        
                         >Réservation</a>
                     </li>
-                    {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin') }}">Espace ADMIN</a>
+                        <a class="nav-link"  href="{{ path('app_contact') }}">Nous contacter</a>
                     </li>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -65,6 +63,10 @@
                             informations</a>
                         <a class="dropdown-item" href="{{ path('user-edit-passsword', {id:app.user.id}) }}">Modifier mon
                             mot de passe</a>
+                        <div class="dropdown-divider"></div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a class="dropdown-item" href="{{ path('admin') }}">Espace ADMIN</a>
+                        {% endif %}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ path('security.logout') }}">Déconnexion</a>
                     </div>
