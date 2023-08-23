@@ -675,7 +675,7 @@ tr {
     /*object-fit: cover;*/
     border-radius:5px;
     animation-name: scale-in;
-    animation-duration: 5s;
+    animation-duration: 2s;
 }
 
 @keyframes scale-in {
@@ -698,11 +698,6 @@ tr {
 .form-label {
     font-size: 13px;
     letter-spacing: 1px;
-}
-
-.menu-items {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
 }
 
 .menu-item {
