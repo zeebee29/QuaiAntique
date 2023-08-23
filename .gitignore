@@ -12,3 +12,6 @@
 public/images/*
 !public/images/.gitignore
 !public/images/LogoRestaurant.svg
+!public/images/FondRestau.png
+!public/images/HeaderRestau.png
+!public/images/chevron-down.svg
