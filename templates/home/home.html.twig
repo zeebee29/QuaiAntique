@@ -6,7 +6,9 @@
     <div class="cont-accueil-logo">
       <img  src="{{ asset('images/LogoRestaurant.svg')}}" alt="Logo Restaurant" />
     </div>
+    <div>
     <a type="button"  href="{{ path('reservation1') }}" class="qa-btn booking-btn">Je réserve</a>
+    </div>
     <div class="down-arrow bounce"></div>
 </div>
 <div class="container">
@@ -51,23 +53,23 @@
     </div>
     <div class="msg1">
         <div class="photo">
-            <img src="{{ vich_uploader_asset(accueil[0], 'imageFile') }}">
+            <img src="{{ vich_uploader_asset(accueil[0], 'imageFile') }}" loading="lazy">
         </div>
         <div class="legend right">{{accueil[0].description}}
         </div>
     </div>
     <div class="banniere-photo">
         <div class="photo">
-            <img src="{{ vich_uploader_asset(images[0], 'imageFile') }}" alt="{{images[0].description}}">
+            <img src="{{ vich_uploader_asset(images[0], 'imageFile') }}" alt="{{images[0].description}}" loading="lazy">
         </div>
         <div class="photo">
-            <img src="{{ vich_uploader_asset(images[1], 'imageFile') }}" alt="{images[1].description}}">
-        </div>
-        <div class="photo">
-            <img src="{{ vich_uploader_asset(images[2], 'imageFile') }}" alt="{images[2].description}}">
-        </div>
-        <div class="photo">
-            <img src="{{ vich_uploader_asset(images[3], 'imageFile') }}" alt="{images[3].description}}">
+            <img src="{{ vich_uploader_asset(images[1], 'imageFile') }}" alt="{images[1].description}}" loading="lazy">
+        </div> loading="lazy"
+        <div class="photo"> loading="lazy"
+            <img src="{{ vich_uploader_asset(images[2], 'imageFile') }}" alt="{images[2].description}}" loading="lazy">
+        </div> loading="lazy"
+        <div class="photo"> loading="lazy"
+            <img src="{{ vich_uploader_asset(images[3], 'imageFile') }}" alt="{images[3].description}}" loading="lazy">
         </div>
     </div>
     <div class="msg2">
