@@ -17,6 +17,8 @@ class ReservationType extends AbstractType
             ->add('nbConvive', IntegerType::class, [
                 'attr' => [
                     'class' => 'form-control input-nb',
+                    'min'=> 1,
+                    'max'=> 10,
                 ],
                 'required' => true,
                 'label' => ' ',

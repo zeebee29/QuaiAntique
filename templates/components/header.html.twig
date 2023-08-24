@@ -86,19 +86,4 @@
 </nav>
 </div>
 </header>
-<script>
-    let prevScrollPos = window.pageYOffset;
-
-window.onscroll = function() {
-    let currentScrollPos = window.pageYOffset;
-    
-    if (prevScrollPos > currentScrollPos) {
-        document.querySelector(".navbar").style.top = "0";
-    } else {
-        document.querySelector(".navbar").style.top = "-100px";
-    }
-    
-    prevScrollPos = currentScrollPos;
-}
-
-</script>
+<script src="{{ asset('js/header.js') }}"></script>
