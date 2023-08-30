@@ -27,13 +27,13 @@ class RestaurantCrudController extends AbstractCrudController
             TextField::new('tel', 'Tél.'),
             TextEditorField::new('adresse', 'Adresse'),
             IntegerField::new('capacite', 'Capacité'),
-            //AssociationField::new('image', 'Image'),
         ];
     }
 
     public function configureActions(Actions $actions): Actions
     {
-        $actions->remove(Crud::PAGE_INDEX, Action::NEW);
+        $actions->remove(Crud::PAGE_INDEX, Action::NEW)
+        ->remove(Crud::PAGE_INDEX, Action::DELETE);
         return $actions;
     }
 }

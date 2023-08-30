@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Image;
 use App\Field\VichImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -37,4 +38,12 @@ class ImageCrudController extends AbstractCrudController
 
         return $fields;
     }
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('nom')
+            ->add('imageFile')
+            ->add('description')
+        ;
+    }        
 }

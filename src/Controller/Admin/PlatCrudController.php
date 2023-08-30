@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Plat;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -28,5 +29,13 @@ class PlatCrudController extends AbstractCrudController
             MoneyField::new('prix', 'Prix')->setCurrency('EUR')->setCustomOption('storedAsCents', false),
             BooleanField::new('inCarte', 'Sur carte')
         ];
+    }
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('inCarte')
+            ->add('nom')
+            ->add('description')
+        ;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -53,5 +54,13 @@ class UserCrudController extends AbstractCrudController
             IntegerField::new('nbConvive', 'Nbre couvert(s)'),
             TextEditorField::new('allergie', 'Allergie signalée'),
         ];
+    }
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('email')
+            ->add('nom')
+            ->add('prenom')
+        ;
     }
 }
