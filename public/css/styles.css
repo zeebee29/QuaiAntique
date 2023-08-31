@@ -28,6 +28,19 @@ body{
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+.message-box{
+    position: fixed;
+    bottom: 75px;
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    align-self: center;
+    opacity:1;
+    transition: opacity 1s;
+    z-index:2;
+}
 .navbar {
     transition: top 0.3s ease-in-out;
     transition-delay: 0.2s;
@@ -910,6 +923,10 @@ th {
     }
     .fixed-footer{
     display: none;
+    }
+    .message-box{
+        bottom: 10px;
+        width: 75%;
     }
     .navbar-brand-logo{
         text-align:center;

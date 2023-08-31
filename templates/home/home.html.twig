@@ -7,7 +7,13 @@
       <img  src="{{ asset('images/LogoRestaurant.svg')}}" alt="Logo Restaurant" />
     </div>
     <div>
-    <a type="button"  href="{{ path('reservation1') }}" class="qa-btn booking-btn">Je réserve</a>
+    <a type="button" 
+        {% if app.user %}
+            href="{{ path('reservation1', {id:app.user.id}) }}"
+        {% else %}
+            href="{{ path('reservation1') }}"
+        {% endif %}                        
+        class="qa-btn booking-btn">Je réserve</a>
     </div>
     <div class="down-arrow bounce"></div>
 </div>
