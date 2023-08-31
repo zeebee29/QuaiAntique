@@ -1,2 +1,8 @@
 <p>{{ coord.adresse }}</p>
-<p>{{ coord.tel }}</p>
+  {% if coord.tel|length == 10 %}
+      <p>{{ coord.tel[:2] }} {{ coord.tel[2:2] }} {{ coord.tel[4:2] }} {{ coord.tel[6:2] }} {{ coord.tel[8:2] }}</p>
+  {% elseif coord.tel|length == 12 %}      
+      <p>{{ coord.tel[:3] }} {{ coord.tel[3:1] }} {{ coord.tel[4:2] }} {{ coord.tel[6:2] }} {{ coord.tel[8:2] }} {{ coord.tel[10:2] }}</p>
+  {% else %}      
+      <p>{{ coord.tel}}</p>
+{% endif %}

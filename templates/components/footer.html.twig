@@ -22,7 +22,7 @@
     <div class="fixed-footer-link">
       <a href="{{ path('app_contact') }}">
       <i class="bi bi-geo-alt"></i>
-      <p>Nous contacter</p></a>
+      <p>Nous trouver</p></a>
     </div>    
 </div>
 <footer class="footer bg-dark ">
@@ -33,9 +33,9 @@
     </div>
     <div class="ouvertures mt-2">
       <div class="footer h2">Horaires d'ouverture :</div>
-      <ul class="hours">
+      <div class="hours">
         {{ render(controller('App\\Controller\\FooterController::plageOuverture')) }}
-    </ul>
+      </div>
     </div>
     <div class="address mt-2">
       <div class="logo-container">

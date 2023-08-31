@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password;
 
-    #[ORM\Column(length: 14)]
+    #[ORM\Column(length: 12)]
     #[Assert\NotBlank(['message'=>"Le N° de téléphone est obligatoire."])]
     #[Assert\Regex(['pattern' => '/^(\+33|0)[0-9]{9}$/',
         'message' => "Veuillez saisir un N° de téléphone valide ('+33' ou '0' suivi de 9 chiffres).",

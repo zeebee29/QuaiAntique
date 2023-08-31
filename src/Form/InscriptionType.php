@@ -24,7 +24,7 @@ class InscriptionType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'minlength' => '2',
                     'maxlength' => '50',
                 ],
@@ -35,7 +35,7 @@ class InscriptionType extends AbstractType
             ])
             ->add('prenom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'minlength' => '2',
                     'maxlength' => '50'
                 ],
@@ -47,7 +47,7 @@ class InscriptionType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'minlength' => '2',
                     'maxlength' => '180'
                 ],
@@ -65,7 +65,7 @@ class InscriptionType extends AbstractType
                         'class' => 'col-form-label mt-1'
                     ],
                     'attr' => [
-                        'class' => 'form-control',
+                        'class' => 'form-control mb-3',
                         'data-role'=> "input-pw",
                     ]
                 ],
@@ -75,13 +75,13 @@ class InscriptionType extends AbstractType
                         'class' => 'col-form-label'
                     ],
                     'attr' => [
-                        'class' => 'form-control',
+                        'class' => 'form-control mb-3',
                     ]
                 ],
             ])
             ->add('tel', TelType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'minlength' => '10',
                     'maxlength' => '14'
                 ],
@@ -92,7 +92,9 @@ class InscriptionType extends AbstractType
             ])
             ->add('nbConvive', IntegerType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
+                    'min'=> 1,
+                    'max'=> 10,
                 ],
                 'required' => false,
                 'label' => 'Nombre de couvert(s)',
@@ -102,7 +104,7 @@ class InscriptionType extends AbstractType
             ])
             ->add('allergie', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'maxlength' => '500'
                 ],
                 'required' => false,

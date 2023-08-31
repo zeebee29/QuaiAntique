@@ -5,20 +5,16 @@ document.addEventListener("DOMContentLoaded", function() {
     var links = document.getElementsByClassName("nav-link");
     for (var i = 0; i < links.length; i++) {
         var href = links[i].getAttribute("href");
-        console.log("p",path);
-        console.log("r",referrerPath);
-        console.log("==> h",href);
-        console.log("c",currentURL);
     if (path === href) {
         links[i].classList.add("active");
     } 
     }
 });
 
-let prevScrollPos = window.pageYOffset;
+let prevScrollPos = window.scrollY;
 
 window.onscroll = function() {
-    let currentScrollPos = window.pageYOffset;
+    let currentScrollPos = window.scrollY;
     
     if (prevScrollPos > currentScrollPos) {
         document.querySelector(".navbar").style.top = "0";

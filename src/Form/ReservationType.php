@@ -21,7 +21,7 @@ class ReservationType extends AbstractType
                     'max'=> 10,
                 ],
                 'required' => true,
-                'label' => ' ',
+                'label' => '',
                 'label_attr' => [
                     'class' => 'mx-auto content-center ',
                     'placeholder' => 'Nombre de personnes',

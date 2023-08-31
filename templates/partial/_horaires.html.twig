@@ -1,14 +1,19 @@
+<div class="footer-horaires">
 {% for heure in heures %}
-{% if heure.plage == 'midi' %}
-<li> {{ heure.jourSemaine }} : {{heure.plageTxt }}
+{# if heure.hOuverture|date('H:i') < hBascule %#}
+    {% if heure.plage == 'midi' %}
+<div>
+        {{ heure.jourSemaine }} : </div>
+<div>{{heure.plageTxt }}
     {% set heureMidi = heure %}
-    {% else %}
+{% else %}
     {% if heure.hFermeture %} / {{heure.plageTxt}}
     {% else %}
-    {% if heureMidi.hOuverture %}
-    {{heure.plageTxt}}
+        {% if heureMidi.hOuverture %}
+            {{heure.plageTxt}}
+        {% endif %}
     {% endif %}
-    {% endif %}
-</li>
+</div>
 {% endif %}
 {% endfor %}
+</div>

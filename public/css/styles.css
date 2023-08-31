@@ -31,7 +31,6 @@ body{
 .navbar {
     transition: top 0.3s ease-in-out;
     transition-delay: 0.2s;
-    /* Autres styles de votre navbar */
 }
 .nav-item{
     white-space: nowrap;
@@ -69,6 +68,18 @@ body{
     flex-direction: column;
     font-size: 0.8rem;
 }
+
+.footer-horaires{
+    display:grid;
+    grid-template-columns: 2fr 8fr;
+    font-size: 0.8rem;
+}
+
+.txt-error{
+    color:red;
+    font-size:0.8rem;
+}
+
 .logo-navbar {
     height:2em;
 }
@@ -126,8 +137,6 @@ h1,h2,h3{
     flex-wrap:wrap;
     justify-content: space-evenly;
     margin-top: auto;
-   /* position: sticky;*/
-    /*bottom: 0;*/
 }
 
 .footer.h1 {
@@ -215,7 +224,7 @@ h1,h2,h3{
 }
 
 .container-confirm {
-    display: grid;
+    display: flex;
     grid-template-columns: 1fr;
     gap: 5px;
     justify-items: center;
@@ -619,7 +628,7 @@ tr {
     z-index: -1;
 }
 
-.container-resa, .container-resa2, .container-plat, .menu {
+.container-resa, .container-resa2, .container-plat, .menu, .container-user {
     color:var(--txt-color-light);
     background-color: var(--bk-color-dark);
     box-shadow: 4px 4px 10px var(--shadow-card);
@@ -631,14 +640,14 @@ tr {
 .cont-edit{
     display:flex;
     justify-content: center;
-    width: 100%;
-    align-items: center;
+    width: min-content;
+    flex-direction: column;
+    margin: auto;
 }
 .banniere-home{
     position:relative;
 }
 .msg1 > .photo {
-    /*background-color: #8f0c0c;*/
     max-width: 100%;
     max-height: 300px;
     text-align: center;
@@ -743,7 +752,6 @@ tr {
 
 .resa3-input-label{
     text-align: left;
-    width:100%;
 }
 
 .disabled-field:disabled {
@@ -799,7 +807,7 @@ th {
         justify-items: end;
     }
     .resa3-input-label{
-        text-align: right;
+        text-align: left;
     }
     .titre-plage {
         background-color: var(--bk-color-dark);
@@ -953,4 +961,3 @@ th {
         display:block;
     } 
 }
-

@@ -8,67 +8,70 @@
   <h1 class="title-page">RESERVATION</h1>
 </div>
 <div class="container">
-        {% if app.user %}
         <form method="POST">
-        {% else %}
-        <form method="POST">
-        {% endif %}          
-        {{ form_start(form) }}
-        <div class="container-resa">
-            <div class="d-flex justify-content-center">
-                <div class="col-md-6 mb-2">
-                    <h2 class="titre-page-resa">Compléments et confirmation</h2>
+            {{ form_start(form) }}
+            <div class="container-resa">
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-6 mb-2">
+                        <h2 class="titre-page-resa">Compléments et confirmation</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-5 msg-reservation">
-            {% if app.user %}
-                {% if prenom is defined and prenom is not empty %}
-                    {{ prenom }}, une dernière vérification avant de confirmer.
-                {% else %}
-                    Une dernière vérification avant de confirmer.
+                {% if app.user %}
+                <div class="mt-5 msg-reservation">
+                    {% if prenom is defined and prenom is not empty %}
+                        {{ prenom }}, une dernière vérification avant de confirmer.
+                    {% else %}
+                        Une dernière vérification avant de confirmer.
+                    {% endif %}
+                </div>
                 {% endif %}
-            {% endif %}
-            </div>
-            <div class="d-flex justify-content-center mt-4 mb-3">
-                <div class="container-confirm">
-                    {{ form_label(form.nbConvive) }}
-                    {{ form_widget(form.nbConvive) }}
-                    {{ form_label(form.dateReservation) }}
-                    {{ form_widget(form.dateReservation, {'value': form.dateReservation.vars.value|date('d/m/Y') ~ " - " ~ form.dateReservation.vars.value|date('H:i')}) }}
-                    {{ form_label(form.telReserv) }}
-                    {{ form_widget(form.telReserv) }}
-                    {{ form_label(form.email) }}
-                    {{ form_widget(form.email) }}
-                    {{ form_label(form.allergie) }}
-                    {{ form_widget(form.allergie) }}
+                <div class="cont-edit my-2">
+            
+                {{ form_label(form.nbConvive) }}
+                {{ form_widget(form.nbConvive) }}
 
-                    {{ form_rest(form) }}
+                {{ form_label(form.dateReservation) }}
+                {{ form_widget(form.dateReservation, {'value': form.dateReservation.vars.value|date('d/m/Y') ~ " - " ~ form.dateReservation.vars.value|date('H:i')}) }}
+                
+                {{ form_label(form.telReserv) }}
+                <div class="txt-error">{{ form_errors(form.telReserv) }}</div>
+    
+                {{ form_widget(form.telReserv) }}
+        
+                {{ form_label(form.email) }}
+                <div class="txt-error">{{ form_errors(form.email) }}</div>
+                
+                {{ form_widget(form.email) }}
+        
+                {{ form_label(form.allergie) }}
+                <div class="txt-error">{{ form_errors(form.allergie) }}</div>
+                            
+                {{ form_widget(form.allergie) }}
+                {{ form_rest(form) }}
+</div>
+                <div class="msg-reservation">
+                    Un lien de confirmation valable<strong> 30 minutes </strong>vous sera envoyé par mail.
+    <!--                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success mt-4">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% for message in app.flashes('warning') %}
+                    <div class="alert alert-warning mt-4">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+    -->
                 </div>
-            </div>
-            <div class="msg-reservation">
-                {{ form_errors(form.telReserv) }}
-                {{ form_errors(form.email) }}
-                {{ form_errors(form.allergie) }}
-                Un lien de confirmation valable<strong> 30 minutes </strong>vous sera envoyé par mail.
-                {% for message in app.flashes('success') %}
-                <div class="alert alert-success mt-4">
-                    {{ message }}
+                <div class="d-flex justify-content-center  mb-5 resa-row-btn">
+                    <a href="javascript:history.back()" type="button" class="qa-btn m-3">Retour</a>
+                    <button type="submit" class="qa-btn m-3">Confirmer</button>
+                    <a href="{{ path('homepage') }}" type="button" class="qa-btn m-3">Annuler</a>
                 </div>
-                {% endfor %}
-                {% for message in app.flashes('warning') %}
-                <div class="alert alert-warning mt-4">
-                    {{ message }}
-                </div>
-                {% endfor %}
+    
             </div>
-            <div class="d-flex justify-content-center  mb-5 resa-row-btn">
-                <a href="javascript:history.back()" type="button" class="qa-btn m-3">Retour</a>
-                <button type="submit" class="qa-btn m-3">Confirmer</button>
-                <a href="{{ path('homepage') }}" type="button" class="qa-btn m-3">Annuler</a>
-            </div>
-        </div>
-    {{ form_end(form) }}
-    </form>
+        {{ form_end(form) }}
+        </form>
 </div>
 </body>
 {% endblock %}

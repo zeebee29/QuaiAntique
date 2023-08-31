@@ -5,38 +5,55 @@ Quai antique - Inscription
 {% endblock %}
 
 {% block body %}
-
+<div class="bandeau-titre">
+    <h1 class="title-page">M'inscrire</h1>
+</div>
 <div class="container">
-    <h1 class="title-page-profil mt-4">M'inscrire</h1>
-
-    <div class="cont-edit my-2">
-        <form method="POST">
+    <form method="POST">
+        <div class="container-user my-2">
             {{ form_start(form) }}
-            {{ form_row(form.nom) }}
-            {{ form_errors(form.nom) }}
-            {{ form_row(form.prenom) }}
-            {{ form_row(form.email) }}
-            {{ form_label(form.plainPassword.first)}}
-            {{ form_errors(form.plainPassword.first) }}
-            <div class="input-group mb-3">
-                {{form_widget(form.plainPassword.first)}}
-                <span role="button" class="input-group-text " onclick="togglePassword()">
-                    <i id="eye-slash" class="bi bi-eye-slash"></i>
-                    <i id="eye" class="bi bi-eye" style="display:none"></i>
-                </span>
+            
+            <div class="col-8 col-md-4 mt-5 mb-3 mx-auto">
+                {{ form_label(form.nom) }}
+                <div class="txt-error">{{ form_errors(form.nom) }}</div>
+                {{ form_widget(form.nom) }}
+                {{ form_label(form.prenom) }}
+                <div class="txt-error">{{ form_errors(form.prenom) }}</div>
+                {{ form_widget(form.prenom) }}
+                
+                {{ form_label(form.email) }}
+                <div class="txt-error">{{ form_errors(form.email) }}</div>
+                {{ form_widget(form.email) }}
+                
+                {{ form_label(form.plainPassword.first)}}
+                <div class="txt-error">{{ form_errors(form.plainPassword.first) }}</div>
+                <div class="input-group">
+                    {{form_widget(form.plainPassword.first)}}
+                    <span role="button" class="input-group-text mb-3" onclick="togglePassword()">
+                        <i id="eye-slash" class="bi bi-eye-slash"></i>
+                        <i id="eye" class="bi bi-eye" style="display:none"></i>
+                    </span>
+                </div>
+                {{ form_row(form.plainPassword.second)}}
+                
+                {{ form_label(form.tel) }}
+                <div class="txt-error">{{ form_errors(form.tel) }}</div>
+                {{ form_widget(form.tel) }}
+                
+                {{ form_label(form.nbConvive) }}
+                <div class="txt-error">{{ form_errors(form.nbConvive) }}</div>
+                {{ form_widget(form.nbConvive) }}
+                
+                {{ form_row(form.allergie) }}
             </div>
-            {{ form_row(form.plainPassword.second)}}
-            {{ form_row(form.tel) }}
-            {{ form_row(form.nbConvive) }}
-            {{ form_row(form.allergie) }}
 
             <div class="d-flex mb-5 justify-content-center resa-row-btn">
                 <a href="{{ path('homepage') }}" role="button" class="qa-btn m-3">Annuler</a>
                 <button type="submit" class="qa-btn m-3">Enregistrer</button>
             </div>
             {{ form_end(form)}}
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 <script src="{{ asset('js/functions.js') }}"></script>

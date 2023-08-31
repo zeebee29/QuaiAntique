@@ -73,10 +73,6 @@ class Reservation3Type extends AbstractType
             ],            
             'constraints'=> [
                 new NotBlank(),
-                new Regex([
-                    'pattern' => '/^(\+33|0)[0-9]{9}$/',
-                    'message' => "Veuillez saisir un N° de téléphone valide ('+33' ou '0' suivi de 9 chiffres)",
-                ])
             ]
         ])
         ->add('email', EmailType::class, [

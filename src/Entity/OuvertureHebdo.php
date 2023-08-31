@@ -18,7 +18,6 @@ class OuvertureHebdo
     #[ORM\Column(length: 10)]
     #[Assert\NotNull()]
     #[Assert\NotBlank()]
-    #[Assert\Length(10)]
     #[Assert\Choice(choices: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"])]
     private ?string $jourSemaine = null;
     
@@ -27,11 +26,9 @@ class OuvertureHebdo
 
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    #[Assert\NotBlank()]
     private ?\DateTime $hOuverture = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    #[Assert\NotBlank()]
     private ?\DateTime $hFermeture = null;
 
     #[ORM\Column(length: 10)]

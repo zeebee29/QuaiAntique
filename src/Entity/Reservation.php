@@ -66,13 +66,11 @@ class Reservation
     #[Assert\Length(min: 6, max: 180)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 14)]
-    #[Assert\NotBlank()]
-    #[Assert\Length(
-        min: 10,
-        max: 14,
-        minMessage: 'N° trop court',
-        maxMessage: 'N° trop long')]
+    #[ORM\Column(length: 12)]
+    #[Assert\NotBlank(['message'=>"Le N° de téléphone est obligatoire."])]
+    #[Assert\Regex(['pattern' => '/^(\+33|0)[0-9]{9}$/',
+        'message' => "Veuillez saisir un N° de téléphone valide ('+33' ou '0' suivi de 9 chiffres).",
+    ])]
     private ?string $telReserv = null;
 
     #[ORM\Column(length: 20)]
