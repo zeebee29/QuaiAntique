@@ -35,34 +35,23 @@
                 
                 {{ form_label(form.telReserv) }}
                 <div class="txt-error">{{ form_errors(form.telReserv) }}</div>
-    
                 {{ form_widget(form.telReserv) }}
         
                 {{ form_label(form.email) }}
                 <div class="txt-error">{{ form_errors(form.email) }}</div>
-                
                 {{ form_widget(form.email) }}
         
                 {{ form_label(form.allergie) }}
                 <div class="txt-error">{{ form_errors(form.allergie) }}</div>
-                            
                 {{ form_widget(form.allergie) }}
+
                 {{ form_rest(form) }}
-</div>
+                </div>
+
                 <div class="msg-reservation">
                     Un lien de confirmation valable<strong> 30 minutes </strong>vous sera envoyé par mail.
-    <!--                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success mt-4">
-                        {{ message }}
-                    </div>
-                    {% endfor %}
-                    {% for message in app.flashes('warning') %}
-                    <div class="alert alert-warning mt-4">
-                        {{ message }}
-                    </div>
-                    {% endfor %}
-    -->
                 </div>
+
                 <div class="d-flex justify-content-center  mb-5 resa-row-btn">
                     <a href="javascript:history.back()" type="button" class="qa-btn m-3">Retour</a>
                     <button type="submit" class="qa-btn m-3">Confirmer</button>

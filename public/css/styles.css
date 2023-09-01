@@ -144,12 +144,14 @@ h1,h2,h3{
     align-items: start;
 }
 /* FOOTER */
-.footer {
+.cont-footer {
     color: var(--txt-color-light);
     display: flex;
     flex-wrap:wrap;
     justify-content: space-evenly;
     margin-top: auto;
+    margin-bottom: 100px;
+    padding-bottom: 10px;
 }
 
 .footer.h1 {
@@ -928,6 +930,9 @@ th {
         bottom: 10px;
         width: 75%;
     }
+    .footer {
+        margin-bottom: auto;
+    }    
     .navbar-brand-logo{
         text-align:center;
         width: 100%;

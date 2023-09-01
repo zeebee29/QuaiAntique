@@ -56,7 +56,6 @@ class ReservationRepository extends ServiceEntityRepository
             . "SELECT DATE(resa.date_reservation) AS jour, SUM(resa.nb_convive) AS total, resa.midi_soir AS plage, resa.restaurant_id AS id "
             . "FROM reservation AS resa "
             . "WHERE resa.date_reservation > :jourJ "
-//            . "AND resa.status = 'confirmé' "
             . "GROUP BY plage, jour "
             . ") AS temp "
             . "LEFT JOIN restaurant AS restau "
@@ -97,23 +96,23 @@ class ReservationRepository extends ServiceEntityRepository
     }
 
 
-        /**
-         * @return Reservation[] Returns an array of Reservation objects
-         */
-        public function findByUserField($user): array
-        {
-            $connection = $this->getEntityManager()->getConnection();
+    /**
+     * @return Reservation[] Returns an array of Reservation objects
+     */
+    public function findByUserField($user): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
 
-            $sql = 'SELECT date_reservation, nb_convive, status, email, tel_reserv
-                FROM reservation AS r
-                WHERE r.user_id = :user
-                ORDER BY date_reservation DESC'
-                ;
-            $params = [
-                'user' => $user->getId(),
-            ];
+        $sql = 'SELECT date_reservation, nb_convive, status, email, tel_reserv
+            FROM reservation AS r
+            WHERE r.user_id = :user
+            ORDER BY date_reservation DESC'
+            ;
+        $params = [
+            'user' => $user->getId(),
+        ];
 
-            $result = $connection->executeQuery($sql, $params)->fetchAllAssociative();
-            return $result;
+        $result = $connection->executeQuery($sql, $params)->fetchAllAssociative();
+        return $result;
     }
 }
