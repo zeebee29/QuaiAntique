@@ -161,7 +161,12 @@ h1,h2,h3{
     font-size: 1em;
     justify-content: left;
 }
-
+.mention{
+    font-size: 0.7em;
+    text-align: center;
+    color: var(--txt-color-light);
+    background-color: var(--bk-color-dark);
+}
 .cont-contact{
     display: flex;
     flex-direction: column;
@@ -932,7 +937,10 @@ th {
     }
     .footer {
         margin-bottom: auto;
-    }    
+    }   
+    .cont-footer{
+        margin-bottom: 0px;
+    } 
     .navbar-brand-logo{
         text-align:center;
         width: 100%;
