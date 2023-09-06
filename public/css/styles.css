@@ -150,7 +150,6 @@ h1,h2,h3{
     flex-wrap:wrap;
     justify-content: space-evenly;
     margin-top: auto;
-    margin-bottom: 100px;
     padding-bottom: 10px;
 }
 
@@ -162,10 +161,16 @@ h1,h2,h3{
     justify-content: left;
 }
 .mention{
-    font-size: 0.7em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 0.8em;
     text-align: center;
     color: var(--txt-color-light);
     background-color: var(--bk-color-dark);
+    margin-bottom: 90px;
+    gap: 5px;
 }
 .cont-contact{
     display: flex;
@@ -938,7 +943,7 @@ th {
     .footer {
         margin-bottom: auto;
     }   
-    .cont-footer{
+    .mention{
         margin-bottom: 0px;
     } 
     .navbar-brand-logo{
