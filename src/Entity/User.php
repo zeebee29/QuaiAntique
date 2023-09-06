@@ -43,6 +43,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[Assert\NotBlank(['message'=>"Le mot de passe est obligatoire."])]
+    #[Assert\Length(min: 8)]
+    #[Assert\Regex(['pattern' => '/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
+    'message' => "8 caractères minimum avec au moins un chiffre, une lettre et un caractère spécial (#?!@$%^&*-).",
+    ])]
     private ?string $plainPassword = 'password';
     /**
      * @var string The hashed password
@@ -50,6 +54,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password;
 
+
+    
     #[ORM\Column(length: 12)]
     #[Assert\NotBlank(['message'=>"Le N° de téléphone est obligatoire."])]
     #[Assert\Regex(['pattern' => '/^(\+33|0)[0-9]{9}$/',

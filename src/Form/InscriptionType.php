@@ -66,6 +66,7 @@ class InscriptionType extends AbstractType
                     ],
                     'attr' => [
                         'class' => 'form-control mb-3',
+                        'minlength' => '8',
                         'data-role'=> "input-pw",
                     ]
                 ],
