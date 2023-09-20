@@ -15,3 +15,12 @@ public/images/*
 !public/images/FondRestau.png
 !public/images/HeaderRestau.png
 !public/images/chevron-down.svg
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###

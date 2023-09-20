@@ -30,7 +30,7 @@ class OuvertureHebdoFixtures extends Fixture
 
         foreach ($ouvertureExamples as [$numJsem, $jSem, $plage, $openH, $closeH, $plageTxt, $resa]) {
             $opening = new OuvertureHebdo();
-            $opening->setJourSemaine($numJsem);
+            $opening->setNumJsem($numJsem);
             $opening->setJourSemaine($jSem);
             $opening->setPlage($plage);
             $opening->setPlageTxt($plageTxt);

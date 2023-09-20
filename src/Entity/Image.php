@@ -28,7 +28,7 @@ class Image
 
     #[ORM\Column]
     #[Assert\NotNull()]
-    private ?\DateTimeImmutable $updatedAt = null;
+    private ?\DateTime $updatedAt = null;
 
     #[Vich\UploadableField(mapping: 'restaurant_images', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
@@ -38,6 +38,12 @@ class Image
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    public function __construct()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -72,7 +78,7 @@ class Image
         $this->imageFile = $imageFile;
 
         if (null !== $imageFile) {
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new \DateTime();
         }
     }
 
@@ -91,12 +97,12 @@ class Image
         return $this->imageName;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

@@ -27,6 +27,9 @@ class ReservationController extends AbstractController
     {
         $resa = new Reservation();
 
+        //récupère le nombre maximum de réservation en ligne
+        $nbMaxReservation = 10;
+
         $idUser= null;
         if (($this->getUser()) && ($this->getUser() === $user)) {
             //user connected AND user connected <> #id transmitted
@@ -62,6 +65,7 @@ class ReservationController extends AbstractController
 
         return $this->render('reservation/reservation.html.twig', [
             'form' => $form->createView(),
+            'maxReservation' => $nbMaxReservation,
             'nbConvive' => $resa->getNbConvive(),
             'pageR' => 'OK',
         ]);
@@ -71,8 +75,20 @@ class ReservationController extends AbstractController
      * renvoie les jours complets et la table des ouvertures/fermetures Hebdo  
      */
     #[Route('/reservation2/{nb}/{id?}', name: 'reservation2_dispo', methods: ['GET', 'POST'])]
-    public function consultDispo(Request $request,int $nb, PlageReservationRepository $plageReservationRepository, ReservationRepository $reservationRepository, OuvertureHebdoRepository $ouvertureHebdoRepository, ?User $user): Response
+    public function consultDispo(Request $request,int $nb, PlageReservationRepository $plageReservationRepository, ReservationRepository $reservationRepository, OuvertureHebdoRepository $ouvertureHebdoRepository, ?User $user=null): Response
     {
+        //récupère le nombre maximum de réservation en ligne
+        $nbMaxReservation = 10;
+        if (($nb > $nbMaxReservation) || ($nb < 1)) {
+            $this->addflash('warning', 'Erreur sur le nombre de couverts.');
+        
+            if ($user === null) {
+                return $this->redirectToRoute('reservation1',);
+            }
+            else {
+                return $this->redirectToRoute('reservation1',['id' => $user->getId(),]);
+            }
+        }
         $resa = new Reservation();
         $jClos = $ouvertureHebdoRepository->findFermeture();
         $plages = $plageReservationRepository->findAllPlages();
@@ -121,14 +137,26 @@ class ReservationController extends AbstractController
          OuvertureHebdoRepository $ouvertureHebdoRepository,
          RestaurantRepository $restaurantRepository,
          EntityManagerInterface $entityManager,
-         ?User $user): Response
+         ?User $user=null): Response
     {
         $anonymous = true;
         if (($this->getUser()) && ($this->getUser() === $user)) {
             //user connected AND user connected = #id transmitted
             $anonymous = false;
         }
+        //récupère le nombre maximum de réservation en ligne
+        $nbMaxReservation = 10;
 
+        if (($nb > $nbMaxReservation) || ($nb < 1)) {
+            $this->addflash('warning', 'Erreur sur le nombre de couverts.');
+        
+            if ($user === null) {
+                return $this->redirectToRoute('reservation1',);
+            }
+            else {
+                return $this->redirectToRoute('reservation1',['id' => $user->getId(),]);
+            }
+        }
         //Init d'un objet Reservation avec données saisies
         $resa = new Reservation();
         $resa->setNbConvive($nb);
@@ -192,10 +220,10 @@ class ReservationController extends AbstractController
                     //Si plus dispo => message et retour sur réservation
                     $nonDispoDate = $dateResa->format('d/m/Y');
                     if(1 === $nb) {
-                        $this->addflash('warning', 'Après vérification, il n\'y a plus de place disponible le '.$nonDispoDate.' '.$plageTxt);
+                        $this->addflash('warning', 'Après vérification, il n\'y a plus de place disponible le '.$nonDispoDate.' '.$plageTxt.'.');
                     }
                     else {
-                        $this->addflash('warning', 'Après vérification, il n\'y a plus de place disponible pour '.$nb.' personnes le '.$nonDispoDate.' '.$plageTxt);
+                        $this->addflash('warning', 'Après vérification, il n\'y a plus de place disponible pour '.$nb.' personnes le '.$nonDispoDate.' '.$plageTxt.'.');
                     }                    
                     return $this->redirectToRoute(
                         'reservation2_dispo',
