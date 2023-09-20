@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as CustomAssert;
 
 
 #[UniqueEntity('email')]
@@ -44,23 +45,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Assert\NotBlank(['message'=>"Le mot de passe est obligatoire."])]
     #[Assert\Length(min: 8)]
-    #[Assert\Regex(['pattern' => '/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
-    'message' => "8 caractères minimum avec au moins un chiffre, une lettre et un caractère spécial (#?!@$%^&*-).",
-    ])]
+    #[CustomAssert\RegexPassword()]
     private ?string $plainPassword = 'password';
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
     private ?string $password;
-
-
     
     #[ORM\Column(length: 12)]
     #[Assert\NotBlank(['message'=>"Le N° de téléphone est obligatoire."])]
-    #[Assert\Regex(['pattern' => '/^(\+33|0)[0-9]{9}$/',
-        'message' => "Veuillez saisir un N° de téléphone valide ('+33' ou '0' suivi de 9 chiffres).",
-    ])]
+    #[CustomAssert\RegexPhone()]
     private ?string $tel = null;
 
     #[ORM\Column(nullable: true)]

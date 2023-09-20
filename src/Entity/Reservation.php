@@ -6,6 +6,8 @@ use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as CustomAssert;
+
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -68,9 +70,12 @@ class Reservation
 
     #[ORM\Column(length: 12)]
     #[Assert\NotBlank(['message'=>"Le N° de téléphone est obligatoire."])]
+/*
     #[Assert\Regex(['pattern' => '/^(\+33|0)[0-9]{9}$/',
         'message' => "Veuillez saisir un N° de téléphone valide ('+33' ou '0' suivi de 9 chiffres).",
     ])]
+*/
+    #[CustomAssert\RegexPhone()]
     private ?string $telReserv = null;
 
     #[ORM\Column(length: 20)]
