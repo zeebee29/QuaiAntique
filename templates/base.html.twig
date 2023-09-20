@@ -27,12 +27,12 @@
 <body>
     {% include "/components/header.html.twig" %}
     {% for message in app.flashes('success') %}
-    <div id="message-box" class="message-box text-center mx-auto alert alert-success">
+    <div id="message-success" class="message-box alert alert-success text-center mx-auto">
         {{ message }}
     </div>
     {% endfor %}
     {% for message in app.flashes('warning') %}
-    <div class="message-box text-center mx-auto alert alert-warning">
+    <div id="message-warning" class="message-box text-center mx-auto alert alert-warning">
         {{ message }}
     </div>
     {% endfor %}    

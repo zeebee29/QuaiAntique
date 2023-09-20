@@ -1,7 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const alert = document.getElementById('message-box');
+  const alertSuccess = document.getElementById('message-success');
+  const alertWarning = document.getElementById('message-warning');
 
-  alert.addEventListener('click', function () {
-      alert.style.opacity = 0; 
-  });
+  if (alertSuccess) {
+    alertSuccess.addEventListener('click', function () {
+      alertSuccess.style.opacity = 0; 
+    });
+  }
+  if (alertWarning) {
+    alertWarning.addEventListener('click', function () {
+      alertWarning.style.opacity = 0; 
+    });
+  }
 });
