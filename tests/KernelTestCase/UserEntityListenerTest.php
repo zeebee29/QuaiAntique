@@ -1,6 +1,6 @@
 <?php
-// tests/Listener/UserEntityListenerTest.php
-namespace App\tests\Listener;
+
+namespace App\tests\KernelTestCase;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use App\Entity\User;

@@ -1,10 +1,9 @@
 <?php
 
-namespace App\tests\Reservation;
+namespace App\tests\WebTestCase;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ReservationTest extends WebTestCase
 {
@@ -53,7 +52,7 @@ class ReservationTest extends WebTestCase
     public function testValidReservation3(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('POST', '/reservation3/2/2023-09-23 20:00:00/2');
+        $crawler = $client->request('POST', '/reservation3/2/2023-10-24 20:00:00/2');
 
         $this->assertResponseIsSuccessful();
         
@@ -62,7 +61,7 @@ class ReservationTest extends WebTestCase
         $submitBtn = $crawler->selectButton('Confirmer');
         $form = $submitBtn->form();
         $form["reservation3[nbConvive]"]=2;
-        $form["reservation3[dateReservation]"]="16/09/2023 - 20:00";
+        $form["reservation3[dateReservation]"]="17/10/2023 - 20:00";
         $form["reservation3[telReserv]"]="0102030405";
         $form["reservation3[email]"]="test@test.tst";
 

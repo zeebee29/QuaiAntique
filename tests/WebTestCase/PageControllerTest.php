@@ -1,6 +1,6 @@
 <?php
 
-namespace App\tests\Controller;
+namespace App\tests\WebTestCase;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
