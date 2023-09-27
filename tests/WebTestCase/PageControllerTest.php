@@ -14,13 +14,11 @@ class PageControllerTest extends WebTestCase
 
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
-
     public function testRedirectToRouteHistory():void
     {
         $client = static::createClient();
         $client->request('GET', '/user/history/5');
 
         $this->assertResponseRedirects('/login');
-
     }
 }

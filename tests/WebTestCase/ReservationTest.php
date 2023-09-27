@@ -39,7 +39,6 @@ class ReservationTest extends WebTestCase
 
         $this->assertEquals(1, $crawler->filter('.message-box.alert.alert-warning:contains("Erreur sur le nombre de couverts.")')->count());
 
-
         $crawler = $client->request('GET', '/reservation2/-1/1');
         //test redirection
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
@@ -68,12 +67,6 @@ class ReservationTest extends WebTestCase
         $client->submit($form);
 
         $this->assertTrue($client->getResponse()->isRedirect('/'));
-        $this->assertSame(302, $client->getResponse()->getStatusCode());
-
-        //$this->assertTrue($session->has('success'));
-       // $crawler = $client->followRedirect();
-        //$this->assertEquals(1, $crawler->filter('.message-box.alert.alert-success:contains("Votre réservation a été enregistrée. Confirmez-la grâce au lien envoyé dans votre boite mail.")')->count());
-
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }    
-
 }

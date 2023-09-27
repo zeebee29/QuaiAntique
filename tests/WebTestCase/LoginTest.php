@@ -4,7 +4,7 @@ namespace App\tests\WebTestCase;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginTest extends WebTestCase
 {
@@ -25,4 +25,28 @@ class LoginTest extends WebTestCase
       $this->assertResponseIsSuccessful();
       $this->assertPageTitleContains('Historique');
     }
+    public function testInvalidRestrictedPage(): void
+    {    
+
+        $client = static::createClient();
+
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $testUser = $userRepository->findOneById('6');
+        $client->logInUser($testUser);
+        
+        $client->request('GET', '/admin');
+        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
+      }
+      public function testValidRestrictedPage(): void
+      {    
+  
+          $client = static::createClient();
+  
+          $userRepository = static::getContainer()->get(UserRepository::class);
+          $testUser = $userRepository->findOneById('10');
+          $client->logInUser($testUser);
+          
+          $client->request('GET', '/admin');
+          $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+        }
 }

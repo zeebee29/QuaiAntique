@@ -29,9 +29,19 @@ class UserTest extends KernelTestCase
         $user = $this->getUser();
         $errors = $container->get('validator')->validate($user);
         $this->assertCount(0,$errors);
+
+        $errors = $container->get('validator')->validate($this->getUser()->getUserIdentifier(),new Assert\Email());
+        $this->assertCount(0,$errors);
+        
+        $this->assertMatchesRegularExpression($container->getParameter('regex_password'),$this->getUser()->getPlainPassword());
+
+        $this->assertMatchesRegularExpression($container->getParameter('regex_phone'),$user->getTel());
+        //tel version internationale
+        $user->setTel('+33102030405');
+        $this->assertMatchesRegularExpression($container->getParameter('regex_phone'),$user->getTel());
     }
 
-    public function testInvalidName():void
+    public function testInvalidUserDatas():void
     {
         self::bootKernel();
         $container = static::getContainer();
@@ -39,108 +49,50 @@ class UserTest extends KernelTestCase
         $errors = $container->get('validator')->validate($this->getUser()->setNom(''));
         $this->assertCount(2,$errors);
 
-    }
-
-    public function testInvalidFirstName():void
-    {
-        self::bootKernel();
-        $container = static::getContainer();
-
         $errors = $container->get('validator')->validate($this->getUser()->setPrenom('t'));
         $this->assertCount(1,$errors);
-
-    }
-
-    public function testInvalidEmail():void
-    {
-        self::bootKernel();
-        $container = static::getContainer();
 
         $errors = $container->get('validator')->validate($this->getUser()->setEmail('t@t'));
         $this->assertCount(1,$errors);
         $errors = $container->get('validator')->validate($this->getUser()->setEmail('tt.fr'));
         $this->assertCount(1,$errors);
-    }
 
-    public function testValidUserIdentifier():void
-    {
-        self::bootKernel();
-        $container = static::getContainer();
-        $user = $this->getUser();
-        $errors = $container->get('validator')->validate($user->getUserIdentifier(),new Assert\Email());
-        $this->assertCount(0,$errors);
-    }
-    public function testInvalidUserIdentifier():void
-    {
-        self::bootKernel();
-        $container = static::getContainer();
         $user = $this->getUser();
         $user->setEmail('testInvalidEmail');
         $errors = $container->get('validator')->validate($user->getUserIdentifier(),new Assert\Email());
         $this->assertCount(1,$errors);
-    }
 
-    public function testValidPasswordFormat():void
-    {
-        self::bootKernel();
-        $container = static::getContainer();
         $user = $this->getUser();
-        $this->assertMatchesRegularExpression($container->getParameter('regex_password'),$user->getPlainPassword());
-    }
-
-    public function testInvalidRegExpPassword():void
-    {
-        self::bootKernel();
-        $container = static::getContainer();
-        $user = $this->getUser();
-        //too short
+        //too short password
         $user->setPlainPassword('A12356*');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_password'),$user->getPlainPassword());
-        //no number
+        //no number in password
         $user->setPlainPassword('A**aa*aaa');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_password'),$user->getPlainPassword());
-        //no letter
+        //no letter in password
         $user->setPlainPassword('11223344*');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_password'),$user->getPlainPassword());
-        //no special car.
+        //no special car. in password
         $user->setPlainPassword('Aa12345678');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_password'),$user->getPlainPassword());
-    }
 
-    public function testValidRegExpPhone():void
-    {
-        self::bootKernel();
-        $container = static::getContainer();
         $user = $this->getUser();
-        //version francaise
-        $user->setTel('0102030405');
-        $this->assertMatchesRegularExpression($container->getParameter('regex_phone'),$user->getTel());
-        //version internationale
-        $user->setTel('+33102030405');
-        $this->assertMatchesRegularExpression($container->getParameter('regex_phone'),$user->getTel());
-    }
-    
-    public function testInvalidRegExpPhone():void
-    {
-        self::bootKernel();
-        $container = static::getContainer();
-        $user = $this->getUser();
-        //too short
+        //too short Fr tel
         $user->setTel('002030405');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_phone'),$user->getTel());
-        //too short
+        //too short inter. tel
         $user->setTel('+33030405');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_phone'),$user->getTel());
-        //too long
+        //too long Fr Tel
         $user->setTel('011102030405');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_phone'),$user->getTel());
-        //too long
+        //too long iner. tel
         $user->setTel('+330102030405');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_phone'),$user->getTel());
-        //lettre
+        //lettre in tel
         $user->setTel('+33a02030405');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_phone'),$user->getTel());
-        //indicatif Nok
+        //indicatif Nok 
         $user->setTel('1102030405');
         $this->assertDoesNotMatchRegularExpression($container->getParameter('regex_phone'),$user->getTel());
         //indicatif Nok
