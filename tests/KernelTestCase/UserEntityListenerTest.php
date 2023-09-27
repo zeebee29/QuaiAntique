@@ -8,7 +8,7 @@ use App\EntityListener\UserListener;
 
 class UserEntityListenerTest extends KernelTestCase
 {
-    private $listener;
+/*    private $listener;
 
     protected function setUp(): void
     {
@@ -16,14 +16,19 @@ class UserEntityListenerTest extends KernelTestCase
         $container = static::getContainer();
         $this->listener = new UserListener($container->get('security.password_hasher'));
     }
-
+*/
     public function testEncodePassword():void
     {
-        //test si plainPassword est null après hashage
+        self::bootKernel();
+        $container = static::getContainer();
+        $listener = new UserListener($container->get('security.password_hasher'));
+        $password = 'Aa*123456798';
         $user = new User();
-        $user->setPlainPassword('Aa*123456798');
-
-        $this->listener->encodePassword($user);
+        $user->setPlainPassword($password);
+        $listener->encodePassword($user);
+        //test si mot de passe encodé
+        $this->assertTrue(password_verify($password,$user->getPassword()));
+        //test si plainPassword est null après hashage
         $this->assertEquals('', $user->getPlainPassword());
     }
 }
