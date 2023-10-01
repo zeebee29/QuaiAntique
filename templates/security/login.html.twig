@@ -33,7 +33,7 @@
                     <a class="d-inline" href="{{ path('security.registration') }}"> Inscrivez-vous.</a>
                 </div>
             </div>
-        
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">        
             <div class="d-flex my-5 justify-content-center resa-row-btn">
                 <a href="{{ path('homepage') }}" role="button" class="qa-btn m-3">Annuler</a>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">

@@ -16,15 +16,12 @@ class ReservationTest extends WebTestCase
         
         $this->assertSelectorTextContains('h1', 'RESERVATION');
 
-        //récupérer formulaire
         $submitBtn = $crawler->selectButton('Date >>');
         $form = $submitBtn->form();
         $form["reservation[nbConvive]"]=2;
 
-        //Soumettre le formulaire
         $client->submit($form);
 
-        //Vérifier statut HTTP
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
 

@@ -26,17 +26,17 @@ class UserRegisterTest extends WebTestCase
         $container = static::getContainer();
 
         $user = $this->getUser();
-
         $entityManager = $container->get('doctrine')->getManager();
-
+        //enregistrement du User de test
         $entityManager->persist($user);
         $entityManager->flush();
-
+        //récupération du User de test
         $userRepository = $entityManager->getRepository(User::class);
         $registeredUser = $userRepository->findOneBy(['nom' => 'nomTest']);
-
+        //vérif
         $this->assertInstanceOf(User::class, $registeredUser);
         $this->assertEquals('tst@mail.tst', $registeredUser->getEmail());
+        //effacement du User de test
         $entityManager->remove($user);
         $entityManager->flush();        
     }
